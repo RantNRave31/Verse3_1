@@ -5,12 +5,13 @@ using System;
 using System.Windows;
 using System.Windows.Forms;
 using System.Windows.Media;
-using Verse3;
-using Verse3.VanillaElements;
+using Verse3.Nodes;
+using Verse3.Elements;
+using Verse3.Components;
 
 namespace MathLibrary
 {
-    public class RangeSelector : BaseComp
+    public class RangeSelector : BaseCompViewModel
     {
         internal double? _valueStart = -100.0;
         internal double? _valueEnd = 100.0;
@@ -36,9 +37,9 @@ namespace MathLibrary
                 this.previewTextBlock.DisplayedText = $"Range = {_valueStart.Value} to {_valueEnd.Value}";
             }
         }
-        public override CompInfo GetCompInfo() => new CompInfo(this, "Range Selector", "Inputs", "Math");
+        public override CompInfo GetCompInfo() => new CompInfo(this, "Range", "Types", "Double");
         
-        internal RangeSliderElement sliderBlock = new RangeSliderElement();
+        internal RangeSliderElementViewModel sliderBlock = new RangeSliderElementViewModel();
         internal NumberDataNode nodeBlock;
         internal NumberDataNode nodeBlock1;
         internal GenericEventNode nodeBlock2;
@@ -55,7 +56,7 @@ namespace MathLibrary
             nodeBlock1 = new NumberDataNode(this, NodeType.Output);
             this.ChildElementManager.AddDataOutputNode(nodeBlock1, "End");
 
-            sliderBlock = new RangeSliderElement();
+            sliderBlock = new RangeSliderElementViewModel();
             sliderBlock.ValuesChanged += SliderBlock_ValuesChanged;
             sliderBlock.TickFrequency = 1;
             if (_valueStart.HasValue) sliderBlock.ValueStart = _valueStart.Value;

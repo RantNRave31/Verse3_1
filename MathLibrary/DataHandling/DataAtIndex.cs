@@ -1,11 +1,11 @@
 ﻿using Core;
-using Verse3;
-using Verse3.VanillaElements;
+using Verse3.Components;
+using Verse3.Nodes;
 
 
 namespace MathLibrary
 {
-    public class DataAtIndex : BaseComp
+    public class DataAtIndex : BaseCompViewModel
     {
         public DataAtIndex() : base()
         {

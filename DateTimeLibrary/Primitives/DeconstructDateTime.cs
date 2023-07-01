@@ -1,12 +1,12 @@
 ﻿using Core;
 using System;
 using System.Windows;
-using Verse3;
-using Verse3.VanillaElements;
+using Verse3.Components;
+using Verse3.Nodes;
 
 namespace MathLibrary
 {
-    public class DeconstructDateTime : BaseComp
+    public class DeconstructDateTime : BaseCompViewModel
     {
 
         
@@ -24,7 +24,7 @@ namespace MathLibrary
         #endregion
 
 
-        public override CompInfo GetCompInfo() => new CompInfo(this, "Deconstruct DateTime", "Primitives", "DateTime");
+        public override CompInfo GetCompInfo() => new CompInfo(this, "Deconstruct DateTime", "Primatives", "DateTime");
 
         public override void Compute()
         {

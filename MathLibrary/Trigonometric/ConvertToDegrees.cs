@@ -1,12 +1,12 @@
 ﻿using Core;
 using System;
 using System.Windows;
-using Verse3;
-using Verse3.VanillaElements;
+using Verse3.Components;
+using Verse3.Nodes;
 
-namespace MathLibrary
+namespace MathLibrary.Trigonometric
 {
-    public class ConvertToDegrees : BaseComp
+    public class ConvertToDegrees : BaseCompViewModel
     {
 
 
@@ -15,36 +15,36 @@ namespace MathLibrary
 
         public ConvertToDegrees() : base()
         {
-          
+
         }
 
         public ConvertToDegrees(int x, int y) : base(x, y)
         {
-   
+
         }
 
         #endregion
 
         public override void Compute()
         {
-            double a = this.ChildElementManager.GetData(nodeBlock, 0);
-            this.ChildElementManager.SetData<double>((180/Math.PI) *a, nodeBlock2);
-            
+            double a = ChildElementManager.GetData(nodeBlock, 0);
+            ChildElementManager.SetData(180 / Math.PI * a, nodeBlock2);
+
         }
 
-        public override CompInfo GetCompInfo() => new CompInfo(this, "Convert to Degrees", "Conversions", "Math");
+        public override CompInfo GetCompInfo() => new CompInfo(this, "Convert to Degrees", "Conversions", "Double");
 
         private NumberDataNode nodeBlock;
         private NumberDataNode nodeBlock2;
         public override void Initialize()
         {
             nodeBlock = new NumberDataNode(this, NodeType.Input);
-      
-            this.ChildElementManager.AddDataInputNode(nodeBlock, "Radians");
+
+            ChildElementManager.AddDataInputNode(nodeBlock, "Radians");
 
 
             nodeBlock2 = new NumberDataNode(this, NodeType.Output);
-            this.ChildElementManager.AddDataOutputNode(nodeBlock2, "Degrees", true);
+            ChildElementManager.AddDataOutputNode(nodeBlock2, "Degrees", true);
 
 
         }

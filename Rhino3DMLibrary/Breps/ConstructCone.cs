@@ -1,14 +1,14 @@
 ﻿using Core;
 using System;
 using System.Windows;
-using Verse3;
-using Verse3.VanillaElements;
 using Rhino;
 using Rhino.Geometry;
+using Verse3.Nodes;
+using Verse3.Components;
 
 namespace Rhino3DMLibrary
 {
-    public class ConstructCone : BaseComp
+    public class ConstructCone : BaseCompViewModel
     {
         public ConstructCone() : base()
         {
@@ -31,7 +31,7 @@ namespace Rhino3DMLibrary
 
         }
 
-        public override CompInfo GetCompInfo() => new CompInfo(this, "Construct Cone", "Basic", "Breps");
+        public override CompInfo GetCompInfo() => new CompInfo(this, "Cone", "Basic", "Breps");
 
         private RhinoGeometryDataNode nodeBlockX;
         private NumberDataNode nodeBlockY;

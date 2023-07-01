@@ -1,12 +1,12 @@
 ﻿using Core;
 using System;
 using System.Windows;
-using Verse3;
-using Verse3.VanillaElements;
+using Verse3.Components;
+using Verse3.Nodes;
 
 namespace MathLibrary
 {
-    public class DateTimeTransform : BaseComp
+    public class DateTimeTransform : BaseCompViewModel
     {
 
         #region Constructors
@@ -21,7 +21,7 @@ namespace MathLibrary
 
         #endregion
 
-        public override CompInfo GetCompInfo() => new CompInfo(this, "DateTime transform", "Operations", "DateTime");
+        public override CompInfo GetCompInfo() => new CompInfo(this, "Transform DateTime", "Operations", "DateTime");
 
         public override void Compute()
         {

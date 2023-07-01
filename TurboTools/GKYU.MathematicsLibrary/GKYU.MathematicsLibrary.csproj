@@ -1,0 +1,76 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+	  <TargetFramework>net6.0-windows</TargetFramework>
+	  <OutputType>Library</OutputType>
+	  <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+	  <UseWPF>True</UseWPF>
+	  <ImportWindowsDesktopTargets>true</ImportWindowsDesktopTargets>
+	  <AutoGenerateBindingRedirects>True</AutoGenerateBindingRedirects>
+	  <Deterministic>false</Deterministic>
+	  <Platforms>AnyCPU;x64</Platforms>
+	  <GenerateDocumentationFile>True</GenerateDocumentationFile>
+	  <SignAssembly>False</SignAssembly>
+	  <AssemblyOriginatorKeyFile>apphost.exe</AssemblyOriginatorKeyFile>
+	  <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+	  <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="Collections\Octrees\NodeOperations.cs" />
+    <Compile Include="Collections\Octrees\NodeSelectors.cs" />
+    <Compile Include="Collections\Octrees\Octree.cs" />
+    <Compile Include="Collections\Octrees\OctreeReport.cs" />
+    <Compile Include="Geometry\Operations\PlaneIntersections.cs" />
+    <Compile Include="Geometry\Operations\SphereIntersections.cs" />
+    <Compile Include="Geometry\Operations\TriangleIntersections.cs" />
+    <Compile Include="Geometry\Operations\VectorIntersections.cs" />
+    <Compile Include="Geometry\Primatives\AABB.cs" />
+    <Compile Include="Geometry\Primatives\LineSegment.cs" />
+    <Compile Include="Geometry\Primatives\Plane.cs" />
+    <Compile Include="Geometry\Primatives\Polygon.cs" />
+    <Compile Include="Geometry\Primatives\Vertex.cs" />
+    <Compile Include="Geometry\Shapes\Circle.cs" />
+    <Compile Include="Geometry\Shapes\Cube.cs" />
+    <Compile Include="Geometry\Shapes\Sphere.cs" />
+    <Compile Include="Geometry\Shapes\Triangle.cs" />
+    <Compile Include="Maths\ActivationFunctions.cs" />
+    <Compile Include="Maths\Angle.cs" />
+    <Compile Include="Maths\Constants.cs" />
+    <Compile Include="Maths\MathsHelper.cs" />
+    <Compile Include="Maths\Matrices\Matrix4D.cs" />
+    <Compile Include="Maths\Range.cs" />
+    <Compile Include="Maths\Tensors\Costs\BaseCost.cs" />
+    <Compile Include="Maths\Tensors\Costs\BinaryCrossEntropy.cs" />
+    <Compile Include="Maths\Tensors\Costs\MeansSquaredError.cs" />
+    <Compile Include="Maths\Tensors\Layers\Activations\BaseActivation.cs" />
+    <Compile Include="Maths\Tensors\Layers\Activations\ReLUActivation.cs" />
+    <Compile Include="Maths\Tensors\Layers\Activations\SigmoidActivation.cs" />
+    <Compile Include="Maths\Tensors\Layers\BaseLayer.cs" />
+    <Compile Include="Maths\Tensors\Layers\FullyConnected.cs" />
+    <Compile Include="Maths\Tensors\Metrics\BaseMetric.cs" />
+    <Compile Include="Maths\Tensors\Metrics\BinaryAccuraccy.cs" />
+    <Compile Include="Maths\Tensors\Metrics\MeansAbsoluteError.cs" />
+    <Compile Include="Maths\Tensors\NDArray.cs" />
+    <Compile Include="Maths\Tensors\NeuralNet.cs" />
+    <Compile Include="Maths\Tensors\Operations.cs" />
+    <Compile Include="Maths\Tensors\Optimizers\Adam.cs" />
+    <Compile Include="Maths\Tensors\Optimizers\BaseOptimizer.cs" />
+    <Compile Include="Maths\Trigonometry.cs" />
+    <Compile Include="Maths\Vectors\Swizzle.cs" />
+    <Compile Include="Maths\Vectors\Vector.cs" />
+    <Compile Include="Maths\Vectors\Vector2D.cs" />
+    <Compile Include="Maths\Vectors\Vector2F.cs" />
+    <Compile Include="Maths\Vectors\Vector3D.cs" />
+    <Compile Include="Maths\Vectors\Vector3F.cs" />
+    <Compile Include="Maths\Vectors\Vector4D.cs" />
+    <Compile Include="Maths\Vectors\Vector4F.cs" />
+    <Compile Include="PrimitiveSystem\PrimitiveSystem.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\GKYU.CollectionsLibrary\GKYU.CollectionsLibrary.csproj" />
+    <ProjectReference Include="..\GKYU.CoreLibrary\GKYU.CoreLibrary.csproj" />
+  </ItemGroup>
+
+</Project>

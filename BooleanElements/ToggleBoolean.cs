@@ -1,12 +1,13 @@
 ﻿using Core;
 using System;
 using System.Windows;
-using Verse3;
-using Verse3.VanillaElements;
+using Verse3.Nodes;
+using Verse3.Elements;
+using Verse3.Components;
 
 namespace EventsLibrary
 {
-    public class ToggleBoolean : BaseComp
+    public class ToggleBoolean : BaseCompViewModel
     {
         internal bool? _value = false;
 
@@ -30,9 +31,9 @@ namespace EventsLibrary
                 toggleBlock.DisplayedText = _value.ToString();
             }
         }
-        public override CompInfo GetCompInfo() => new CompInfo(this, "Toggle Boolean", "Basic UI", "Boolean");
+        public override CompInfo GetCompInfo() => new CompInfo(this, "BOOL", "Types", "Boolean");
         
-        internal ToggleElement toggleBlock = new ToggleElement();
+        internal ToggleElementViewModel toggleBlock = new ToggleElementViewModel();
         internal GenericEventNode nodeBlock;
         internal GenericEventNode nodeBlock1;
         internal BooleanDataNode nodeBlock2;
@@ -40,7 +41,7 @@ namespace EventsLibrary
         {
             base.titleTextBlock.TextRotation = 0;
 
-            toggleBlock = new ToggleElement();
+            toggleBlock = new ToggleElementViewModel();
             toggleBlock.Value = _value;
             toggleBlock.DisplayedText = _value.ToString();
             toggleBlock.ToggleChecked += ButtonBlock_ToggleChecked;

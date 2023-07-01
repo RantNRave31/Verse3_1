@@ -1,14 +1,14 @@
 ﻿using Core;
 using System;
 using System.Windows;
-using Verse3;
-using Verse3.VanillaElements;
+using Verse3.Elements;
 using Rhino;
 using Rhino.Geometry;
+using Verse3.Components;
 
 namespace Rhino3DMLibrary
 {
-    public class ConstructBoundingBox : BaseComp
+    public class ConstructBoundingBox : BaseCompViewModel
     {
         public ConstructBoundingBox() : base()
         {
@@ -31,7 +31,7 @@ namespace Rhino3DMLibrary
 
         }
 
-        public override CompInfo GetCompInfo() => new CompInfo(this, "Construct Bounding Box", "Basic", "Breps");
+        public override CompInfo GetCompInfo() => new CompInfo(this, "Bounding Box", "Basic", "Breps");
 
         private RhinoGeometryDataNode nodeBlockX;
         private RhinoGeometryDataNode nodeBlockY;

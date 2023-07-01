@@ -1,13 +1,13 @@
 ﻿using Core;
 using System;
 using System.Windows;
-using Verse3;
-using Verse3.VanillaElements;
-using TextElement = Verse3.VanillaElements.TextElement;
+using Verse3.Components;
+using Verse3.Nodes;
+using TextElement = Verse3.Elements.TextElementViewModel;
 
 namespace MathLibrary
 {
-    public class RandomNumber : BaseComp
+    public class RandomNumber : BaseCompViewModel
     {
 
         #region Constructors
@@ -31,7 +31,7 @@ namespace MathLibrary
         }
 
 
-        public override CompInfo GetCompInfo() => new CompInfo(this, "Random", "Miscellaneous", "Math");
+        public override CompInfo GetCompInfo() => new CompInfo(this, "Random", "Miscellaneous", "Double");
         
         private NumberDataNode nodeBlock;
         private NumberDataNode nodeBlock1;

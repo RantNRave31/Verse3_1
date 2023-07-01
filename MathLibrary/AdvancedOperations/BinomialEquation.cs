@@ -1,13 +1,13 @@
 ﻿using Core;
 using System;
 using System.Windows;
-using Verse3;
-using Verse3.VanillaElements;
+using Verse3.Components;
+using Verse3.Nodes;
 
 
 namespace MathLibrary
 {
-    public class BinomialEquation : BaseComp
+    public class BinomialEquation : BaseCompViewModel
     {
 
 
@@ -34,7 +34,7 @@ namespace MathLibrary
 
         }
 
-        public override CompInfo GetCompInfo() => new CompInfo(this, "Binomial Equation", "Advanced Operations", "Math");
+        public override CompInfo GetCompInfo() => new CompInfo(this, "Binomial(a,n)", "Advanced Operations", "Double");
 
        
         private NumberDataNode nodeBlock;

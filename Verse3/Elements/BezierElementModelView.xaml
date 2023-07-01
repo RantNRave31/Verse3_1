@@ -1,0 +1,27 @@
+<UserControl x:Class="Verse3.Elements.BezierElementModelView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Verse3.Elements" 
+             xmlns:nodes="clr-namespace:Verse3.Nodes" 
+             d:DataContext="{d:DesignInstance Type=local:BezierElement}"
+             mc:Ignorable="d" 
+             d:DesignHeight="400"
+             d:DesignWidth="400"
+             MouseDown="OnMouseDown"
+             MouseMove="OnMouseMove"
+             MouseUp="OnMouseUp"
+             MouseWheel="OnMouseWheel"
+             DataContextChanged="OnDataContextChanged"
+             Loaded="OnLoaded"
+             >
+    <Grid
+        x:Name="MainGrid"
+        Width="{Binding BoundingBox.Size.Width}"
+        Height="{Binding BoundingBox.Size.Height}"
+        SizeChanged="MainGrid_SizeChanged"
+        Loaded="OnLoaded"
+        >
+    </Grid>
+</UserControl>

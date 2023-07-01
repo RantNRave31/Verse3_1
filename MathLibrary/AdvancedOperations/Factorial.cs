@@ -1,12 +1,12 @@
 ﻿using Core;
 using System;
 using System.Windows;
-using Verse3;
-using Verse3.VanillaElements;
+using Verse3.Components;
+using Verse3.Nodes;
 
 namespace MathLibrary
 {
-    public class Factorial : BaseComp
+    public class Factorial : BaseCompViewModel
     {
 
 
@@ -31,7 +31,7 @@ namespace MathLibrary
             this.ChildElementManager.SetData<double>((MathUtils.GetFactorial(a)), nodeBlock2);
         }
 
-        public override CompInfo GetCompInfo() => new CompInfo(this, "Factorial", "Advanced Operations", "Math");
+        public override CompInfo GetCompInfo() => new CompInfo(this, "FAC(A)", "Advanced Operations", "Double");
        
         private NumberDataNode nodeBlock;
         private NumberDataNode nodeBlock2;

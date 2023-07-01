@@ -1,0 +1,58 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ output extension=".cs" #>
+<#
+	Tuple<int,string,string>[] errors = new Tuple<int,string,string>[]{
+		new Tuple<int,string,string>(-1, "UNDEFINED", ""),
+		new Tuple<int,string,string>(0, "OK", "0"),
+		new Tuple<int,string,string>(-4000, "PINPAD_ERROR", ""),
+		new Tuple<int,string,string>(-4001, "PINPAD_FAILED_INITIALIZE", ""),
+		new Tuple<int,string,string>(-4002, "PINPAD_FAILED_OPEN", ""),
+		new Tuple<int,string,string>(-4003, "PINPAD_FAILED_EXECUTE", ""),
+		new Tuple<int,string,string>(-4004, "PINPAD_ERROR_PARSE", ""),
+		new Tuple<int,string,string>(5000, "NoLexerDeclared", ""),
+		new Tuple<int,string,string>(5001, "MultipleLexerDeclarations", ""),
+		new Tuple<int,string,string>(5002, "NFA_NoAcceptStates", ""),
+		new Tuple<int,string,string>(5003, "NoParserDeclared", ""),
+		new Tuple<int,string,string>(5004, "MultipleParserDeclarations", ""),
+	};
+#>
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+using GKYU.CoreLibrary.ErrorHandling;
+
+namespace GKYU.PresentationLogicLibrary.ErrorHandling
+{
+	public partial class ErrorViewModel
+	{
+        public enum CODE : int
+        {
+<#
+	foreach(Tuple<int,string,string> t in errors)
+	{
+#>
+            <#= t.Item2 #> = <#= t.Item1 #>,
+<#
+	}
+#>
+        }
+        public static Dictionary<ErrorViewModel.CODE, ErrorCode> ErrorCodes = new Dictionary<ErrorViewModel.CODE, ErrorCode>()
+        {
+<#
+	foreach(Tuple<int,string,string> t in errors)
+	{
+#>
+            {ErrorViewModel.CODE.<#= t.Item2 #>, new ErrorCode((int)CODE.<#= t.Item2 #>, "<#= t.Item2 #>", "<#= t.Item3 #>") },
+<#
+	}
+#>
+        };
+	}
+}

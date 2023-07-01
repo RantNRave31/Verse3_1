@@ -1,12 +1,12 @@
 ﻿using Core;
 using System;
 using System.Windows;
-using Verse3;
-using Verse3.VanillaElements;
+using Verse3.Components;
+using Verse3.Nodes;
 
 namespace InteropLibrary
 {
-    public class InteropMessageSND : BaseComp
+    public class InteropMessageSND : BaseCompViewModel
     {
         internal string _lastMessage = "";
 

@@ -1,11 +1,11 @@
 ﻿using Core;
-using Verse3;
-using Verse3.VanillaElements;
+using Verse3.Elements;
 using RestSharp;
+using Verse3.Components;
 
 namespace MathLibrary
 {
-    public class GET : BaseComp
+    public class GET : BaseCompViewModel
     {
         public GET() : base()
         {

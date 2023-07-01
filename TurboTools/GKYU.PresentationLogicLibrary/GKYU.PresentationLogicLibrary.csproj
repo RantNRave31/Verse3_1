@@ -1,0 +1,150 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+	  <TargetFramework>net6.0-windows</TargetFramework>
+	  <OutputType>Library</OutputType>
+	  <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+	  <UseWPF>True</UseWPF>
+	  <ImportWindowsDesktopTargets>true</ImportWindowsDesktopTargets>
+	  <AutoGenerateBindingRedirects>True</AutoGenerateBindingRedirects>
+	  <Deterministic>false</Deterministic>
+	  <Platforms>AnyCPU;x64</Platforms>
+	  <GenerateDocumentationFile>True</GenerateDocumentationFile>
+	  <SignAssembly>False</SignAssembly>
+	  <AssemblyOriginatorKeyFile>apphost.exe</AssemblyOriginatorKeyFile>
+	  <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+	  <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <ItemGroup>
+	  <PackageReference Include="HandyControl" Version="3.3.0" />
+	  <PackageReference Include="HandyControl.Lang.en" Version="3.3.0" />
+	  <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
+	  <PackageReference Include="Microsoft.DotNet.UpgradeAssistant.Extensions.Default.Analyzers" Version="0.4.346202">
+		  <PrivateAssets>all</PrivateAssets>
+	  </PackageReference>
+	  <PackageReference Include="Microsoft.Web.WebView2" Version="1.0.1370.28" />
+	  <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.39" />
+	  <PackageReference Include="WindowsAPICodePack-Core" Version="1.1.2" />
+	  <PackageReference Include="WindowsAPICodePack-Shell" Version="1.1.1" />
+  </ItemGroup>
+	<ItemGroup>
+		<None Remove="Audio\click.wav" />
+		<None Remove="Documentation\RDS.ServiceEquipment.Manager.About.html" />
+		<None Remove="Documentation\ServiceEquipmentHelpPage.html" />
+		<None Remove="ErrorHandling\ErrorCodes.tt" />
+		<None Remove="Images\RDS.Logo.Black.JPG" />
+		<None Remove="Images\RDS.Logo.Color.png" />
+	</ItemGroup>
+	<ItemGroup>
+	  <Page Remove="ButtonStyles.xaml" />
+	</ItemGroup>
+	<ItemGroup>
+	  <Compile Include="About\AboutModelView.xaml.cs" />
+	  <Compile Include="About\AboutViewModel.cs" />
+	  <Compile Include="Behaviors\DragBehavior.cs" />
+	  <Compile Include="Behaviors\FrameworkAdorner.cs" />
+	  <Compile Include="Behaviors\FrameworkElementDragBehavior.cs" />
+	  <Compile Include="Behaviors\FrameworkElementDropBehavior.cs" />
+	  <Compile Include="Behaviors\IDragable.cs" />
+	  <Compile Include="Behaviors\IDropable.cs" />
+	  <Compile Include="Behaviors\TreeViewDropBlendBehavior.cs" />
+	  <Compile Include="Behaviors\TreeViewDragBlendBehavior.cs" />
+	  <Compile Include="Behaviors\ListViewDragBlendBehavior.cs" />
+	  <Compile Include="Behaviors\ListViewDropBlendBehavior.cs" />
+	  <Compile Include="Behaviors\ZoomBehavior.cs" />
+	  <Compile Include="ErrorHandling\ErrorViewModel.cs" />
+	  <Compile Include="ErrorHandling\ErrorCodes.cs">
+	    <DesignTime>True</DesignTime>
+	    <AutoGen>True</AutoGen>
+	    <DependentUpon>ErrorCodes.tt</DependentUpon>
+	  </Compile>
+	  <Compile Include="ErrorHandling\ErrorManager.cs" />
+	  <Compile Include="Feedback\FeedbackModelView.xaml.cs" />
+	  <Compile Include="Feedback\FeedbackViewModel.cs" />
+	  <Compile Include="ViewModels\FileViewModel.cs" />
+	  <Content Include="CollectionExtensions.cs">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Content>
+	  <Compile Include="Collections\ObservableStyleDictionary.cs" />
+	  <Compile Include="Controls\BitmapControl.xaml.cs" />
+	  <Compile Include="DataMatrixModel\ListViewExtension.cs" />
+	  <Compile Include="ModelViews\BitmapModelView.xaml.cs" />
+	  <Compile Include="ModelViews\CanvasCommand.cs" />
+	  <Compile Include="ModelViews\DataMatrixModelView.xaml.cs" />
+	  <Compile Include="ModelViews\ImageEditModelView.xaml.cs" />
+	  <Compile Include="ModelViews\ObservableDictionaryModelView.xaml.cs" />
+	  <Compile Include="ModelViews\PluginLibraryModelView.xaml.cs" />
+	  <Compile Include="ModelViews\TextModelView.xaml.cs" />
+	  <Compile Include="Controls\MatrixControl.xaml.cs" />
+	  <Compile Include="ModelViews\TouchTemplateModelView.xaml.cs" />
+	  <Compile Include="Settings\Configuration.cs" />
+	  <Compile Include="Settings\HTMLParameters.cs" />
+	  <Compile Include="Shapes\ShapeFactory.cs" />
+	  <Compile Include="Transactions\TransactionSaleModelView.xaml.cs" />
+	  <Compile Include="Transactions\TransactionSaleViewModel.cs" />
+	  <Compile Include="Transactions\TransactionNodeModelView.xaml.cs" />
+	  <Compile Include="Transactions\TransactionNodeViewModel.cs" />
+	  <Compile Include="Transactions\TransactionTicketBalanceControl.xaml.cs" />
+	  <Compile Include="Transactions\TransactionTicketItemCountControl.xaml.cs" />
+	  <Compile Include="Transactions\TransactionTicketModelView.xaml.cs" />
+	  <Compile Include="Transactions\TransactionTicketViewModel.cs" />
+	  <Compile Include="Controls\DockControl.xaml.cs" />
+	  <Compile Include="ViewModels\BitmapViewModel.cs" />
+	  <Compile Include="ViewModels\DataMatrixViewModel.cs" />
+	  <Compile Include="ViewModels\FileEditViewModel.cs" />
+	  <Compile Include="ViewModels\EquipmentViewModel.cs" />
+	  <Compile Include="Models\MANUFACTURER.cs" />
+	  <Compile Include="ModelViews\DockModelView.xaml.cs" />
+	  <Compile Include="ModelViews\EditorModelView.xaml.cs" />
+	  <Compile Include="ModelViews\FeedbackForm.xaml.cs" />
+	  <Compile Include="ModelViews\NavigationModelView.xaml.cs" />
+	  <Compile Include="ModelViews\ResourceModelView.xaml.cs" />
+	  <Compile Include="ViewModels\ImageEditViewModel.cs" />
+	  <Compile Include="ViewModels\ObservableDictionaryViewModel.cs" />
+	  <Compile Include="ViewModels\TextViewModel.cs" />
+	  <Compile Include="ViewModels\TouchCommandViewModel.cs" />
+	  <Compile Include="ViewModels\TouchTemplateViewModel.cs" />
+	  <Compile Include="WorkspaceModelView.xaml.cs" />
+	  <Compile Include="WorkspaceViewModel.cs" />
+	  <Compile Include="ViewModels\TaskManagerViewModel.cs" />
+	  <Compile Include="ViewModels\DockViewModel.cs" />
+	  <Compile Include="ViewModels\NavigationViewModel.cs" />
+	</ItemGroup>
+	<ItemGroup>
+	  <Content Include="Audio\click.wav">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="ButtonStyles.xaml">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	    <Generator>XamlIntelliSenseFileGenerator</Generator>
+	  </Content>
+	  <Content Include="Documentation\RDS.ServiceEquipment.Manager.About.html">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="Documentation\ServiceEquipmentHelpPage.html">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="ErrorHandling\ErrorCodes.tt">
+	    <LastGenOutput>ErrorCodes.cs</LastGenOutput>
+	    <Generator>TextTemplatingFileGenerator</Generator>
+	  </Content>
+	  <Content Include="Images\RDS.Logo.Black.JPG">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="Images\RDS.Logo.Color.png">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Content>
+	</ItemGroup>
+	<ItemGroup>
+	  <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
+	</ItemGroup>
+	<ItemGroup>
+	  <Folder Include="Extensions\" />
+	</ItemGroup>
+	<ItemGroup>
+	  <ProjectReference Include="..\GKYU.BusinessLogicLibrary\GKYU.BusinessLogicLibrary.csproj" />
+	  <ProjectReference Include="..\GKYU.CollectionsLibrary\GKYU.CollectionsLibrary.csproj" />
+	  <ProjectReference Include="..\GKYU.PresentationCoreLibrary\GKYU.PresentationCoreLibrary.csproj" />
+	</ItemGroup>
+
+</Project>

@@ -1,12 +1,12 @@
 ﻿using Core;
 using System;
 using System.Windows;
-using Verse3;
-using Verse3.VanillaElements;
+using Verse3.Components;
+using Verse3.Nodes;
 
 namespace MathLibrary
 {
-    public class DateCharacteristics : BaseComp
+    public class DateCharacteristics : BaseCompViewModel
     {
 
         #region Constructors
@@ -22,7 +22,7 @@ namespace MathLibrary
         #endregion
 
 
-        public override CompInfo GetCompInfo() => new CompInfo(this, "Date Characteristics", "Primitives", "DateTime");
+        public override CompInfo GetCompInfo() => new CompInfo(this, "Date Characteristics", "Primatives", "DateTime");
 
         public override void Compute()
         {

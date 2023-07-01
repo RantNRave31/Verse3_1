@@ -4,11 +4,13 @@ using System;
 using System.Windows;
 using System.Windows.Controls;
 using Verse3;
-using Verse3.VanillaElements;
+using Verse3.Nodes;
+using Verse3.Elements;
+using Verse3.Components;
 
 namespace MathLibrary
 {
-    public class NumberContainer : BaseComp
+    public class NumberContainer : BaseCompViewModel
     {
         internal double? _sliderValue = 0.0;
 
@@ -34,9 +36,9 @@ namespace MathLibrary
                 this.previewTextBlock.DisplayedText = $"Value = {_sliderValue.Value}";
             }
         }
-        public override CompInfo GetCompInfo() => new CompInfo(this, "Number Slider", "Inputs", "Math");
+        public override CompInfo GetCompInfo() => new CompInfo(this, "Double", "Types", "Double");
 
-        internal SliderElement sliderBlock = new SliderElement();
+        internal SliderElementViewModel sliderBlock = new SliderElementViewModel();
         internal NumberDataNode nodeBlock;
         internal GenericEventNode nodeBlock1;
         public override void Initialize()
@@ -49,7 +51,7 @@ namespace MathLibrary
             nodeBlock = new NumberDataNode(this, NodeType.Output);
             this.ChildElementManager.AddDataOutputNode(nodeBlock, "Number");
 
-            sliderBlock = new SliderElement();
+            sliderBlock = new SliderElementViewModel();
             sliderBlock.Minimum = -200;
             sliderBlock.Maximum = 200;
             sliderBlock.Value = 10;
@@ -76,7 +78,7 @@ namespace MathLibrary
                 menuItem.Header = "Delete";
                 menuItem.Click += (s, e) =>
                 {
-                    DataViewModel.Instance.Elements.Remove(this);
+                    DataViewModel.DataModel.Elements.Remove(this);
                 };
                 contextMenu.Items.Add(menuItem);
 

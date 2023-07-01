@@ -5,12 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
-using Verse3;
-using Verse3.VanillaElements;
+using Verse3.Components;
+using Verse3.Nodes;
 
 namespace TextLibrary
 {
-    public class TextPanel : BaseComp
+    public class TextPanel : BaseCompViewModel
     {
         public TextPanel() : base()
         {

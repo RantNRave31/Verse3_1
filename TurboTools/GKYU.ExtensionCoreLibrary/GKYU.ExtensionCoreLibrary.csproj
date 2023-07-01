@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+	  <TargetFramework>net6.0-windows</TargetFramework>
+	  <OutputType>Library</OutputType>
+	  <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+	  <UseWPF>True</UseWPF>
+	  <ImportWindowsDesktopTargets>true</ImportWindowsDesktopTargets>
+	  <AutoGenerateBindingRedirects>True</AutoGenerateBindingRedirects>
+	  <Deterministic>false</Deterministic>
+	  <Platforms>AnyCPU;x64</Platforms>
+	  <GenerateDocumentationFile>True</GenerateDocumentationFile>
+	  <SignAssembly>False</SignAssembly>
+	  <AssemblyOriginatorKeyFile>apphost.exe</AssemblyOriginatorKeyFile>
+	  <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+	  <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="HandyControl" Version="3.3.0" />
+    <PackageReference Include="HandyControl.Lang.en" Version="3.3.0" />
+    <PackageReference Include="HandyControls" Version="3.3.3" />
+    <PackageReference Include="Microsoft.Web.WebView2" Version="1.0.1370.28" />
+    <PackageReference Include="WindowsAPICodePack-Core" Version="1.1.2" />
+    <PackageReference Include="WindowsAPICodePack-Shell" Version="1.1.1" />
+  </ItemGroup>
+
+</Project>

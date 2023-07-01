@@ -1,0 +1,102 @@
+﻿<Window x:Class="GKYU.PresentationLogicLibrary.About.AboutModelView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:GKYU.PresentationLogicLibrary"
+             mc:Ignorable="d" 
+             Height="325" Width="475"
+            Title="GKYU.TurboTools (About)" WindowStartupLocation="CenterOwner"
+        >
+    <Window.Resources>
+        <ResourceDictionary>
+            <SolidColorBrush x:Key="DefaultBackgroundBrush" Color="{x:Static SystemColors.WindowColor}" />
+            <LinearGradientBrush x:Key="RainbowGradientBrush" StartPoint="0,0.5" EndPoint="1,0.5">
+                <GradientStop Color="Yellow" Offset="0.0" />
+                <GradientStop Color="Red" Offset="0.25" />
+                <GradientStop Color="Blue" Offset="0.75" />
+                <GradientStop Color="LimeGreen" Offset="1.0" />
+            </LinearGradientBrush>
+            <LinearGradientBrush x:Key="HeaderBackgroundBrush" EndPoint=".5,1" StartPoint="1,0">
+                <GradientStop Color="#006699" Offset="1"/>
+                <GradientStop Color="#80A8CC" Offset="0.5"/>
+            </LinearGradientBrush>
+            <LinearGradientBrush x:Key="HeaderBackgroundOpacityMask" StartPoint="0,0" EndPoint="0,1">
+                <GradientStop Color="#FFFFFFFF" Offset="0"/>
+                <GradientStop Color="#FFFFFFFF" Offset="0.667"/>
+                <GradientStop Color="#00FFFFFF" Offset="1"/>
+            </LinearGradientBrush>
+            <!--This style used for normal button style-->
+            <Style x:Key="buttonStyle" TargetType="{x:Type Button}">
+                <Setter Property="Foreground" Value="Black" />
+                <Setter Property="Background" Value="Silver" />
+                <Setter Property="Opacity" Value="100"/>
+                <Setter Property="OpacityMask" Value="{x:Null}"/>
+                <Setter Property="FontSize" Value="14" />
+                <Setter Property="BorderBrush" Value="Black"/>
+            </Style>
+            <!--SolidColorBrush x:Key="{x:Static SystemColors.WindowBrushKey}" Color="Black" />
+    <SolidColorBrush x:Key="{x:Static SystemColors.WindowTextBrushKey}" Color="White" /-->
+        </ResourceDictionary>
+    </Window.Resources>
+    <StackPanel>
+        <Grid Margin="5,5,5,5" Background="{StaticResource HeaderBackgroundBrush}" OpacityMask="{StaticResource HeaderBackgroundOpacityMask}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="161*"/>
+                <RowDefinition Height="152*"/>
+                <RowDefinition Height="120*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="29*"/>
+                <ColumnDefinition Width="79*"/>
+            </Grid.ColumnDefinitions>
+            <Border Margin="5,0,5,5">
+                <Image Margin="4,4,4,4" Grid.Column="0" Grid.Row="0" Source="C:\Source\Verse3-master\PresentationLogicLibrary/Images/RDS.Logo.Color.png" />
+            </Border >
+            <GroupBox Grid.Column="1" Grid.Row="0" Header="Version" >
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="91*"/>
+                        <ColumnDefinition Width="213*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="20*"/>
+                        <RowDefinition Height="20*"/>
+                        <RowDefinition Height="20*"/>
+                        <RowDefinition Height="20*"/>
+                        <RowDefinition Height="20*"/>
+                        <RowDefinition Height="20*"/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Row="0" Grid.Column="0" Text="Product:  " FontWeight="Bold"/>
+                    <TextBox Grid.Row="0" Grid.Column="1" Text="RDS Service Equipment Manager" />
+                    <TextBlock Grid.Row="1" Grid.Column="0" Text="Version:  " FontWeight="Bold"/>
+                    <TextBox Grid.Row="1" Grid.Column="1" Text="1.2b" />
+                    <TextBlock Grid.Row="2" Grid.Column="0" Text="DLL Version Info:  " FontWeight="Bold"/>
+                    <TextBox Grid.Row="2" Grid.Column="1" Text="1.2b" />
+                    <TextBlock Grid.Row="3" Grid.Column="0" Text="Copyright:  " FontWeight="Bold"/>
+                    <TextBox Grid.Row="3" Grid.Column="1" Text="2021 By Don Gunter for RDS West (DSI)" />
+                    <TextBlock Grid.Row="4" Grid.Column="0" Text="Company Name:  " FontWeight="Bold"/>
+                    <TextBox Grid.Row="4" Grid.Column="1" Text="RDS West (a division of DSI)" />
+
+                </Grid>
+            </GroupBox>
+            <GroupBox Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Header="Description" >
+                <WebBrowser Source="pack://siteoforigin:,,,/Documentation/RDS.ServiceEquipment.Manager.About.html" Height="112" />
+            </GroupBox>
+            <StackPanel Grid.Column="1" Grid.Row="2">
+            </StackPanel>
+
+        </Grid>
+        <StatusBar>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="350"/>
+                    <ColumnDefinition Width="100"/>
+                </Grid.ColumnDefinitions>
+                <Button Grid.Column="1" Content="OK" FontSize="12" Width="75" Height="20" HorizontalAlignment="Right"/>
+
+            </Grid>
+        </StatusBar>
+
+    </StackPanel>
+</Window>

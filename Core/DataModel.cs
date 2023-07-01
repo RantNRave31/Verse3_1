@@ -1,8 +1,6 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.ComponentModel;
-using System.Runtime.CompilerServices;
-using System.Runtime.Serialization;
 using System.Xml.Serialization;
 using static Core.Geometry2D;
 
@@ -114,7 +112,7 @@ namespace Core
                 //{
                 //    instance = new DataModel();
                 //}
-                return DataModel.instance;
+                return instance;
             }
             protected set
             {
@@ -375,164 +373,4 @@ namespace Core
         
     }
 
-    internal class ShellElement : IElement
-    {
-        public Guid ID { get; }
-
-        public ElementState ElementState { get; set; }
-        public ElementType ElementType { get; set; }
-
-
-        public void Dispose()
-        {
-            GC.SuppressFinalize(this);
-        }
-        ~ShellElement() => Dispose();
-        public void GetObjectData(SerializationInfo info, StreamingContext context)
-        {
-            try
-            {
-                info.AddValue("ID", this.ID);
-                //info.AddValue("X", this.X);
-                //info.AddValue("Y", this.Y);
-                //info.AddValue("Width", this.Width);
-                //info.AddValue("Height", this.Height);
-                info.AddValue("ElementType", this.ElementType);
-                //info.AddValue("State", this.State);
-                //info.AddValue("IsSelected", this.IsSelected);
-                //info.AddValue("BoundingBox", this.BoundingBox);
-                //info.AddValue("ElementState", this.ElementState);
-                //info.AddValue("Parent", this.Parent);
-                //info.AddValue("Children", this.Children);
-            }
-            catch (Exception ex)
-            {
-                CoreConsole.Log(ex);
-            }
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        public void OnPropertyChanged(string name)
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(name));
-            }
-        }
-        protected bool SetProperty<T>(ref T field, T newValue, [CallerMemberName] string propertyName = null)
-        {
-            if (!Equals(field, newValue))
-            {
-                field = newValue;
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-                return true;
-            }
-
-            return false;
-        }
-    }
-
-    public interface IElement : INotifyPropertyChanged, IDisposable, ISerializable
-    {
-        #region Properties
-
-        /// <summary>
-        /// GUID of the element.
-        /// </summary>
-        //[XmlIgnore]
-        public Guid ID { get; }
-
-        [JsonIgnore]
-        public ElementState ElementState { get; set; }
-
-        public ElementType ElementType { get; set; }
-
-        #endregion
-
-        #region INotifyPropertyChanged Members
-
-        /// <summary>
-        /// Raises the 'PropertyChanged' event when the value of a property of the data model has changed.
-        /// Be sure to Define a 'PropertyChanged' event that is raised when the value of a property of the data model has changed.
-        /// eg. <code>public new abstract event PropertyChangedEventHandler PropertyChanged;</code>
-        /// </summary>
-        public abstract void OnPropertyChanged(string name);
-
-        #endregion
-    }
-
-    #region Enums
-
-    public enum ElementState
-    {
-        /// <summary>
-        /// No state.
-        /// </summary>
-        Unset = -1,
-        /// <summary>
-        /// Default state.
-        /// </summary>
-        Default = 0,
-        /// <summary>
-        /// Hidden state.
-        /// </summary>
-        Hidden = 1,
-        /// <summary>
-        /// Disabled state.
-        /// </summary>
-        Disabled = 2
-    }
-    public enum ComputableElementState
-    {
-        /// <summary>
-        /// No state.
-        /// </summary>
-        Unset = -1,
-        /// <summary>
-        /// Default state.
-        /// </summary>
-        Default = 0,
-        Computing = 1,
-        Computed = 2,
-        Failed = 3
-    }
-    public enum ElementType
-    {
-        /// <summary>
-        /// No type.
-        /// </summary>
-        Unset = -1,
-        /// <summary>
-        /// Default type.
-        /// </summary>
-        Default = 0,
-        /// <summary>
-        /// Default type.
-        /// </summary>
-        Connection = 1,
-        /// <summary>
-        /// Default type.
-        /// </summary>
-        Node = 2,
-        UIElement = 3,
-        DisplayUIElement = 4,
-        CanvasElement = 5,
-        BaseComp = 6
-    }
-    public enum NodeType
-    {
-        Unset = -1,
-        Default = 0,
-        Input = 1,
-        Output = 2
-    }
-    public enum ConnectionType
-    {
-        Unset = -1,
-        Default = 0,
-        Data = 1,
-        Event = 2
-    }
-
-    #endregion
 }

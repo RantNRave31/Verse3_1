@@ -1,12 +1,12 @@
 ﻿using Core;
 using System;
 using System.Windows;
-using Verse3;
-using Verse3.VanillaElements;
+using Verse3.Components;
+using Verse3.Nodes;
 
 namespace MathLibrary
 {
-    public class Absolute : BaseComp
+    public class Absolute : BaseCompViewModel
     {
 
         #region Constructors
@@ -32,7 +32,7 @@ namespace MathLibrary
         }
 
 
-        public override CompInfo GetCompInfo() => new CompInfo(this, "Absolute", "Intermediate Operations", "Math");
+        public override CompInfo GetCompInfo() => new CompInfo(this, "ABS(A,B)", "Intermidiate Operations", "Double");
 
 
         private NumberDataNode nodeBlock;

@@ -1,14 +1,14 @@
 ﻿using Core;
 using System;
 using System.Windows;
-using Verse3;
-using Verse3.VanillaElements;
 using Rhino;
 using Rhino.Geometry;
+using Verse3.Nodes;
+using Verse3.Components;
 
 namespace Rhino3DMLibrary
 {
-    public class ConstructCylinder : BaseComp
+    public class ConstructCylinder : BaseCompViewModel
     {
         public ConstructCylinder() : base()
         {
@@ -31,7 +31,7 @@ namespace Rhino3DMLibrary
 
         }
 
-        public override CompInfo GetCompInfo() => new CompInfo(this, "Construct Cylinder", "Basic", "Breps");
+        public override CompInfo GetCompInfo() => new CompInfo(this, "Cylinder", "Basic", "Breps");
 
         private RhinoGeometryDataNode nodeBlockX;
         private NumberDataNode nodeBlockY;

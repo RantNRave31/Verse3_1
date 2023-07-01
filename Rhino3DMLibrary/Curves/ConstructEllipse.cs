@@ -1,14 +1,14 @@
 ﻿using Core;
 using System;
 using System.Windows;
-using Verse3;
-using Verse3.VanillaElements;
+using Verse3.Elements;
 using Rhino;
 using Rhino.Geometry;
+using Verse3.Components;
 
 namespace Rhino3DMLibrary
 {
-    public class ConstructEllipse : BaseComp
+    public class ConstructEllipse : BaseCompViewModel
     {
         public ConstructEllipse() : base()
         {

@@ -1,12 +1,12 @@
 ﻿using Core;
 using System;
 using System.Windows;
-using Verse3;
-using Verse3.VanillaElements;
+using Verse3.Components;
+using Verse3.Nodes;
 
 namespace MathLibrary
 {
-    public class DateTimeNow : BaseComp
+    public class DateTimeNow : BaseCompViewModel
     {
 
        
@@ -23,7 +23,7 @@ namespace MathLibrary
 
         #endregion
 
-        public override CompInfo GetCompInfo() => new CompInfo(this, "DateTime Now", "Basic UI", "DateTime");
+        public override CompInfo GetCompInfo() => new CompInfo(this, "DateTime Now", "Types", "DateTime");
 
         public override void Compute()
         {

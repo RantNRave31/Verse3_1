@@ -1,0 +1,52 @@
+<UserControl x:Class="Verse3.Elements.TextElementModelView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Verse3.Elements" 
+             xmlns:nodes="clr-namespace:Verse3.Nodes" 
+             d:DataContext="{d:DesignInstance Type=local:TextElement}"
+             mc:Ignorable="d" 
+             d:DesignHeight="250"
+             d:DesignWidth="500"
+             MouseDown="OnMouseDown"
+             MouseMove="OnMouseMove"
+             MouseUp="OnMouseUp"
+             MouseWheel="OnMouseWheel"
+             DataContextChanged="OnDataContextChanged"
+             Loaded="OnLoaded"
+             >
+    <Grid
+        MaxWidth="{Binding BoundingBox.Size.Width}"
+        MaxHeight="{Binding BoundingBox.Size.Height}"
+        >
+        <Border
+            BorderBrush="{x:Null}" RenderTransformOrigin="0.5,0.5"
+            >
+            <Border.LayoutTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="{Binding TextRotation}"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Border.LayoutTransform>
+            <TextBlock
+            x:Name="DisplayedTextBlock"
+            Text="{Binding DisplayedText}"
+            TextAlignment="{Binding TextAlignment}"
+            TextWrapping="Wrap"
+            FontStyle="{Binding FontStyle}"
+            FontFamily="{Binding FontFamily}"
+            FontSize="{Binding FontSize}"
+            FontWeight="{Binding FontWeight}"
+            Foreground="{Binding Foreground}"
+            Background="{Binding Background}"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Margin="10"
+            >
+            </TextBlock>
+        </Border>
+    </Grid>
+</UserControl>

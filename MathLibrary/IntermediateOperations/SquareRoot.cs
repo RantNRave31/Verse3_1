@@ -1,12 +1,12 @@
 ﻿using Core;
 using System;
 using System.Windows;
-using Verse3;
-using Verse3.VanillaElements;
+using Verse3.Components;
+using Verse3.Nodes;
 
 namespace MathLibrary
 {
-    public class SquareRoot : BaseComp
+    public class SquareRoot : BaseCompViewModel
     {
 
         #region Constructors
@@ -29,7 +29,7 @@ namespace MathLibrary
             this.ChildElementManager.SetData<double>((Math.Sqrt(a)), nodeBlock2);
         }
 
-        public override CompInfo GetCompInfo() => new CompInfo(this, "Square Root", "Advanced Operations", "Math");
+        public override CompInfo GetCompInfo() => new CompInfo(this, "SQRT(A)", "Intermidiate Operations", "Double");
         
         private NumberDataNode nodeBlock;
         private NumberDataNode nodeBlock2;

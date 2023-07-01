@@ -4,18 +4,20 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Media;
 using Verse3;
-using Verse3.VanillaElements;
+using Verse3.Nodes;
+using Verse3.Elements;
+using Verse3.Components;
 
 namespace EventsLibrary
 {
-    public class Callback : BaseComp
+    public class Callback : BaseCompViewModel
     {
-        private BaseComp _callbackToComp;
+        private BaseCompViewModel _callbackToComp;
         
         public Callback() : base()
         {
         }
-        public Callback(int x, int y, BaseComp callbackToComp) : base(x, y)
+        public Callback(int x, int y, BaseCompViewModel callbackToComp) : base(x, y)
         {
             if (callbackToComp != null)
             {
@@ -46,18 +48,18 @@ namespace EventsLibrary
                         if (_callbackToComp.ChildElementManager.OutputSide.OfType<EventCallbackNode>().Any())
                         {
                             _eventCallbackNodeFromcbComp = _callbackToComp.ChildElementManager.OutputSide.OfType<EventCallbackNode>().First();
-                            BezierElement b = new BezierElement(_eventCallbackNodeFromcbComp, CallbackEventNode);
+                            BezierElementViewModel b = new BezierElementViewModel(_eventCallbackNodeFromcbComp, CallbackEventNode);
                             _eventCallbackNodeFromcbComp.RenderPipelineInfo.AddChild(b);
                             _eventCallbackNodeFromcbComp.Connections.Add(b);
                             CallbackEventNode.RenderPipelineInfo.AddChild(b);
                             CallbackEventNode.Connections.Add(b);
                             _eventCallbackNodeFromcbComp.ComputationPipelineInfo.AddEventUpStream(_callbackToComp);
-                            EditorForm.connectionsPending.Add(b);
+                            MainWindowViewModel.connectionsPending.Add(b);
                             //DataTemplateManager.RegisterDataTemplate(b);
                             //DataViewModel.Instance.Elements.Add(b);
                             //b.RedrawBezier(b.Origin, b.Destination);
                             //RenderingCore.Render(_callbackToComp);
-                            Main_Verse3.ActiveMain.ActiveEditor.AddToCanvas_OnCall(this, new EventArgs());
+                            MainWindowViewModel.ActiveMain.MainWindowViewModel.AddToCanvas_OnCall(this, new EventArgs());
                             RenderingCore.Render(_callbackToComp, false);
                         }
                     }
@@ -75,7 +77,7 @@ namespace EventsLibrary
         }
         public override CompInfo GetCompInfo() => new CompInfo(this, "Callback", "`", "`",
             (Color)ColorConverter.ConvertFromString("#FFFF6700"),
-            new Type[] { typeof(int), typeof(int), typeof(BaseComp) });
+            new Type[] { typeof(int), typeof(int), typeof(BaseCompViewModel) });
 
         private CallbackNode CallbackEventNode;
         private EventCallbackNode _eventCallbackNodeFromcbComp;
@@ -144,7 +146,7 @@ namespace EventsLibrary
         }
     }
 
-    internal class CallbackNode : EventNodeElement
+    internal class CallbackNode : EventNodeElementViewModel
     {
         public CallbackNode(Callback parent) : base(parent, NodeType.Input)
         {
@@ -154,7 +156,7 @@ namespace EventsLibrary
 
         public override void ToggleActive()
         {
-            ComputationCore.Compute(this.Parent as BaseComp, false);
+            ComputationCore.Compute(this.Parent as BaseCompViewModel, false);
         }
     }
 }

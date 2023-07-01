@@ -1,12 +1,13 @@
 ﻿using Core;
 using System;
 using System.Windows;
-using Verse3;
-using Verse3.VanillaElements;
+using Verse3.Nodes;
+using Verse3.Elements;
+using Verse3.Components;
 
 namespace EventsLibrary
 {
-    public class ButtonTrigger : BaseComp
+    public class ButtonTrigger : BaseCompViewModel
     {
         internal double _sliderValue = 0.0;
         //private double _inputValue = 0.0;
@@ -48,13 +49,13 @@ namespace EventsLibrary
         }
         public override CompInfo GetCompInfo() => new CompInfo(this, "Button Trigger", "Basic UI", "Events");
 
-        internal ButtonElement buttonBlock = new ButtonElement();
+        internal ButtonElementViewModel buttonBlock = new ButtonElementViewModel();
         internal GenericEventNode nodeBlock;
         public override void Initialize()
         {
             base.titleTextBlock.TextRotation = 0;
 
-            buttonBlock = new ButtonElement();
+            buttonBlock = new ButtonElementViewModel();
             buttonBlock.DisplayedText = "Trigger";
             buttonBlock.OnButtonClicked += ButtonBlock_OnButtonClicked;
             buttonBlock.Width = 200;

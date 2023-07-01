@@ -4,7 +4,7 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Runtime.Serialization;
 using System.Windows.Controls;
-using Verse3;
+using Verse3.Components;
 using static Core.Geometry2D;
 
 namespace CanvasElements
@@ -128,6 +128,8 @@ namespace CanvasElements
 
         #endregion
 
+        protected PropertiesViewModel propertiesViewModel;
+        public virtual PropertiesViewModel Properties { get { if (propertiesViewModel == null) propertiesViewModel = new PropertiesViewModel<CanvasExtentElement>(this); return propertiesViewModel; } set { if (value == propertiesViewModel) return; propertiesViewModel = value; OnPropertyChanged("PropertiesViewModel"); } }
         public CanvasExtentElement() : base()
         {
         }

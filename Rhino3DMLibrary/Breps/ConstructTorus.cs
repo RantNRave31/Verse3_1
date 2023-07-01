@@ -1,14 +1,14 @@
 ﻿using Core;
 using System;
 using System.Windows;
-using Verse3;
-using Verse3.VanillaElements;
 using Rhino;
 using Rhino.Geometry;
+using Verse3.Nodes;
+using Verse3.Components;
 
 namespace Rhino3DMLibrary
 {
-    public class ConstructTorus : BaseComp
+    public class ConstructTorus : BaseCompViewModel
     {
         public ConstructTorus() : base()
         {
@@ -40,7 +40,7 @@ namespace Rhino3DMLibrary
             }
         }
 
-        public override CompInfo GetCompInfo() => new CompInfo(this, "Construct Torus", "Basic", "Breps");
+        public override CompInfo GetCompInfo() => new CompInfo(this, "Torus", "Basic", "Breps");
 
         private RhinoGeometryDataNode nodeBlockX;
         private NumberDataNode nodeBlockY;

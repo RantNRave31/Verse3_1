@@ -1,0 +1,155 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ output extension=".cs" #>
+<#@ include file="TextTemplateIncludes.tt" #>
+<#
+#>
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+
+namespace GKYU.TranslationLibrary.Domains.Texts
+{
+    public partial class Text
+    {
+        public enum WORD : int
+        {
+            // Articles
+      <#foreach(string word in articles){#>
+      <#= word.ToUpper() #>,
+      <#}#>
+      // Connectives
+      <#foreach(string word in connectives){#>
+      <#= word.ToUpper() #>,
+      <#}#>
+      // Prepositions
+      <#foreach(string word in prepositions){#>
+      <#= word.ToUpper() #>,
+      <#}#>
+      // Adjectives
+      <#foreach(string word in adjectives){#>
+      <#= word.ToUpper() #>,
+      <#}#>
+      // Verbs
+      <#foreach(string word in verbs){#>
+      <#= word.ToUpper() #>,
+      <#}#>
+      // Nouns
+      <#foreach(string word in nouns){#>
+      <#= word.ToUpper() #>,
+      <#}#>
+      // Animals
+      <#foreach(string word in animals){#>
+      <#= word.ToUpper() #>,
+      <#}#>
+      // Directions
+      <#foreach(string word in directions){#>
+      <#= word.ToUpper() #>,
+      <#}#>
+      // Colors
+      <#foreach(string word in colors){#>
+      <#= word.ToUpper() #>,
+      <#}#>
+  };
+        public static Dictionary<string, WORD> WordList = new Dictionary<string, WORD>()
+        {
+            // Articles
+      <#foreach(string word in articles){#>
+      { "<#= word.ToUpper() #>", WORD.<#= word.ToUpper() #> },
+      <#}#>
+      // Connectives
+      <#foreach(string word in connectives){#>
+      { "<#= word.ToUpper() #>", WORD.<#= word.ToUpper() #> },
+      <#}#>
+      // Prepositions
+      <#foreach(string word in prepositions){#>
+      { "<#= word.ToUpper() #>", WORD.<#= word.ToUpper() #> },
+      <#}#>
+      // Adjectives
+      <#foreach(string word in adjectives){#>
+      { "<#= word.ToUpper() #>", WORD.<#= word.ToUpper() #> },
+      <#}#>
+      // Verbs
+      <#foreach(string word in verbs){#>
+      { "<#= word.ToUpper() #>", WORD.<#= word.ToUpper() #> },
+      <#}#>
+      // Nouns
+      <#foreach(string word in nouns){#>
+      { "<#= word.ToUpper() #>", WORD.<#= word.ToUpper() #> },
+      <#}#>
+      // Animals
+      <#foreach(string word in animals){#>
+      { "<#= word.ToUpper() #>", WORD.<#= word.ToUpper() #> },
+      <#}#>
+      // Directions
+      <#foreach(string word in directions){#>
+      { "<#= word.ToUpper() #>", WORD.<#= word.ToUpper() #> },
+      <#}#>
+      // Colors
+      <#foreach(string word in colors){#>
+      { "<#= word.ToUpper() #>", WORD.<#= word.ToUpper() #> },
+      <#}#>
+  };
+        public static Dictionary<WORD, HashSet<WORD>> WordSet = new Dictionary<WORD, HashSet<WORD>>()
+        {
+            { WORD.ANIMAL, new HashSet<WORD>(){
+      <#foreach(string word in animals){#>
+          WORD.<#= word.ToUpper() #>,
+      <#}#>
+      } },
+            { WORD.DIRECTION, new HashSet<WORD>(){
+      <#foreach(string word in directions){#>
+          WORD.<#= word.ToUpper() #>,
+      <#}#>
+      } },
+            { WORD.COLOR, new HashSet<WORD>(){
+      <#foreach(string word in colors){#>
+          WORD.<#= word.ToUpper() #>,
+      <#}#>
+      } },
+  };
+        public enum PARTOFSPEECH : int
+        {
+      <#foreach(string word in partsOfSpeech){#>
+      <#= word.ToUpper() #>,
+      <#}#>
+  };
+        public static Dictionary<PARTOFSPEECH, HashSet<WORD>> PartsOfSpeech = new Dictionary<PARTOFSPEECH, HashSet<WORD>>()
+        {
+            { PARTOFSPEECH.ARTICLE, new HashSet<WORD>(){
+      <#foreach(string word in articles){#>
+          WORD.<#= word.ToUpper() #>,
+      <#}#>
+      } },
+            { PARTOFSPEECH.CONNECTIVE, new HashSet<WORD>(){
+      <#foreach(string word in connectives){#>
+          WORD.<#= word.ToUpper() #>,
+      <#}#>
+      } },
+            { PARTOFSPEECH.PREPOSITION, new HashSet<WORD>(){
+      <#foreach(string word in prepositions){#>
+          WORD.<#= word.ToUpper() #>,
+      <#}#>
+      } },
+            { PARTOFSPEECH.ADJECTIVE, new HashSet<WORD>(){
+      <#foreach(string word in adjectives){#>
+          WORD.<#= word.ToUpper() #>,
+      <#}#>
+      } },
+            { PARTOFSPEECH.VERB, new HashSet<WORD>(){
+      <#foreach(string word in verbs){#>
+          WORD.<#= word.ToUpper() #>,
+      <#}#>
+      } },
+            { PARTOFSPEECH.NOUN, new HashSet<WORD>(){
+      <#foreach(string word in nouns){#>
+          WORD.<#= word.ToUpper() #>,
+      <#}#>
+      } },
+        };
+    }
+}

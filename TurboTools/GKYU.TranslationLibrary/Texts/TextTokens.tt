@@ -1,0 +1,56 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ output extension=".cs" #>
+<#@ include file="TextTemplateIncludes.tt" #>
+<#
+#>
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+
+namespace GKYU.TranslationLibrary.Domains.Texts
+{
+    public partial class Text
+    {
+        public enum TOKEN : int
+        {
+      <#foreach(string word in scannerTokens){#>
+      <#= word.ToUpper() #>,
+      <#}#>
+  };
+        public static Dictionary<string, TOKEN> TokenList = new Dictionary<string, TOKEN>()
+        {
+            // Scanner Tokens
+      <#foreach(string word in scannerTokens){#>
+      { "<#= word.ToUpper() #>", TOKEN.<#= word.ToUpper() #> },
+      <#}#>
+      // Symbols
+  };
+        public enum TOKENSET : int
+        {
+      <#foreach(string word in tokenSets){#>
+      <#= word.ToUpper() #>,
+      <#}#>
+  };
+        public static Dictionary<TOKENSET, HashSet<WORD>> TokenSets = new Dictionary<TOKENSET, HashSet<WORD>>()
+        {
+        };
+        public enum SYMBOL : int
+        {
+      <#foreach(string word in symbols){#>
+      <#= word #>,
+      <#}#>
+  };
+        public static Dictionary<string, SYMBOL> SymbolList = new Dictionary<string, SYMBOL>()
+        {
+            // Symbols
+      <#foreach(string word in symbols){#>
+      { "<#= word #>", SYMBOL.<#= word #> },
+      <#}#>
+  };
+    }
+}

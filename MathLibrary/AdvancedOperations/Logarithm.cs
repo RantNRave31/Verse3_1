@@ -1,12 +1,12 @@
 ﻿using Core;
 using System;
 using System.Windows;
-using Verse3;
-using Verse3.VanillaElements;
+using Verse3.Components;
+using Verse3.Nodes;
 
 namespace MathLibrary
 {
-    public class Logarithm : BaseComp
+    public class Logarithm : BaseCompViewModel
     {
 
         #region Constructors
@@ -28,7 +28,7 @@ namespace MathLibrary
             this.ChildElementManager.SetData<double>((Math.Log(a, b)), nodeBlock2);
         }
 
-        public override CompInfo GetCompInfo() => new CompInfo(this, "Logarithm", "Advanced Operations", "Math");
+        public override CompInfo GetCompInfo() => new CompInfo(this, "LOG(A,n)", "Advanced Operations", "Double");
         
         private NumberDataNode nodeBlock;
         private NumberDataNode nodeBlock1;
@@ -36,10 +36,10 @@ namespace MathLibrary
         public override void Initialize()
         {
             nodeBlock = new NumberDataNode(this, NodeType.Input);
-            this.ChildElementManager.AddDataInputNode(nodeBlock, "Number");
+            this.ChildElementManager.AddDataInputNode(nodeBlock, "A");
 
             nodeBlock1 = new NumberDataNode(this, NodeType.Input);
-            this.ChildElementManager.AddDataInputNode(nodeBlock1, "Base");
+            this.ChildElementManager.AddDataInputNode(nodeBlock1, "n");
 
             nodeBlock2 = new NumberDataNode(this, NodeType.Output);
             this.ChildElementManager.AddDataOutputNode(nodeBlock2, "Result", true);

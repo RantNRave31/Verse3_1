@@ -1,12 +1,12 @@
 ﻿using Core;
 using System;
 using System.Windows;
-using Verse3;
-using Verse3.VanillaElements;
+using Verse3.Components;
+using Verse3.Nodes;
 
 namespace EventsLibrary
 {
-    public class IfThenEventFilter : BaseComp
+    public class IfThenEventFilter : BaseCompViewModel
     {
         private bool _condition = false;
         

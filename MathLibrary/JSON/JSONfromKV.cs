@@ -1,14 +1,13 @@
 ﻿using Core;
-using Verse3;
-using Verse3.VanillaElements;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Windows.Forms;
-
+using Verse3.Nodes;
+using Verse3.Components;
 
 namespace MathLibrary
 {
-    public class JSONfromKV : BaseComp
+    public class JSONfromKV : BaseCompViewModel
     {
         public JSONfromKV() : base()
         {

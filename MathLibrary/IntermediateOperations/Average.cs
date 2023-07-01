@@ -1,12 +1,12 @@
 ﻿using Core;
 using System;
 using System.Windows;
-using Verse3;
-using Verse3.VanillaElements;
+using Verse3.Components;
+using Verse3.Nodes;
 
 namespace MathLibrary
 {
-    public class Average : BaseComp
+    public class Average : BaseCompViewModel
     {
 
         #region Constructors
@@ -30,7 +30,7 @@ namespace MathLibrary
             this.ChildElementManager.SetData<double>((a+b)/2, nodeBlock2);
         }
 
-        public override CompInfo GetCompInfo() => new CompInfo(this, "Average", "Intermediate Operations", "Math");
+        public override CompInfo GetCompInfo() => new CompInfo(this, "AVG(A,B)", "Intermidiate Operations", "Double");
         
         private NumberDataNode nodeBlock;
         private NumberDataNode nodeBlock1;

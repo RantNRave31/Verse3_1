@@ -6,11 +6,12 @@ using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
 using Verse3;
-using Verse3.VanillaElements;
+using Verse3.Components;
+using Verse3.Elements;
 
 namespace MathLibrary
 {
-    public class SearchForComp : BaseComp
+    public class SearchForComp : BaseCompViewModel
     {
 
         public static SearchForComp Instance = null;
@@ -29,7 +30,7 @@ namespace MathLibrary
             }
             else
             {
-                DataViewModel.Instance.Elements.Remove(Instance);
+                DataViewModel.DataModel.Elements.Remove(Instance);
                 Instance = this;
             }
         }
@@ -42,12 +43,12 @@ namespace MathLibrary
         {
         }
         
-        private SearchBoxElement searchBlock = new SearchBoxElement();
+        private SearchBoxElementViewModel searchBlock = new SearchBoxElementViewModel();
         public override void Initialize()
         {
             base.titleTextBlock.TextRotation = 0;
             
-            searchBlock = new SearchBoxElement();
+            searchBlock = new SearchBoxElementViewModel();
             searchBlock.Width = 200;
             searchBlock.InputText = "";
             searchBlock.IsSelected = true;
@@ -55,7 +56,7 @@ namespace MathLibrary
             this.ChildElementManager.AddElement(searchBlock);
         }
 
-        private Dictionary<ButtonElement, CompInfo> buttonDictionary = new Dictionary<ButtonElement, CompInfo>();
+        private Dictionary<ButtonElementViewModel, CompInfo> buttonDictionary = new Dictionary<ButtonElementViewModel, CompInfo>();
 
         private void SearchBlock_SearchStarted(object? sender, HandyControl.Data.FunctionEventArgs<string> e)
         {
@@ -63,7 +64,7 @@ namespace MathLibrary
             {
                 if (buttonDictionary.Count > 0)
                 {
-                    foreach (ButtonElement renderable in buttonDictionary.Keys)
+                    foreach (ButtonElementViewModel renderable in buttonDictionary.Keys)
                     {
                         this.ChildElementManager.RemoveElement(renderable);
                     }
@@ -72,7 +73,7 @@ namespace MathLibrary
 
                 string query = e.Info;
                 //Get a list of types that inherit BaseComp in loaded assemblies
-                Type[] types = AppDomain.CurrentDomain.GetAssemblies().SelectMany(s => s.GetTypes()).Where(p => typeof(BaseComp).IsAssignableFrom(p)).ToArray();
+                Type[] types = AppDomain.CurrentDomain.GetAssemblies().SelectMany(s => s.GetTypes()).Where(p => typeof(BaseCompViewModel).IsAssignableFrom(p)).ToArray();
                 if (types != null && types.Length > 0)
                 {
                     //get an array of all the names of the types
@@ -101,7 +102,7 @@ namespace MathLibrary
                     {
                         foreach (string result in results)
                         {
-                            ButtonElement btn = new ButtonElement();
+                            ButtonElementViewModel btn = new ButtonElementViewModel();
                             btn.DisplayedText = result;
                             btn.Width = 200;
                             btn.OnButtonClicked += Btn_OnButtonClicked;
@@ -111,7 +112,7 @@ namespace MathLibrary
                             if (type != null)
                             {
                                 //create a new instance of the type
-                                if (type == typeof(BaseComp)) continue;
+                                if (type == typeof(BaseCompViewModel)) continue;
                                 if (type == typeof(SearchForComp)) continue;
                                 object? comp = Activator.CreateInstance(type);
                                 //get the CompInfo from the type
@@ -124,7 +125,7 @@ namespace MathLibrary
 
                     if (buttonDictionary.Count > 0)
                     {
-                        foreach (ButtonElement button in buttonDictionary.Keys)
+                        foreach (ButtonElementViewModel button in buttonDictionary.Keys)
                         {
                             if (!this.ChildElementManager.BottomUIItems.Contains(button)) this.ChildElementManager.AddElement(button);
                         }
@@ -144,7 +145,7 @@ namespace MathLibrary
                 if (btn.Content is string name)
                 {
                     //find the buttonelement in the dictionary with compinfo.name
-                    ButtonElement? btnElement = buttonDictionary.Where((kv) => kv.Value.Name == name).FirstOrDefault().Key;
+                    ButtonElementViewModel? btnElement = buttonDictionary.Where((kv) => kv.Value.Name == name).FirstOrDefault().Key;
                     if (btnElement is null) return;
                     if (buttonDictionary[btnElement].ConstructorInfo != null)
                     {
@@ -161,13 +162,13 @@ namespace MathLibrary
                                 else
                                 {
                                     if (pi[i].ParameterType == typeof(int) && pi[i].Name.ToLower() == "x")
-                                        args[i] = DataViewModel.WPFControl.GetMouseRelPosition().X;
+                                        args[i] = MainWindowViewModel.ActiveMain.MainWindowViewModel.SelectedDataViewModel.DataModelView.GetMouseRelPosition().X;
                                     else if (pi[i].ParameterType == typeof(int) && pi[i].Name.ToLower() == "y")
-                                        args[i] = DataViewModel.WPFControl.GetMouseRelPosition().Y;
+                                        args[i] = MainWindowViewModel.ActiveMain.MainWindowViewModel.SelectedDataViewModel.DataModelView.GetMouseRelPosition().Y;
                                 }
                             }
-                            EditorForm.compsPendingInst.Add(ci, args);
-                            Main_Verse3.ActiveMain.ActiveEditor.AddToCanvas_OnCall(this, new EventArgs());
+                            MainWindowViewModel.compsPendingInst.Add(ci, args);
+                            MainWindowViewModel.ActiveMain.MainWindowViewModel.AddToCanvas_OnCall(this, new EventArgs());
                             //IElement? elInst = buttonDictionary[btnElement].ConstructorInfo.Invoke(args) as IElement;
                             //DataTemplateManager.RegisterDataTemplate(elInst as IRenderable);
                             //DataViewModel.Instance.Elements.Add(elInst);

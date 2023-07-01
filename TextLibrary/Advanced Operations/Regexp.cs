@@ -1,13 +1,13 @@
 ﻿using Core;
 using System;
 using System.Windows;
-using Verse3;
-using Verse3.VanillaElements;
 using System.Text.RegularExpressions;
+using Verse3.Nodes;
+using Verse3.Components;
 
 namespace MathLibrary
 {
-    public class Regexp : BaseComp
+    public class Regexp : BaseCompViewModel
     {
         #region Constructors
 

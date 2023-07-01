@@ -1,0 +1,55 @@
+﻿<UserControl x:Class="GKYU.PresentationLogicLibrary.ModelViews.BitmapModelView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:i="http://schemas.microsoft.com/xaml/behaviors" 
+             xmlns:local="clr-namespace:GKYU.PresentationLogicLibrary.ModelViews"
+             xmlns:behaviors="clr-namespace:GKYU.PresentationLogicLibrary.Behaviors"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800" Loaded="UserControl_Loaded">
+    <UserControl.InputBindings>
+        <KeyBinding Key="F5">
+            <KeyBinding.Command>
+                <local:CanvasCommand Executed="Command_OnTest"/>
+            </KeyBinding.Command>
+        </KeyBinding>
+    </UserControl.InputBindings>
+    <Grid>
+        <Border BorderBrush ="Black">
+        </Border>
+        <StackPanel>
+            <TextBox Text="{Binding Path=FileName}"/>
+            <Border Width="{Binding Path=WidthInPixels, UpdateSourceTrigger=PropertyChanged}" 
+                    Height="{Binding Path=HeightInPixels, UpdateSourceTrigger=PropertyChanged}" 
+                    Background="Wheat" 
+                    HorizontalAlignment="Center" 
+                    VerticalAlignment="Center"
+                    >
+                <ScrollViewer
+                    HorizontalScrollBarVisibility="Auto">
+                    <Canvas x:Name="tempCanvas">
+                        <Image Name="imageViewer" Margin="5,5,5,5" Source="{Binding Path=WriteableBitmap, UpdateSourceTrigger=PropertyChanged}" >
+                        </Image>
+                        <Border BorderBrush="Black" Height="59" Width="113">
+                            <TextBlock Text="Drag me around!"/>
+                            <i:Interaction.Behaviors>
+                                <behaviors:DragBehavior/>
+                            </i:Interaction.Behaviors>
+                        </Border>
+                    </Canvas>
+                    <i:Interaction.Behaviors>
+                        <behaviors:ZoomBehavior />
+                    </i:Interaction.Behaviors>
+                </ScrollViewer>
+            </Border>
+            <StackPanel Orientation="Horizontal">
+                <Button Margin="10,5,10,5" Width="75" Content="Load" Command="{Binding LoadCommand}"/>
+                <Button Margin="10,5,10,5" Width="75" Content="Save" Command="{Binding SaveCommand}"/>
+                <Button Margin="10,5,10,5" Width="75" Content="Clear" Command="{Binding ClearCommand}"/>
+                <Button Margin="10,5,10,5" Width="75" Content="Scale" Command="{Binding ScaleCommand}" CommandParameter="{Binding ElementName=textbox1, Path=Text}"/>
+                <TextBox Name="textbox1" Margin="10,5,10,5" Width="75" Text="1.0"/>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</UserControl>

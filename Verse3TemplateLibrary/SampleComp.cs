@@ -2,12 +2,13 @@
 using System;
 using System.Windows;
 using System.Windows.Controls;
-using Verse3;
-using Verse3.VanillaElements;
+using Verse3.Nodes;
+using Verse3.Elements;
+using Verse3.Components;
 
 namespace Verse3TemplateLibrary
 {
-    public class SampleComp : BaseComp
+    public class SampleComp : BaseCompViewModel
     {
         #region Constructors
         public SampleComp() : base()
@@ -30,9 +31,9 @@ namespace Verse3TemplateLibrary
         private GenericEventNode EventEOutputNode;
         private NumberDataNode NumberFOutputNode;
 
-        private ButtonElement ButtonX;
-        private SliderElement SliderY;
-        private TextBoxElement TextBoxZ;
+        private ButtonElementViewModel ButtonX;
+        private SliderElementViewModel SliderY;
+        private TextBoxElementViewModel TextBoxZ;
         public override void Initialize()
         {
             //EVENT NODES
@@ -63,13 +64,13 @@ namespace Verse3TemplateLibrary
 
             //UI ELEMENTS
             //BUTTON
-            ButtonX = new ButtonElement();
+            ButtonX = new ButtonElementViewModel();
             ButtonX.DisplayedText = "Sample Button";
             ButtonX.OnButtonClicked += ButtonX_OnButtonClicked;
             this.ChildElementManager.AddElement(ButtonX);
 
             //SLIDER
-            SliderY = new SliderElement();
+            SliderY = new SliderElementViewModel();
             SliderY.Minimum = 0;
             SliderY.Maximum = 100;
             SliderY.Value = 50;
@@ -77,7 +78,7 @@ namespace Verse3TemplateLibrary
             this.ChildElementManager.AddElement(SliderY);
 
             //TEXTBOX
-            TextBoxZ = new TextBoxElement();
+            TextBoxZ = new TextBoxElementViewModel();
             TextBoxZ.InputText = "Sample Text";
             TextBoxZ.ValueChanged += TextBoxZ_ValueChanged;
         }

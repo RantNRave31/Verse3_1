@@ -1,12 +1,12 @@
 ﻿using Core;
 using System;
 using System.Windows;
-using Verse3;
-using Verse3.VanillaElements;
+using Verse3.Components;
+using Verse3.Nodes;
 
 namespace EventsLibrary
 {
-    public class Flipflop : BaseComp
+    public class Flipflop : BaseCompViewModel
     {
         private bool _state = false;
         

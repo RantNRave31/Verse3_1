@@ -1,12 +1,12 @@
 ﻿using Core;
 using System;
 using System.Windows;
-using Verse3;
-using Verse3.VanillaElements;
+using Verse3.Components;
+using Verse3.Nodes;
 
 namespace TextLibrary
 {
-    public class TextTransform : BaseComp
+    public class TextTransform : BaseCompViewModel
     {
 
         #region Constructors

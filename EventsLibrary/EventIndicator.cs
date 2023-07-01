@@ -1,12 +1,12 @@
 ﻿using Core;
 using System;
 using System.Windows;
-using Verse3;
-using Verse3.VanillaElements;
+using Verse3.Components;
+using Verse3.Nodes;
 
 namespace EventsLibrary
 {
-    public class EventIndicator : BaseComp
+    public class EventIndicator : BaseCompViewModel
     {
         internal int _counter = 0;
         internal string _argstring = "";

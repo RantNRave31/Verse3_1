@@ -6,12 +6,13 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Forms;
 using System.Windows.Media;
-using Verse3;
-using Verse3.VanillaElements;
+using Verse3.Nodes;
+using Verse3.Elements;
+using Verse3.Components;
 
 namespace ColorLibrary
 {
-    public class ColorSelector : BaseComp
+    public class ColorSelector : BaseCompViewModel
     {
         internal Color? _value = Color.FromArgb(255, 255, 255, 255);
         
@@ -42,8 +43,8 @@ namespace ColorLibrary
         internal ColorPicker colorPicker;
         internal PopupWindow window;
 
-        internal ButtonElement buttonBlock = new ButtonElement();
-        internal TextBoxElement textBoxElement = new TextBoxElement();
+        internal ButtonElementViewModel buttonBlock = new ButtonElementViewModel();
+        internal TextBoxElementViewModel textBoxElement = new TextBoxElementViewModel();
         internal ColorDataNode nodeBlock;
         internal GenericEventNode nodeBlock1;
         public override void Initialize()
@@ -56,13 +57,13 @@ namespace ColorLibrary
             nodeBlock = new ColorDataNode(this, NodeType.Output);
             this.ChildElementManager.AddDataOutputNode(nodeBlock, "Color");
 
-            buttonBlock = new ButtonElement();
+            buttonBlock = new ButtonElementViewModel();
             buttonBlock.DisplayedText = _value.GetValueOrDefault(Color.FromArgb(255, 255, 255, 255)).ToString();
             buttonBlock.BackgroundColor = new System.Windows.Media.SolidColorBrush(_value.GetValueOrDefault(Color.FromArgb(255, 255, 255, 255)));
             buttonBlock.OnButtonClicked += ButtonBlock_OnButtonClicked;
             this.ChildElementManager.AddElement(buttonBlock);
 
-            textBoxElement = new TextBoxElement();
+            textBoxElement = new TextBoxElementViewModel();
             textBoxElement.InputText = _value.GetValueOrDefault(Color.FromArgb(255, 255, 255, 255)).ToString();
             textBoxElement.ValueChanged += TextBoxElement_ValueChanged;
             this.ChildElementManager.AddElement(textBoxElement);

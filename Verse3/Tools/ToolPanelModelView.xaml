@@ -1,0 +1,129 @@
+﻿<UserControl x:Class="Verse3.Tools.ToolPanelModelView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Verse3.Tools"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="200"
+          >
+    <UserControl.Resources>
+        <Style x:Key="FileItemStyle" TargetType="{x:Type ListViewItem}">
+            <Setter Property="Margin" Value="5,5,5,5"/>
+            <Setter Property="Padding" Value="0,0,0,0"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate  TargetType="{x:Type ListViewItem}">
+                        <Grid HorizontalAlignment="Left" VerticalAlignment="Top" Height="50" >
+                            <Border x:Name="border" BorderBrush="{x:Null}" BorderThickness="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" CornerRadius="2.5"/>
+                            <StackPanel HorizontalAlignment="Stretch"  VerticalAlignment="Stretch">
+                                <ContentPresenter/>
+                            </StackPanel>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+        <Style x:Key="UnexpandHeaderStyle" TargetType="{x:Type Expander}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Expander}">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="Auto" Name="contentRow"/>
+                            </Grid.RowDefinitions>
+                            <!--Expander Header-->
+                            <Border Background="AliceBlue" Grid.Row="0">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="20"/>
+                                    </Grid.ColumnDefinitions>
+                                    <ContentPresenter Grid.Column="0" ContentSource="Header" RecognizesAccessKey="True" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5" />
+                                    <ToggleButton Grid.Column="1" Content="x" IsChecked="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=IsExpanded}"/>
+                                </Grid>
+                            </Border>
+                            <!--Expander Content-->
+                            <Border Background="Aqua" Grid.Row="1" Visibility="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=IsExpanded, Converter={StaticResource BooleanToVisibilityConverter}}">
+                                <ContentPresenter/>
+                            </Border>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style TargetType="{x:Type Expander}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Expander}">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="Auto" Name="contentRow"/>
+                            </Grid.RowDefinitions>
+                            <!--Expander Header-->
+                            <Border Background="AliceBlue" Grid.Row="0">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="20"/>
+                                    </Grid.ColumnDefinitions>
+                                    <ContentPresenter Grid.Column="0" ContentSource="Header" RecognizesAccessKey="True" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5" />
+                                    <!--Expander Header-->
+                                    <ToggleButton IsChecked="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=IsExpanded}" HorizontalContentAlignment="Stretch" Grid.Row="0">
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="20"/>
+                                            </Grid.ColumnDefinitions>
+                                            <ContentPresenter Grid.Column="0" ContentSource="Header" RecognizesAccessKey="True" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5" />
+                                        </Grid>
+                                    </ToggleButton>
+                                </Grid>
+                            </Border>
+                            <!--Expander Content-->
+                            <Border Background="Aqua" Grid.Row="1" Visibility="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=IsExpanded, Converter={StaticResource BooleanToVisibilityConverter}}">
+                                <ContentPresenter/>
+                            </Border>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <DataTemplate x:Key="ToolSubcategoriesTemplate">
+            <Expander Header="{Binding Name}" IsExpanded="True">
+                <ListView ItemsSource="{Binding Tools}" ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+              SelectedItem="{Binding SelectedTool, RelativeSource={RelativeSource AncestorType=Window}}"
+              ItemContainerStyle="{StaticResource FileItemStyle}">
+                    <ListView.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel Orientation="Horizontal" Width="250" />
+                        </ItemsPanelTemplate>
+                    </ListView.ItemsPanel>
+
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <DockPanel>
+                                <Button Height="32" Content="{Binding Name}" ToolTip="{Binding Name}" Click="Button_Click" Tag="{Binding CompInfo}"/>
+                            </DockPanel>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </Expander>
+        </DataTemplate>
+        <DataTemplate x:Key="ToolCategoriesTemplate">
+            <Expander Header="{Binding Name}" IsExpanded="False">
+                <ListView HorizontalAlignment="Stretch"
+              VerticalAlignment="Stretch"
+              ItemsSource="{Binding ToolSubcategories}" 
+                ItemTemplate="{StaticResource ToolSubcategoriesTemplate}"
+                          />
+            </Expander>
+        </DataTemplate>
+    </UserControl.Resources>
+    <ListView ItemsSource="{Binding ToolCategories}" ItemTemplate="{StaticResource ToolCategoriesTemplate}">
+    </ListView>
+</UserControl>

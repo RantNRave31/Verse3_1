@@ -1,0 +1,186 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+	  <TargetFramework>net6.0-windows</TargetFramework>
+	  <OutputType>Library</OutputType>
+	  <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+	  <UseWPF>True</UseWPF>
+	  <ImportWindowsDesktopTargets>true</ImportWindowsDesktopTargets>
+	  <AutoGenerateBindingRedirects>True</AutoGenerateBindingRedirects>
+	  <Deterministic>false</Deterministic>
+	  <Platforms>AnyCPU;x64</Platforms>
+	  <GenerateDocumentationFile>True</GenerateDocumentationFile>
+	  <SignAssembly>False</SignAssembly>
+	  <AssemblyOriginatorKeyFile>apphost.exe</AssemblyOriginatorKeyFile>
+	  <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+	  <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="ErrorHandling\ErrorCodes.tt" />
+    <None Remove="Texts\TextTemplateIncludes.tt" />
+    <None Remove="Texts\TextTokens.tt" />
+    <None Remove="Texts\TextWordSets.tt" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="Code.cs" />
+    <Compile Include="ErrorHandling\ErrorCodes.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>ErrorCodes.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ErrorHandling\ErrorManager.cs" />
+    <Compile Include="ErrorHandling\Error.cs" />
+    <Compile Include="Grammars\Analyzers\AnalysisPass.cs" />
+    <Compile Include="Grammars\Analyzers\GrammarAnalysisPass.cs" />
+    <Compile Include="Grammars\Analyzers\GrammarAnalysisPass2.cs" />
+    <Compile Include="Grammars\Analyzers\GrammarAnalyzer.cs" />
+    <Compile Include="Grammars\Analyzers\GrammarValidationPass.cs" />
+    <Compile Include="Grammars\Analyzers\TotalsPass.cs" />
+    <Compile Include="Grammars\Generators\AnalysisGenerator.cs" />
+    <Compile Include="Grammars\Generators\GrammarAnalysisReportGenerator.cs" />
+    <Compile Include="Grammars\Generators\LexerSwitchGenerator.cs" />
+    <Compile Include="Grammars\GrammarConstructor.cs" />
+    <Compile Include="Grammars\GrammarExtensions.cs" />
+    <Compile Include="Grammars\Information\GrammarAnalysisInfo.cs" />
+    <Compile Include="Grammars\Information\GrammarValidationInfo.cs" />
+    <Compile Include="Grammars\Information\LexerValidationInfo.cs" />
+    <Compile Include="Grammars\Information\ParserValidationInfo.cs" />
+    <Compile Include="Grammars\QuickBuilder.cs" />
+    <Compile Include="Grammars\Syntax.Atom.cs" />
+    <Compile Include="Grammars\Syntax.Builder.cs" />
+    <Compile Include="Grammars\Syntax.CharacterDeclaration.cs" />
+    <Compile Include="Grammars\Syntax.CharacterSetDeclaration.cs" />
+    <Compile Include="Grammars\Syntax.Choice.cs" />
+    <Compile Include="Grammars\Syntax.ClassDeclaration.cs" />
+    <Compile Include="Grammars\Syntax.Copier.cs" />
+    <Compile Include="Grammars\Syntax.Decimal.cs" />
+    <Compile Include="Grammars\Syntax.Empty.cs" />
+    <Compile Include="Grammars\Syntax.EndOfFile.cs" />
+    <Compile Include="Grammars\Syntax.EndOfLine.cs" />
+    <Compile Include="Grammars\Syntax.ExpressionNode.cs" />
+    <Compile Include="Grammars\Syntax.FileDeclaration.cs" />
+    <Compile Include="Grammars\Syntax.FileReference.cs" />
+    <Compile Include="Grammars\Syntax.Grammar2NFA.cs" />
+    <Compile Include="Grammars\Syntax.IBuildSyntax.cs" />
+    <Compile Include="Grammars\Syntax.ICopySyntax.cs" />
+    <Compile Include="Grammars\Syntax.Identifier.cs" />
+    <Compile Include="Grammars\Syntax.Instance.cs" />
+    <Compile Include="Grammars\Syntax.Integer.cs" />
+    <Compile Include="Grammars\Syntax.IVisitSyntax.cs" />
+    <Compile Include="Grammars\Syntax.LexerDeclaration.cs" />
+    <Compile Include="Grammars\Syntax.LEXER_SYMBOL.cs" />
+    <Compile Include="Grammars\Syntax.MacroExpression.cs" />
+    <Compile Include="Grammars\Syntax.MemberDeclaration.cs" />
+    <Compile Include="Grammars\Syntax.MethodDeclaration.cs" />
+    <Compile Include="Grammars\Syntax.NamespaceDeclaration.cs" />
+    <Compile Include="Grammars\Syntax.Number.cs" />
+    <Compile Include="Grammars\Syntax.ParserDefinition.cs" />
+    <Compile Include="Grammars\Syntax.Primative.cs" />
+    <Compile Include="Grammars\Syntax.ProjectFile.cs" />
+    <Compile Include="Grammars\Syntax.Reference.cs" />
+    <Compile Include="Grammars\Syntax.Repitition.cs" />
+    <Compile Include="Grammars\Syntax.Sequence.cs" />
+    <Compile Include="Grammars\Syntax.SourceFile.cs" />
+    <Compile Include="Grammars\Syntax.String.cs" />
+    <Compile Include="Grammars\Syntax.SYMBOL.cs" />
+    <Compile Include="Grammars\Syntax.SymbolDeclaration.cs" />
+    <Compile Include="Grammars\Syntax.Symbolic.cs" />
+    <Compile Include="Grammars\Syntax.SymbolTable.cs" />
+    <Compile Include="Grammars\Syntax.SyntaxNode.cs" />
+    <Compile Include="Grammars\Syntax.TokenDeclaration.cs" />
+    <Compile Include="Grammars\Syntax.TypeDeclaration.cs" />
+    <Compile Include="Grammars\Syntax.Variable.cs" />
+    <Compile Include="Grammars\Syntax.Visitor.cs" />
+    <Compile Include="Grammars\Syntax.Writer.cs" />
+    <Compile Include="Grammars\TextTemplate.cs" />
+    <Compile Include="Interfaces.cs" />
+    <Compile Include="MacroProcessor.cs" />
+    <Compile Include="MakeProcessor.cs" />
+    <Compile Include="Patterns\CompilerBase.cs" />
+    <Compile Include="Patterns\GeneratorBase.cs" />
+    <Compile Include="Patterns\TranslatorBase.cs" />
+    <Compile Include="Patterns\VisitorBase.cs" />
+    <Compile Include="RegularExpressions\Parser.cs" />
+    <Compile Include="RegularExpressions\RegularExpression.cs" />
+    <Compile Include="Scripts\Executor.cs" />
+    <Compile Include="Scripts\Loader.cs" />
+    <Compile Include="Scripts\Script.cs" />
+    <Compile Include="Symbols\QuickEntityMapExtensions.cs" />
+    <Compile Include="Symbols\Symbol.cs" />
+    <Compile Include="Symbols\Symbol.Table.cs" />
+    <Compile Include="TemplateProcessor.cs" />
+    <Compile Include="Texts\Text.Characters.cs" />
+    <Compile Include="Texts\Text.Element.cs" />
+    <Compile Include="Texts\Text.Formatter.cs" />
+    <Compile Include="Texts\Text.Template.cs" />
+    <Compile Include="Texts\Text.Templates.cs" />
+    <Compile Include="Texts\TextTemplateIncludes.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>TextTemplateIncludes.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Texts\TextTokens.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>TextTokens.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Texts\TextWordSets.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>TextWordSets.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Token.cs" />
+    <Compile Include="Translators\Emitter.cs" />
+    <Compile Include="Translators\EnumerableLexer.cs" />
+    <Compile Include="Translators\EnumerableScanner.cs" />
+    <Compile Include="Translators\FormatterBase.cs" />
+    <Compile Include="Translators\InputInterfaces.cs" />
+    <Compile Include="Translators\Lexer.cs" />
+    <Compile Include="Translators\LexerBase.cs" />
+    <Compile Include="Translators\ObjectWriter.cs" />
+    <Compile Include="Translators\OutputInterfaces.cs" />
+    <Compile Include="Translators\ParserBase.cs" />
+    <Compile Include="Translators\Scanner.cs" />
+    <Compile Include="Translators\ScannerBase.cs" />
+    <Compile Include="Translators\StreamCharacterScanner.cs" />
+    <Compile Include="Translators\StreamLexer.cs" />
+    <Compile Include="Translators\StreamLineLexer.cs" />
+    <Compile Include="Translators\StreamLineScanner.cs" />
+    <Compile Include="Translators\StreamScanner.cs" />
+    <Compile Include="Translators\Translator.cs" />
+    <Compile Include="Translators\WriterBase.cs" />
+    <Compile Include="Writer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="ErrorHandling\ErrorCodes.tt">
+      <LastGenOutput>ErrorCodes.cs</LastGenOutput>
+      <Generator>TextTemplatingFileGenerator</Generator>
+    </Content>
+    <Content Include="Texts\TextTemplateIncludes.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>TextTemplateIncludes.cs</LastGenOutput>
+    </Content>
+    <Content Include="Texts\TextTokens.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>TextTokens.cs</LastGenOutput>
+    </Content>
+    <Content Include="Texts\TextWordSets.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>TextWordSets.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\GKYU.CollectionsLibrary\GKYU.CollectionsLibrary.csproj" />
+    <ProjectReference Include="..\GKYU.CoreLibrary\GKYU.CoreLibrary.csproj" />
+    <ProjectReference Include="..\GKYU.StateMachinesLibrary\GKYU.StateMachinesLibrary.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
+  </ItemGroup>
+
+</Project>

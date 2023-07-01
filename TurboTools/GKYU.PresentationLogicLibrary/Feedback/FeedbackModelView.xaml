@@ -1,0 +1,49 @@
+﻿<Window x:Class="GKYU.PresentationLogicLibrary.Feedback.FeedbackModelView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:GKYU.PresentationLogicLibrary.Feedback"
+        mc:Ignorable="d"
+        Title="FeedbackModelView" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="145*"/>
+            <RowDefinition Height="72*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="507*"/>
+            <ColumnDefinition Width="293*"/>
+        </Grid.ColumnDefinitions>
+        <GroupBox x:Name="groupBox1" Header="Feedback Body:">
+            <TextBox>
+
+            </TextBox>
+        </GroupBox>
+        <GroupBox Grid.Column="1" Grid.Row="0" Header="Report Settings">
+            <StackPanel>
+                <TextBox Text="" Height="147"/>
+                <CheckBox Content="Include canvas viewport snapshot"/>
+                <CheckBox Content="Include serialized script contents"/>
+                <CheckBox Content="Include internal logs"/>
+                <Button Content="Show Report Data in Explorer..."/>
+            </StackPanel>
+        </GroupBox>
+        <Grid Grid.Column="0" Grid.Row="1" >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="28*"/>
+                <RowDefinition Height="11*"/>
+                <RowDefinition Height="9*"/>
+            </Grid.RowDefinitions>
+            <TextBlock TextWrapping="Wrap" Text="If you have encountered an error, please take the time to elaborate on the details of what you 
+                       were doing when the error occured. If you have a suggestion or feature request, please send 
+                       two more after this one :)" />
+            <TextBlock Grid.Row="1" Text="If you're a developer, visit the GitHub repository and add an issue :" />
+            <TextBlock Grid.Row="2" Margin="0,2,0,0">https://github.com/ARPM-Design-and-Research/Verse3/issues<Hyperlink NavigateUri="https://github.com/ARPM-Design-and-Research/Verse3/issues"/></TextBlock>
+        </Grid>
+        <StackPanel Grid.Column="1" Grid.Row="1">
+            <Button Content="Submit Report"/>
+            <Button Content="Don't Send" />
+        </StackPanel>
+    </Grid>
+</Window>

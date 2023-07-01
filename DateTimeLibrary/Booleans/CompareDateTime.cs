@@ -1,12 +1,12 @@
 ﻿using Core;
 using System;
 using System.Windows;
-using Verse3;
-using Verse3.VanillaElements;
+using Verse3.Components;
+using Verse3.Nodes;
 
 namespace MathLibrary
 {
-    public class CompareDateTime : BaseComp
+    public class CompareDateTime : BaseCompViewModel
     {
 
         #region Constructors
@@ -22,7 +22,7 @@ namespace MathLibrary
         #endregion
 
 
-        public override CompInfo GetCompInfo() => new CompInfo(this, "Compare DateTime", "Boolean", "DateTime");
+        public override CompInfo GetCompInfo() => new CompInfo(this, "Compare DateTime", "Logical Operations", "DateTime");
 
         public override void Compute()
         {

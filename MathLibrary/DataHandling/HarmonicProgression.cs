@@ -1,11 +1,11 @@
 ﻿using Core;
-using Verse3;
-using Verse3.VanillaElements;
 using System;
+using Verse3.Nodes;
+using Verse3.Components;
 
 namespace MathLibrary
 {
-    public class HarmonicProgression : BaseComp
+    public class HarmonicProgression : BaseCompViewModel
     {
         public HarmonicProgression() : base()
         {

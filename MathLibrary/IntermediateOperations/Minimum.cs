@@ -1,12 +1,12 @@
 ﻿using Core;
 using System;
 using System.Windows;
-using Verse3;
-using Verse3.VanillaElements;
+using Verse3.Components;
+using Verse3.Nodes;
 
 namespace MathLibrary
 {
-    public class Minimum : BaseComp
+    public class Minimum : BaseCompViewModel
     {
 
         #region Constructors
@@ -30,7 +30,7 @@ namespace MathLibrary
             this.ChildElementManager.SetData<double>((Math.Min(a, b)), nodeBlock2);
         }
 
-        public override CompInfo GetCompInfo() => new CompInfo(this, "Minimum", "Intermediate Operations", "Math");
+        public override CompInfo GetCompInfo() => new CompInfo(this, "MIN(A,B)", "Intermidiate Operations", "Double");
 
         
         private NumberDataNode nodeBlock;

@@ -1,0 +1,45 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+	  <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+	  <LangVersion>preview</LangVersion>
+	  <EnablePreviewFeatures>true</EnablePreviewFeatures>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="ErrorCodes.tt" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="ArgumentExtensions.cs" />
+    <Compile Include="BitTwiddlingExtensions.cs" />
+    <Compile Include="Conversions\Cast.cs" />
+    <Compile Include="DictionaryExtensions.cs" />
+    <Compile Include="ErrorHandling\ErrorBase.cs" />
+    <Compile Include="ErrorHandling\ErrorCode.cs" />
+    <Compile Include="ErrorHandling\ErrorContext.cs" />
+    <Compile Include="ExpressionExtensions.cs" />
+    <Compile Include="Expressions\ExpressionExceptions.cs" />
+    <Compile Include="Expressions\ExpressionExtensions.cs" />
+    <Compile Include="Expressions\ExpressionTreeHelpers.cs" />
+    <Compile Include="FileExtensions.cs" />
+    <Compile Include="IEnumerableExtensions.cs" />
+    <Compile Include="IntegerExtensions.cs" />
+    <Compile Include="MemoryStreamExtensions.cs" />
+    <Compile Include="Attributes\Metrics.cs" />
+    <Compile Include="Attributes\Parameter.cs" />
+    <Compile Include="Performance\PerformanceTimer.cs" />
+    <Compile Include="MetaData\ClassInfo.cs" />
+    <Compile Include="MetaData\MetaData.cs" />
+    <Compile Include="MetaData\TypeExtensions.cs" />
+    <Compile Include="MetaData\TypeSystem.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
+  </ItemGroup>
+
+</Project>

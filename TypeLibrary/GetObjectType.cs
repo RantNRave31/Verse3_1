@@ -1,11 +1,11 @@
 ﻿using Core;
 using System;
-using Verse3;
-using Verse3.VanillaElements;
+using Verse3.Nodes;
+using Verse3.Components;
 
 namespace MathLibrary
 {
-    public class GetObjectType : BaseComp
+    public class GetObjectType : BaseCompViewModel
     {
         public GetObjectType() : base()
         {

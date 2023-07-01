@@ -3,12 +3,12 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
-using Verse3;
-using Verse3.VanillaElements;
+using Verse3.Components;
+using Verse3.Nodes;
 
 namespace EventsLibrary
 {
-    public class Wait : BaseComp
+    public class Wait : BaseCompViewModel
     {
         private int _duration = 1000;
         private int _counter = 0;

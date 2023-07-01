@@ -1,12 +1,13 @@
 ﻿using Core;
 using System;
 using System.Windows;
-using Verse3;
-using Verse3.VanillaElements;
+using Verse3.Nodes;
+using Verse3.Elements;
+using Verse3.Components;
 
 namespace TextLibrary
 {
-    public class TextContainer : BaseComp
+    public class TextContainer : BaseCompViewModel
     {
         internal string _inputText = "";
 
@@ -29,13 +30,13 @@ namespace TextLibrary
         }
         public override CompInfo GetCompInfo() => new CompInfo(this, "Text Input", "Inputs", "Text");
 
-        internal TextBoxElement textBoxBlock = new TextBoxElement();
+        internal TextBoxElementViewModel textBoxBlock = new TextBoxElementViewModel();
         internal TextDataNode nodeBlock;
         public override void Initialize()
         {
             base.titleTextBlock.TextRotation = 0;
 
-            textBoxBlock = new TextBoxElement();
+            textBoxBlock = new TextBoxElementViewModel();
             textBoxBlock.InputText = "";
             textBoxBlock.ValueChanged += TextBoxBlock_OnValueChanged;
             this.ChildElementManager.AddElement(textBoxBlock);

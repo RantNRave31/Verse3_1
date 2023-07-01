@@ -1,12 +1,12 @@
 ﻿using Core;
 using System;
-using Verse3;
-using Verse3.VanillaElements;
+using Verse3.Components;
+using Verse3.Nodes;
 
 
 namespace MathLibrary
 {
-    public class ContainsItem : BaseComp
+    public class ContainsItem : BaseCompViewModel
     {
         public ContainsItem() : base()
         {

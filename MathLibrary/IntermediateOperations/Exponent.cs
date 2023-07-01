@@ -1,12 +1,12 @@
 ﻿using Core;
 using System;
 using System.Windows;
-using Verse3;
-using Verse3.VanillaElements;
+using Verse3.Components;
+using Verse3.Nodes;
 
 namespace MathLibrary
 {
-    public class Exponent : BaseComp
+    public class Exponent : BaseCompViewModel
     {
 
         #region Constructors
@@ -30,7 +30,7 @@ namespace MathLibrary
             this.ChildElementManager.SetData<double>((Math.Pow(a, b)), nodeBlock2);
         }
 
-        public override CompInfo GetCompInfo() => new CompInfo(this, "Exponent", "Intermediate Operations", "Math");
+        public override CompInfo GetCompInfo() => new CompInfo(this, "EXP(A,n)", "Intermidiate Operations", "Double");
         
         private NumberDataNode nodeBlock;
         private NumberDataNode nodeBlock1;
@@ -38,10 +38,10 @@ namespace MathLibrary
         public override void Initialize()
         {
             nodeBlock = new NumberDataNode(this, NodeType.Input);
-            this.ChildElementManager.AddDataInputNode(nodeBlock, "Number");
+            this.ChildElementManager.AddDataInputNode(nodeBlock, "A");
 
             nodeBlock1 = new NumberDataNode(this, NodeType.Input);
-            this.ChildElementManager.AddDataInputNode(nodeBlock1, "Power");
+            this.ChildElementManager.AddDataInputNode(nodeBlock1, "n");
 
             nodeBlock2 = new NumberDataNode(this, NodeType.Output);
             this.ChildElementManager.AddDataOutputNode(nodeBlock2, "Result", true);

@@ -1,12 +1,12 @@
 ﻿using Core;
 using System;
 using System.Windows;
-using Verse3;
-using Verse3.VanillaElements;
+using Verse3.Components;
+using Verse3.Nodes;
 
 namespace MathLibrary
 {
-    public class Round : BaseComp
+    public class Round : BaseCompViewModel
     {
 
         #region Constructors
@@ -29,7 +29,7 @@ namespace MathLibrary
             this.ChildElementManager.SetData<double>((Math.Round(a)), nodeBlock2);
         }
 
-        public override CompInfo GetCompInfo() => new CompInfo(this, "Round", "Intermediate Operations", "Math");
+        public override CompInfo GetCompInfo() => new CompInfo(this, "ROUND(A)", "Intermidiate Operations", "Double");
 
         
         private NumberDataNode nodeBlock;

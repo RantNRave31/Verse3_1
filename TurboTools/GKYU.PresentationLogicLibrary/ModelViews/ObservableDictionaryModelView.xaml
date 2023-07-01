@@ -1,0 +1,52 @@
+﻿<UserControl x:Class="GKYU.PresentationLogicLibrary.ModelViews.ObservableDictionaryModelView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:GKYU.PresentationLogicLibrary.ModelViews"
+             xmlns:collections="clr-namespace:GKYU.PresentationLogicLibrary.Collections"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <collections:ObservableStyleDictionary x:Key="ButtonStyles" />
+        <DataTemplate x:Key="ButtonTemplate">
+            <Button Style="{Binding Value}">Sample</Button>
+        </DataTemplate>
+        <DataTemplate x:Key="StyleNameTemplate">
+            <TextBlock Text="{Binding Key}" />
+        </DataTemplate>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.Background>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                <GradientStop Color="DarkGray" Offset="0" />
+                <GradientStop Color="LightGray" Offset="1" />
+            </LinearGradientBrush>
+        </Grid.Background>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <ListView Name="StyleListView" Button.Click="AddOrRemoveButton" Background="Transparent"
+        ItemsSource="{Binding Source={StaticResource ButtonStyles}}">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Style Name" DisplayMemberBinding="{Binding Key}" />
+                    <GridViewColumn Width="75" Header="Sample" CellTemplate="{StaticResource ButtonTemplate}"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+        <StackPanel Grid.Column="1">
+            <ComboBox Name="StyleSelector" Margin="10" SelectedValuePath="Value"
+          ItemTemplate="{StaticResource StyleNameTemplate}"
+          ItemsSource="{Binding Source={StaticResource ButtonStyles}}" />
+            <Button VerticalAlignment="Top" HorizontalAlignment="Center"
+          Style="{Binding ElementName=StyleSelector, Path=SelectedValue}"
+          Margin="10" Click="ReloadDictionary">Reload Dictionary</Button>
+        </StackPanel>
+
+    </Grid>
+</UserControl>

@@ -3,11 +3,13 @@ using System;
 using System.Windows;
 using System.Windows.Media;
 using Verse3;
-using Verse3.VanillaElements;
+using Verse3.Nodes;
+using Verse3.Elements;
+using Verse3.Components;
 
 namespace EventsLibrary
 {
-    public class Loop : BaseComp
+    public class Loop : BaseCompViewModel
     {
         internal bool _loopRunning = false;
         
@@ -38,7 +40,7 @@ namespace EventsLibrary
         private GenericEventNode LoopBeginNode;
         //private GenericDataNode DataToLoopNode;
         private NumberDataNode Count;
-        private ButtonElement ButtonBlock;
+        private ButtonElementViewModel ButtonBlock;
         
         internal Callback CallbackComp;
 
@@ -67,7 +69,7 @@ namespace EventsLibrary
             Count = new NumberDataNode(this, NodeType.Output);
             this.ChildElementManager.AddDataOutputNode(Count, "Count", true);
 
-            ButtonBlock = new ButtonElement();
+            ButtonBlock = new ButtonElementViewModel();
             ButtonBlock.DisplayedText = "Force Stop Loop";
             ButtonBlock.OnButtonClicked += ButtonBlock_OnButtonClicked;
             this.ChildElementManager.AddElement(ButtonBlock);
@@ -122,7 +124,7 @@ namespace EventsLibrary
         }
     }
 
-    public class EventCallbackNode : EventNodeElement
+    public class EventCallbackNode : EventNodeElementViewModel
     {
         public EventCallbackNode(IRenderable parent) : base(parent, NodeType.Output)
         {
@@ -132,11 +134,11 @@ namespace EventsLibrary
             {
                 //Callback callback = new Callback(DataViewModel.WPFControl.GetMouseRelPosition().X, DataViewModel.WPFControl.GetMouseRelPosition().Y, parent as BaseComp);
                 object[] args = new object[3];
-                args[0] = DataViewModel.WPFControl.GetMouseRelPosition().X;
-                args[1] = DataViewModel.WPFControl.GetMouseRelPosition().Y;
-                args[2] = parent as BaseComp;
-                using (Callback callback = new Callback(0, 0, parent as BaseComp))
-                    EditorForm.compsPendingInst.Add(callback.GetCompInfo(), args);
+                args[0] = MainWindowViewModel.ActiveMain.MainWindowViewModel.SelectedDataViewModel.DataModelView.GetMouseRelPosition().X;
+                args[1] = MainWindowViewModel.ActiveMain.MainWindowViewModel.SelectedDataViewModel.DataModelView.GetMouseRelPosition().Y;
+                args[2] = parent as BaseCompViewModel;
+                using (Callback callback = new Callback(0, 0, parent as BaseCompViewModel))
+                    MainWindowViewModel.compsPendingInst.Add(callback.GetCompInfo(), args);
                 //Main_Verse3.ActiveMain.ActiveEditor.AddToCanvas_OnCall(this, new EventArgs());
             }
         }

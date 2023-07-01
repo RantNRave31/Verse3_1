@@ -27,6 +27,15 @@
     <ProjectReference Include="..\CoreInterop\CoreInterop.csproj" />
     <ProjectReference Include="..\Core\Core.csproj" />
     <ProjectReference Include="..\InfiniteCanvas\InfiniteCanvas.csproj" />
+    <ProjectReference Include="..\TurboTools\GKYU.BusinessLogicLibrary\GKYU.BusinessLogicLibrary.csproj" />
+    <ProjectReference Include="..\TurboTools\GKYU.CollectionsLibrary\GKYU.CollectionsLibrary.csproj" />
+    <ProjectReference Include="..\TurboTools\GKYU.CoreLibrary\GKYU.CoreLibrary.csproj" />
+    <ProjectReference Include="..\TurboTools\GKYU.ExtensionCoreLibrary\GKYU.ExtensionCoreLibrary.csproj" />
+    <ProjectReference Include="..\TurboTools\GKYU.MathematicsLibrary\GKYU.MathematicsLibrary.csproj" />
+    <ProjectReference Include="..\TurboTools\GKYU.PresentationCoreLibrary\GKYU.PresentationCoreLibrary.csproj" />
+    <ProjectReference Include="..\TurboTools\GKYU.PresentationLogicLibrary\GKYU.PresentationLogicLibrary.csproj" />
+    <ProjectReference Include="..\TurboTools\GKYU.StateMachinesLibrary\GKYU.StateMachinesLibrary.csproj" />
+    <ProjectReference Include="..\TurboTools\GKYU.TranslationLibrary\GKYU.TranslationLibrary.csproj" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="HandyControl" Version="3.3.0" />
@@ -36,60 +45,97 @@
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.Web.WebView2" Version="1.0.1370.28" />
+    <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.39" />
     <PackageReference Include="WindowsAPICodePack-Core" Version="1.1.2" />
     <PackageReference Include="WindowsAPICodePack-Shell" Version="1.1.1" />
   </ItemGroup>
   <ItemGroup>
-    <Page Update="VanillaElements\BezierElement.xaml">
+    <Page Update="Elements\BezierElementModelView.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="VanillaElements\AddRemoveNodeButtonElement.xaml">
+    <Page Update="Elements\AddRemoveNodeButtonElementModelView.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="VanillaElements\RangeSliderElement.xaml">
+    <Page Update="Elements\RangeSliderElementModelView.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="VanillaElements\DateTimeElement.xaml">
+    <Page Update="Elements\DateTimeElementModelView.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="VanillaElements\SearchBoxElement.xaml">
+    <Page Update="Elements\SearchBoxElementModelView.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="VanillaElements\ToggleElement.xaml">
+    <Page Update="Elements\IntegerSliderElementModelView.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+    </Page>
+    <Page Update="Elements\ToggleElementModelView.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="VanillaElements\EventNodeElement.xaml">
+    <Page Update="Elements\EventNodeElementModelView.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="VanillaElements\DataNodeElement.xaml">
+    <Page Update="Nodes\DataNodeElementModelView.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="VanillaElements\TextBoxElement.xaml">
+    <Page Update="Elements\TextBoxElementModelView.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="VanillaElements\ButtonElement.xaml">
+    <Page Update="Elements\ButtonElementModelView.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="VanillaElements\SliderElement.xaml">
+    <Page Update="Elements\SliderElementModelView.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="VanillaElements\TextElement.xaml">
+    <Page Update="Elements\TextElementModelView.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <None Remove="VanillaElements\vlcsnap-2022-08-21-18h46m17s429.png" />
+    <None Remove="Documentation\RDS.ServiceEquipment.Manager.About.html" />
+    <None Remove="Documentation\ServiceEquipmentHelpPage.html" />
+    <None Remove="Elements\vlcsnap-2022-08-21-18h46m17s429.png" />
+    <None Remove="Images\RDS.Logo.Black.JPG" />
+    <None Remove="Images\RDS.Logo.Color.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Documentation\RDS.ServiceEquipment.Manager.About.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Documentation\ServiceEquipmentHelpPage.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\RDS.Logo.Black.JPG">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\RDS.Logo.Color.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="About\AboutModelView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Feedback\FeedbackModelView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Tools\ToolPanelModelView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Collections\" />
+    <Folder Include="ViewModels\" />
   </ItemGroup>
 </Project>

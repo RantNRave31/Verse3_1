@@ -2,12 +2,12 @@
 using System;
 using System.Windows;
 using System.Windows.Media;
-using Verse3;
-using Verse3.VanillaElements;
+using Verse3.Components;
+using Verse3.Nodes;
 
 namespace ColorLibrary
 {
-    public class DeconstructColor : BaseComp
+    public class DeconstructColor : BaseCompViewModel
     {
         public DeconstructColor() : base()
         {

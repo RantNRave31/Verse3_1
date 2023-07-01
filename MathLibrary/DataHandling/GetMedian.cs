@@ -1,12 +1,12 @@
 ﻿using Core;
 using MS.WindowsAPICodePack.Internal;
-using Verse3;
-using Verse3.VanillaElements;
+using Verse3.Components;
+using Verse3.Nodes;
 
 
 namespace MathLibrary
 {
-    public class GetMedian : BaseComp
+    public class GetMedian : BaseCompViewModel
     {
         public GetMedian() : base()
         {

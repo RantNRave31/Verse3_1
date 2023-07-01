@@ -1,13 +1,13 @@
 ﻿using Core;
 using System;
 using System.Windows;
-using Verse3;
-using Verse3.VanillaElements;
+using Verse3.Components;
+using Verse3.Nodes;
 
 
 namespace MathLibrary
 {
-    public class PermutationCombination : BaseComp
+    public class PermutationCombination : BaseCompViewModel
     {
 
 
@@ -35,7 +35,7 @@ namespace MathLibrary
 
         }
 
-        public override CompInfo GetCompInfo() => new CompInfo(this, "Permutation and Combination", "Advanced Operations", "Math");
+        public override CompInfo GetCompInfo() => new CompInfo(this, "Permutation and Combination", "Advanced Operations", "Double");
 
        
         private NumberDataNode nodeBlock;

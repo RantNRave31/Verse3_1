@@ -5,13 +5,15 @@ using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using System.Windows;
-using VanillaElements;
+using Verse3.Elements;
 using Verse3;
-using Verse3.VanillaElements;
+using Verse3.Components;
+using Verse3.Elements;
+using Core.Assemblies;
 
 namespace CodeLibrary
 {
-    public class CSharp : BaseComp
+    public class CSharp : BaseCompViewModel
     {
 
         #region Constructors
@@ -35,7 +37,7 @@ namespace CodeLibrary
                 _script = this.ideElement.Script;
                 this.previewTextBlock.DisplayedText = "Compiling...";
                 byte[] ASMbytes = AssemblyCompiler.Compile(_script, "RuntimeCompiled_CSharp_Verse3");
-                List<IElement> elements = new List<IElement>(AssemblyLoader.Load(ASMbytes, Main_Verse3.domain_));
+                List<IElement> elements = new List<IElement>(AssemblyLoader.Load(ASMbytes, MainWindowViewModel.domain_));
                 foreach (IElement element in elements)
                 {
                     CoreConsole.Log(element.ID.ToString());
@@ -101,10 +103,10 @@ namespace CodeLibrary
         private string _script = "";
         private CompInfo compiledCompInfo;
 
-        private IDEElement ideElement = new IDEElement();
-        internal ButtonElement buttonBlock = new ButtonElement();
-        internal ButtonElement buttonBlock1 = new ButtonElement();
-        internal ButtonElement buttonBlock2 = new ButtonElement();
+        private IDEElementViewModel ideElement = new IDEElementViewModel();
+        internal ButtonElementViewModel buttonBlock = new ButtonElementViewModel();
+        internal ButtonElementViewModel buttonBlock1 = new ButtonElementViewModel();
+        internal ButtonElementViewModel buttonBlock2 = new ButtonElementViewModel();
         private List<string> _log = new List<string>();
 
         //private ButtonClickedEventNode nodeBlock;
@@ -114,25 +116,25 @@ namespace CodeLibrary
         {
             this.titleTextBlock.TextRotation = 0;
 
-            ideElement = new IDEElement();
+            ideElement = new IDEElementViewModel();
             ideElement.ScriptChanged += IdeElement_ScriptChanged;
             //ideElement.Width = 600;
             //ideElement.Height = 350;
             this.ChildElementManager.AddElement(ideElement);
 
-            buttonBlock = new ButtonElement();
+            buttonBlock = new ButtonElementViewModel();
             buttonBlock.DisplayedText = "Compile";
             buttonBlock.OnButtonClicked += ButtonBlock_OnButtonClicked;
             //buttonBlock.Width = 200;
             this.ChildElementManager.AddElement(buttonBlock);
 
-            buttonBlock1 = new ButtonElement();
+            buttonBlock1 = new ButtonElementViewModel();
             buttonBlock1.DisplayedText = "Load Instance";
             buttonBlock1.OnButtonClicked += ButtonBlock1_OnButtonClicked;
             //buttonBlock1.Width = 200;
             this.ChildElementManager.AddElement(buttonBlock1);
 
-            buttonBlock2 = new ButtonElement();
+            buttonBlock2 = new ButtonElementViewModel();
             buttonBlock2.DisplayedText = "Add to Arsenal";
             buttonBlock2.OnButtonClicked += ButtonBlock2_OnButtonClicked;
             //buttonBlock2.Width = 200;
@@ -157,17 +159,17 @@ namespace CodeLibrary
                             else
                             {
                                 if (pi[i].ParameterType == typeof(int) && pi[i].Name.ToLower() == "x")
-                                    args[i] = DataViewModel.WPFControl.GetMouseRelPosition().X;
+                                    args[i] = MainWindowViewModel.ActiveMain.MainWindowViewModel.SelectedDataViewModel.DataModelView.GetMouseRelPosition().X;
                                 else if (pi[i].ParameterType == typeof(int) && pi[i].Name.ToLower() == "y")
-                                    args[i] = DataViewModel.WPFControl.GetMouseRelPosition().Y;
+                                    args[i] = MainWindowViewModel.ActiveMain.MainWindowViewModel.SelectedDataViewModel.DataModelView.GetMouseRelPosition().Y;
                             }
                         }
                         //IElement? elInst = compInfo.ConstructorInfo.Invoke(args) as IElement;
                         try
                         {
                             //TODO: LOAD/INSTANTIATE ASSEMBLY INTO RIBBON AND ON CANVAS
-                            EditorForm.compsPendingInst.Add(compiledCompInfo, args);
-                            Main_Verse3.ActiveMain.ActiveEditor.AddToCanvas_OnCall(this, new EventArgs());
+                            MainWindowViewModel.compsPendingInst.Add(compiledCompInfo, args);
+                            MainWindowViewModel.ActiveMain.MainWindowViewModel.AddToCanvas_OnCall(this, new EventArgs());
                         }
                         catch (Exception ex)
                         {
@@ -207,17 +209,17 @@ namespace CodeLibrary
                             else
                             {
                                 if (pi[i].ParameterType == typeof(int) && pi[i].Name.ToLower() == "x")
-                                    args[i] = DataViewModel.WPFControl.GetMouseRelPosition().X;
+                                    args[i] = MainWindowViewModel.ActiveMain.MainWindowViewModel.SelectedDataViewModel.DataModelView.GetMouseRelPosition().X;
                                 else if (pi[i].ParameterType == typeof(int) && pi[i].Name.ToLower() == "y")
-                                    args[i] = DataViewModel.WPFControl.GetMouseRelPosition().Y;
+                                    args[i] = MainWindowViewModel.ActiveMain.MainWindowViewModel.SelectedDataViewModel.DataModelView.GetMouseRelPosition().Y;
                             }
                         }
                         //IElement? elInst = compInfo.ConstructorInfo.Invoke(args) as IElement;
                         try
                         {
                             //TODO: LOAD/INSTANTIATE ASSEMBLY INTO RIBBON AND ON CANVAS
-                            EditorForm.compsPendingAddToArsenal.Add(compiledCompInfo);
-                            Main_Verse3.ActiveMain.ActiveEditor.AddToCanvas_OnCall(this, new EventArgs());
+                            MainWindowViewModel.compsPendingAddToArsenal.Add(compiledCompInfo);
+                            MainWindowViewModel.ActiveMain.MainWindowViewModel.AddToCanvas_OnCall(this, new EventArgs());
                         }
                         catch (Exception ex)
                         {

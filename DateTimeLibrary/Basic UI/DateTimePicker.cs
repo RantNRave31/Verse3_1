@@ -1,12 +1,13 @@
 ﻿using Core;
 using System;
 using System.Windows;
-using Verse3;
-using Verse3.VanillaElements;
+using Verse3.Nodes;
+using Verse3.Elements;
+using Verse3.Components;
 
 namespace EventsLibrary
 {
-    public class DateTimePicker : BaseComp
+    public class DateTimePicker : BaseCompViewModel
     {
         internal DateTime? _value = DateTime.Now;
         //private double _inputValue = 0.0;
@@ -26,10 +27,10 @@ namespace EventsLibrary
         #endregion
 
 
-        public override CompInfo GetCompInfo() => new CompInfo(this, "DateTime Picker", "Basic UI", "DateTime");
+        public override CompInfo GetCompInfo() => new CompInfo(this, "DateTime Picker", "Types", "DateTime");
 
         
-        internal DateTimeElement dateTimeElement = new DateTimeElement();
+        internal DateTimeElementViewModel dateTimeElement = new DateTimeElementViewModel();
         internal DateTimeDataNode nodeBlock;
         internal GenericEventNode nodeBlock1;
         public override void Initialize()
@@ -42,7 +43,7 @@ namespace EventsLibrary
             nodeBlock = new DateTimeDataNode(this, NodeType.Output);
             this.ChildElementManager.AddDataOutputNode(nodeBlock, "DateTime");
             
-            dateTimeElement = new DateTimeElement();
+            dateTimeElement = new DateTimeElementViewModel();
             dateTimeElement.Value = _value;
             dateTimeElement.DisplayedText = dateTimeElement.Value.ToString();
             dateTimeElement.DateTimeChanged += DateTimeElement_DateTimeChanged;

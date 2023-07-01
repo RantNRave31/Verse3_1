@@ -2,12 +2,13 @@
 using System;
 using System.Threading;
 using System.Windows;
-using Verse3;
-using Verse3.VanillaElements;
+using Verse3.Nodes;
+using Verse3.Elements;
+using Verse3.Components;
 
 namespace EventsLibrary
 {
-    public class Timer : BaseComp
+    public class Timer : BaseCompViewModel
     {
         private int _interval = 1000;
         private bool _enabled = false;
@@ -51,7 +52,7 @@ namespace EventsLibrary
 
         private NumberDataNode interval;
         private GenericEventNode tickEvent;
-        private ToggleElement toggleBlock;
+        private ToggleElementViewModel toggleBlock;
         public override void Initialize()
         {
             interval = new NumberDataNode(this, NodeType.Input);
@@ -60,7 +61,7 @@ namespace EventsLibrary
             tickEvent = new GenericEventNode(this, NodeType.Output);
             this.ChildElementManager.AddEventOutputNode(tickEvent, "Tick");
 
-            toggleBlock = new ToggleElement();
+            toggleBlock = new ToggleElementViewModel();
             toggleBlock.Value = _enabled;
             if (_enabled) toggleBlock.DisplayedText = "Enabled";
             else toggleBlock.DisplayedText = "Disabled";
