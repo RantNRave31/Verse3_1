@@ -30,7 +30,7 @@ namespace Verse3.Nodes
 
         public static void RefreshPosition()
         {
-            System.Drawing.Point p = MainWindowViewModel.ActiveMain.MainWindowViewModel.SelectedDataViewModel.DataModelView.GetMouseRelPosition();
+            System.Drawing.Point p = ArsenalViewModel.StaticSelectedDataViewModel.DataModelView.GetMouseRelPosition();
             Instance._hotspot = new CanvasPoint(p.X, p.Y);
 
             if (Instance.Connections != null)

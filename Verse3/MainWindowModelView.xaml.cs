@@ -122,26 +122,25 @@ namespace Verse3
             this.Close();
         }
         private void Window_Loaded(object sender, RoutedEventArgs e)
-        {
+        {            
             MainWindowViewModel.ShowNewForm(sender, e);
-            MainWindowViewModel.MainWindowModelView = this;
-            MainWindowViewModel.SelectedDataViewModel = (DataViewModel)DataViewModel.DataModel;
-            MainWindowViewModel.SelectedDataModelView = new DataModelView();
-            MainWindowViewModel.SelectedDataModelView.DataContext = DataViewModel.DataModel;
-            tableLayoutPanel1.Content = MainWindowViewModel.SelectedDataModelView;
-            MainWindowViewModel.SelectedDataModelView.MouseDown += Canvas_MouseDown;
-            MainWindowViewModel.SelectedDataModelView.MouseUp += Canvas_MouseUp;
-            MainWindowViewModel.SelectedDataModelView.MouseMove += Canvas_MouseMove;
+            ArsenalViewModel.StaticArsenal.SelectedDataViewModel = (DataViewModel)DataViewModel.DataModel;
+            ArsenalViewModel.StaticArsenal.SelectedDataModelView = new DataModelView();
+            ArsenalViewModel.StaticArsenal.SelectedDataModelView.DataContext = DataViewModel.DataModel;
+            tableLayoutPanel1.Content = ArsenalViewModel.StaticArsenal.SelectedDataModelView;
+            ArsenalViewModel.StaticArsenal.SelectedDataModelView.MouseDown += Canvas_MouseDown;
+            ArsenalViewModel.StaticArsenal.SelectedDataModelView.MouseUp += Canvas_MouseUp;
+            ArsenalViewModel.StaticArsenal.SelectedDataModelView.MouseMove += Canvas_MouseMove;
             //InfiniteCanvasWPFControl.MouseMove += AddToCanvas_OnCall;
-            MainWindowViewModel.SelectedDataModelView.Loaded += MainWindowViewModel.LoadLibraries;
+            ArsenalViewModel.StaticArsenal.SelectedDataModelView.Loaded += ArsenalViewModel.StaticArsenal.LoadLibraries;
 
         }
         private void timer1_Tick(object sender, EventArgs e)
         {
             if (MainWindowViewModel.SelectedMainWindowModelView is MainWindowModelView)
             {
-                this.MainWindowViewModel.FramesPerSecond = MainWindowViewModel.SelectedDataModelView.AverageFPS.ToString();
-                this.MainWindowViewModel.Status = MainWindowViewModel.SelectedDataModelView.GetMouseRelPosition().ToString();
+                this.MainWindowViewModel.FramesPerSecond = ArsenalViewModel.StaticArsenal.SelectedDataModelView.AverageFPS.ToString();
+                this.MainWindowViewModel.Status = ArsenalViewModel.StaticArsenal.SelectedDataModelView.GetMouseRelPosition().ToString();
             }
             else
             {
@@ -285,7 +284,7 @@ namespace Verse3
             System.Windows.Forms.OpenFileDialog openFileDialog = new System.Windows.Forms.OpenFileDialog();
             if (openFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                ((MainWindowViewModel)DataContext).HotLoadLibrary(openFileDialog.FileName);
+                ArsenalViewModel.StaticArsenal.HotLoadLibrary(openFileDialog.FileName);
             }
         }
         private void Canvas_MouseMove(object sender, System.Windows.Input.MouseEventArgs e)
@@ -295,13 +294,13 @@ namespace Verse3
                 DataModelView infiniteCanvas = (DataModelView)sender;
                 this.Cursor = infiniteCanvas.Cursor;
             }
-            if (this.MainWindowViewModel.SelectedDataViewModel.SelectedConnection != default)
+            if (ArsenalViewModel.StaticArsenal.SelectedDataViewModel.SelectedConnection != default)
             {
                 //DataViewModel.ActiveConnection.Destination.
             }
-            if (MainWindowViewModel.compsPendingInst.Count > 0)
+            if (ArsenalViewModel.compsPendingInst.Count > 0)
             {
-                ((MainWindowViewModel)DataContext).AddToCanvas_OnCall(sender, e);
+                ArsenalViewModel.StaticArsenal.AddToCanvas_OnCall(sender, e);
             }
         }
 
@@ -451,7 +450,7 @@ namespace Verse3
 
         private void saveAsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            VFSerializable VFfile = new VFSerializable((DataViewModel)this.MainWindowViewModel.SelectedDataViewModel);
+            VFSerializable VFfile = new VFSerializable(ArsenalViewModel.StaticSelectedDataViewModel);
             //show a save file dialog with default file extension *.vf or *.vfx
             System.Windows.Forms.SaveFileDialog saveFileDialog = new System.Windows.Forms.SaveFileDialog();
             saveFileDialog.Filter = "Verse3 JSON File (*.vfj)|*.vfj|Verse3 File Extended (*.vfx)|*.vfx|Verse3 File (*.vf)|*.vf";
@@ -493,19 +492,19 @@ namespace Verse3
                     {
                         VFSerializable VFfile = VFSerializable.Deserialize(openFileDialog.FileName);
                         DataViewModel.DataModel = VFfile.DataViewModel;
-                        this.MainWindowViewModel.SelectedDataModelView.ExpandContent();
+                        ArsenalViewModel.StaticSelectedDataViewModel.DataModelView.ExpandContent();
                     }
                     else if (openFileDialog.FileName.EndsWith(".vfx"))
                     {
                         VFSerializable VFfile = VFSerializable.DeserializeXML(openFileDialog.FileName);
                         DataViewModel.DataModel = VFfile.DataViewModel;
-                        this.MainWindowViewModel.SelectedDataViewModel.DataModelView.ExpandContent();
+                        ArsenalViewModel.StaticSelectedDataViewModel.DataModelView.ExpandContent();
                     }
                     else if (openFileDialog.FileName.EndsWith(".vfj"))
                     {
                         VFSerializable VFfile = VFSerializable.DeserializeJSON(openFileDialog.FileName);
                         DataViewModel.DataModel = VFfile.DataViewModel;
-                        this.MainWindowViewModel.SelectedDataViewModel.DataModelView.ExpandContent();
+                        ArsenalViewModel.StaticSelectedDataViewModel.DataModelView.ExpandContent();
                     }
                 }
                 catch (Exception ex)

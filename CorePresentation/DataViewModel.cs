@@ -12,6 +12,7 @@ using Verse3.Components;
 using Verse3.Nodes;
 using Core.Elements;
 using Core.Nodes;
+using Verse3.Collections.Generic;
 
 namespace Verse3
 {
@@ -49,7 +50,7 @@ namespace Verse3
 
         //[XmlElement]
         [JsonProperty("Comps")]
-        internal ElementsLinkedList<BaseCompViewModel> Comps
+        public ElementsLinkedList<BaseCompViewModel> Comps
         {
             get
             {
@@ -162,7 +163,7 @@ namespace Verse3
                 }
                 return instance;
             }
-            internal set
+            set
             {
                 instance = value;
                 Instance = instance;
@@ -187,7 +188,6 @@ namespace Verse3
         //        CoreConsole.Log(ex);
         //    }
         //}
-        
         private DataViewModel() : base()
         {
             dispatcher = Dispatcher.CurrentDispatcher;
@@ -195,7 +195,7 @@ namespace Verse3
 
         public DataViewModel(SerializationInfo info, StreamingContext context)/* : base(info, context)*/
         {
-            dispatcher = Dispatcher.CurrentDispatcher;
+             dispatcher = Dispatcher.CurrentDispatcher;
 
             if (info is null) throw new NullReferenceException("Invalid SerializationInfo");
             //this.elements = (ElementsLinkedList<IElement>)info.GetValue("elements", typeof(ElementsLinkedList<IElement>));
@@ -224,7 +224,7 @@ namespace Verse3
                             if (DataModelView != null)
                             {
                                 CompInfo ci = shell.GetCompInfo();
-                                ci = ((MainWindowViewModel)MainWindowViewModel.ActiveMain.DataContext).FindInArsenal(ci, false);
+                                ci = ArsenalViewModel.StaticArsenal.FindInArsenal(ci, false);
                                 ConstructorInfo ctorInfo = GetDeserializationCtor(ci);
                                 if (ctorInfo != null)
                                 {

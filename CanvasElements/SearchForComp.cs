@@ -162,13 +162,13 @@ namespace MathLibrary
                                 else
                                 {
                                     if (pi[i].ParameterType == typeof(int) && pi[i].Name.ToLower() == "x")
-                                        args[i] = MainWindowViewModel.ActiveMain.MainWindowViewModel.SelectedDataViewModel.DataModelView.GetMouseRelPosition().X;
+                                        args[i] = ArsenalViewModel.StaticSelectedDataViewModel.DataModelView.GetMouseRelPosition().X;
                                     else if (pi[i].ParameterType == typeof(int) && pi[i].Name.ToLower() == "y")
-                                        args[i] = MainWindowViewModel.ActiveMain.MainWindowViewModel.SelectedDataViewModel.DataModelView.GetMouseRelPosition().Y;
+                                        args[i] = ArsenalViewModel.StaticSelectedDataViewModel.DataModelView.GetMouseRelPosition().Y;
                                 }
                             }
-                            MainWindowViewModel.compsPendingInst.Add(ci, args);
-                            MainWindowViewModel.ActiveMain.MainWindowViewModel.AddToCanvas_OnCall(this, new EventArgs());
+                            ArsenalViewModel.compsPendingInst.Add(ci, args);
+                            ArsenalViewModel.StaticArsenal.AddToCanvas_OnCall(this, new EventArgs());
                             //IElement? elInst = buttonDictionary[btnElement].ConstructorInfo.Invoke(args) as IElement;
                             //DataTemplateManager.RegisterDataTemplate(elInst as IRenderable);
                             //DataViewModel.Instance.Elements.Add(elInst);

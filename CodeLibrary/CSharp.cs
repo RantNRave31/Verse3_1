@@ -38,7 +38,7 @@ namespace CodeLibrary
                 _script = this.ideElement.Script;
                 this.previewTextBlock.DisplayedText = "Compiling...";
                 byte[] ASMbytes = AssemblyCompiler.Compile(_script, "RuntimeCompiled_CSharp_Verse3");
-                List<IElement> elements = new List<IElement>(AssemblyLoader.Load(ASMbytes, MainWindowViewModel.domain_));
+                List<IElement> elements = new List<IElement>(AssemblyLoader.Load(ASMbytes, ArsenalViewModel.domain_));
                 foreach (IElement element in elements)
                 {
                     CoreConsole.Log(element.ID.ToString());
@@ -160,17 +160,17 @@ namespace CodeLibrary
                             else
                             {
                                 if (pi[i].ParameterType == typeof(int) && pi[i].Name.ToLower() == "x")
-                                    args[i] = MainWindowViewModel.ActiveMain.MainWindowViewModel.SelectedDataViewModel.DataModelView.GetMouseRelPosition().X;
+                                    args[i] = ArsenalViewModel.StaticSelectedDataViewModel.DataModelView.GetMouseRelPosition().X;
                                 else if (pi[i].ParameterType == typeof(int) && pi[i].Name.ToLower() == "y")
-                                    args[i] = MainWindowViewModel.ActiveMain.MainWindowViewModel.SelectedDataViewModel.DataModelView.GetMouseRelPosition().Y;
+                                    args[i] = ArsenalViewModel.StaticSelectedDataViewModel.DataModelView.GetMouseRelPosition().Y;
                             }
                         }
                         //IElement? elInst = compInfo.ConstructorInfo.Invoke(args) as IElement;
                         try
                         {
                             //TODO: LOAD/INSTANTIATE ASSEMBLY INTO RIBBON AND ON CANVAS
-                            MainWindowViewModel.compsPendingInst.Add(compiledCompInfo, args);
-                            MainWindowViewModel.ActiveMain.MainWindowViewModel.AddToCanvas_OnCall(this, new EventArgs());
+                            ArsenalViewModel.compsPendingInst.Add(compiledCompInfo, args);
+                            ArsenalViewModel.StaticArsenal.AddToCanvas_OnCall(this, new EventArgs());
                         }
                         catch (Exception ex)
                         {
@@ -210,17 +210,17 @@ namespace CodeLibrary
                             else
                             {
                                 if (pi[i].ParameterType == typeof(int) && pi[i].Name.ToLower() == "x")
-                                    args[i] = MainWindowViewModel.ActiveMain.MainWindowViewModel.SelectedDataViewModel.DataModelView.GetMouseRelPosition().X;
+                                    args[i] = ArsenalViewModel.StaticSelectedDataViewModel.DataModelView.GetMouseRelPosition().X;
                                 else if (pi[i].ParameterType == typeof(int) && pi[i].Name.ToLower() == "y")
-                                    args[i] = MainWindowViewModel.ActiveMain.MainWindowViewModel.SelectedDataViewModel.DataModelView.GetMouseRelPosition().Y;
+                                    args[i] = ArsenalViewModel.StaticSelectedDataViewModel.DataModelView.GetMouseRelPosition().Y;
                             }
                         }
                         //IElement? elInst = compInfo.ConstructorInfo.Invoke(args) as IElement;
                         try
                         {
                             //TODO: LOAD/INSTANTIATE ASSEMBLY INTO RIBBON AND ON CANVAS
-                            MainWindowViewModel.compsPendingAddToArsenal.Add(compiledCompInfo);
-                            MainWindowViewModel.ActiveMain.MainWindowViewModel.AddToCanvas_OnCall(this, new EventArgs());
+                            ArsenalViewModel.compsPendingAddToArsenal.Add(compiledCompInfo);
+                            ArsenalViewModel.StaticArsenal.AddToCanvas_OnCall(this, new EventArgs());
                         }
                         catch (Exception ex)
                         {

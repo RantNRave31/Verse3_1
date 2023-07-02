@@ -25,6 +25,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CoreInterop\Verse3.CoreInterop.csproj" />
+    <ProjectReference Include="..\CorePresentation\Verse3.CorePresentation.csproj" />
     <ProjectReference Include="..\Core\Verse3.Core.csproj" />
     <ProjectReference Include="..\InfiniteCanvas\Verse3.InfiniteCanvas.csproj" />
     <ProjectReference Include="..\TurboTools\GKYU.BusinessLogicLibrary\GKYU.BusinessLogicLibrary.csproj" />
@@ -50,92 +51,11 @@
     <PackageReference Include="WindowsAPICodePack-Shell" Version="1.1.1" />
   </ItemGroup>
   <ItemGroup>
-    <Page Update="Elements\BezierElementModelView.xaml">
-      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="Elements\AddRemoveNodeButtonElementModelView.xaml">
-      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="Elements\RangeSliderElementModelView.xaml">
-      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="Elements\DateTimeElementModelView.xaml">
-      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="Elements\SearchBoxElementModelView.xaml">
-      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="Elements\IntegerSliderElementModelView.xaml">
-      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
-    </Page>
-    <Page Update="Elements\ToggleElementModelView.xaml">
-      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="Elements\EventNodeElementModelView.xaml">
-      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="Nodes\DataNodeElementModelView.xaml">
-      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="Elements\TextBoxElementModelView.xaml">
-      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="Elements\ButtonElementModelView.xaml">
-      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="Elements\SliderElementModelView.xaml">
-      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="Elements\TextElementModelView.xaml">
-      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
-      <SubType>Designer</SubType>
-    </Page>
-  </ItemGroup>
-  <ItemGroup>
-    <None Remove="Documentation\RDS.ServiceEquipment.Manager.About.html" />
-    <None Remove="Documentation\ServiceEquipmentHelpPage.html" />
-    <None Remove="Elements\vlcsnap-2022-08-21-18h46m17s429.png" />
-    <None Remove="Images\RDS.Logo.Black.JPG" />
-    <None Remove="Images\RDS.Logo.Color.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Documentation\RDS.ServiceEquipment.Manager.About.html">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Documentation\ServiceEquipmentHelpPage.html">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Images\RDS.Logo.Black.JPG">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Images\RDS.Logo.Color.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Update="About\AboutModelView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Feedback\FeedbackModelView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Tools\ToolPanelModelView.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Collections\" />
-    <Folder Include="ViewModels\" />
   </ItemGroup>
 </Project>

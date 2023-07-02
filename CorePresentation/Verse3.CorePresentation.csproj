@@ -1,0 +1,181 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+	  <TargetFramework>net6.0-windows</TargetFramework>
+	  <OutputType>Library</OutputType>
+	  <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+	  <UseWPF>True</UseWPF>
+	  <ImportWindowsDesktopTargets>true</ImportWindowsDesktopTargets>
+	  <AutoGenerateBindingRedirects>True</AutoGenerateBindingRedirects>
+	  <Deterministic>false</Deterministic>
+	  <Platforms>AnyCPU;x64</Platforms>
+	  <GenerateDocumentationFile>True</GenerateDocumentationFile>
+	  <SignAssembly>False</SignAssembly>
+	  <AssemblyOriginatorKeyFile>apphost.exe</AssemblyOriginatorKeyFile>
+	  <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+	  <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Documentation\RDS.ServiceEquipment.Manager.About.html" />
+    <None Remove="Documentation\ServiceEquipmentHelpPage.html" />
+    <None Remove="Images\RDS.Logo.Black.JPG" />
+    <None Remove="Images\RDS.Logo.Color.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="ArsenalViewModel.cs" />
+    <Compile Include="Assemblies\AssemblyManagerModelView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Assemblies\AssemblyManagerViewModel.cs" />
+    <Compile Include="Assemblies\AssemblyModelView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Assemblies\AssemblyViewModel.cs" />
+    <Compile Include="Behaviors\ListViewBindableSelectedItemBehavior.cs" />
+    <Compile Include="Behaviors\TreeViewBindableSelectedItemBehavior.cs" />
+    <Compile Include="Collections\ObservableDictionary.cs" />
+    <Compile Include="Components\BaseCompModelView.xaml.cs" />
+    <Compile Include="Components\BaseCompViewModel.cs" />
+    <Compile Include="Components\ChildElementManager.cs" />
+    <Compile Include="Components\CompInfo.cs" />
+    <Compile Include="Components\IBaseCompView.cs" />
+    <Compile Include="Components\ShellComp.cs" />
+    <Compile Include="Converters\BaseCompConverter.cs" />
+    <Compile Include="Converters\CanvasSizeOffsetPseudoConverter.cs" />
+    <Compile Include="Converters\ColorToBrushConverter.cs" />
+    <Compile Include="Converters\JsonBaseCompClassConverter.cs" />
+    <Compile Include="Converters\JsonNodeClassConverter.cs" />
+    <Compile Include="Converters\NodeConverter.cs" />
+    <Compile Include="Converters\NodeNameDisplayTextConverter.cs" />
+    <Compile Include="DataModelView.xaml.cs" />
+    <Compile Include="DataTemplateManager.cs" />
+    <Compile Include="DataViewModel.cs" />
+    <Compile Include="Elements\AddRemoveNodeButtonElementModelView.xaml.cs" />
+    <Compile Include="Elements\AddRemoveNodeButtonElementViewModel.cs" />
+    <Compile Include="Elements\BaseElement.cs" />
+    <Compile Include="Elements\BezierElementModelView.xaml.cs" />
+    <Compile Include="Elements\BezierElementViewModel.cs" />
+    <Compile Include="Elements\ButtonElementModelView.xaml.cs" />
+    <Compile Include="Elements\ButtonElementViewModel.cs" />
+    <Compile Include="Elements\DateTimeElementModelView.xaml.cs" />
+    <Compile Include="Elements\DateTimeElementViewModel.cs" />
+    <Compile Include="Elements\EventNodeElementModelView.xaml.cs" />
+    <Compile Include="Elements\EventNodeElementViewModel.cs" />
+    <Compile Include="Elements\IBaseElementView.cs" />
+    <Compile Include="Elements\IDEElementModelView.xaml.cs" />
+    <Compile Include="Elements\IDEElementViewModel.cs" />
+    <Compile Include="Elements\IntegerSliderElementModelView.xaml.cs" />
+    <Compile Include="Elements\IntegerSliderElementViewModel.cs" />
+    <Compile Include="Elements\RangeSliderElementModelView.xaml.cs" />
+    <Compile Include="Elements\RangeSliderElementViewModel.cs" />
+    <Compile Include="Elements\SearchBoxElementModelView.xaml.cs" />
+    <Compile Include="Elements\SearchBoxElementViewModel.cs" />
+    <Compile Include="Elements\SliderElementModelView.xaml.cs" />
+    <Compile Include="Elements\SliderElementViewModel.cs" />
+    <Compile Include="Elements\TextBoxElementModelView.xaml.cs" />
+    <Compile Include="Elements\TextBoxElementViewModel.cs" />
+    <Compile Include="Elements\TextElementModelView.xaml.cs" />
+    <Compile Include="Elements\TextElementViewModel.cs" />
+    <Compile Include="Elements\ToggleElementModelView.xaml.cs" />
+    <Compile Include="Elements\ToggleElementViewModel.cs" />
+    <Compile Include="Nodes\BooleanDataNode.cs" />
+    <Compile Include="Nodes\DataNode.cs" />
+    <Compile Include="Nodes\DataNodeElement.cs" />
+    <Compile Include="Nodes\DataNodeElementModelView.xaml.cs" />
+    <Compile Include="Nodes\DateTimeDataNode.cs" />
+    <Compile Include="Nodes\EventNode.cs" />
+    <Compile Include="Nodes\GenericDataNode.cs" />
+    <Compile Include="Nodes\GenericEventNode.cs" />
+    <Compile Include="Nodes\IntegerDataNode.cs" />
+    <Compile Include="Nodes\InteropMessageEventNode.cs" />
+    <Compile Include="Nodes\MousePositionNode.cs" />
+    <Compile Include="Nodes\NodeVisitor.cs" />
+    <Compile Include="Nodes\NumberDataNode.cs" />
+    <Compile Include="Nodes\ShellNode.cs" />
+    <Compile Include="Nodes\TextDataNode.cs" />
+    <Compile Include="Nodes\TimeSpanDataNode.cs" />
+    <Compile Include="Nodes\TimeZoneDataNode.cs" />
+    <Compile Include="Tools\ToolCategoryViewModel.cs" />
+    <Compile Include="Tools\ToolPanelModelView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Tools\ToolPanelViewModel.cs" />
+    <Compile Include="Tools\ToolSubcategoryViewModel.cs" />
+    <Compile Include="Tools\ToolViewModel.cs" />
+    <Compile Include="ViewModels\ViewModelBase.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Documentation\RDS.ServiceEquipment.Manager.About.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Documentation\ServiceEquipmentHelpPage.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\RDS.Logo.Black.JPG">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\RDS.Logo.Color.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="HandyControl" Version="3.3.0" />
+    <PackageReference Include="HandyControl.Lang.en" Version="3.3.0" />
+    <PackageReference Include="Microsoft.Web.WebView2" Version="1.0.1370.28" />
+    <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.39" />
+    <PackageReference Include="WindowsAPICodePack-Core" Version="1.1.2" />
+    <PackageReference Include="WindowsAPICodePack-Shell" Version="1.1.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Core\Verse3.Core.csproj" />
+    <ProjectReference Include="..\InfiniteCanvas\Verse3.InfiniteCanvas.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="Elements\AddRemoveNodeButtonElementModelView.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+    </Page>
+    <Page Update="Elements\BezierElementModelView.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+    </Page>
+    <Page Update="Elements\ButtonElementModelView.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+    </Page>
+    <Page Update="Elements\DateTimeElementModelView.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+    </Page>
+    <Page Update="Elements\EventNodeElementModelView.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+    </Page>
+    <Page Update="Elements\IntegerSliderElementModelView.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+    </Page>
+    <Page Update="Elements\RangeSliderElementModelView.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+    </Page>
+    <Page Update="Elements\SearchBoxElementModelView.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+    </Page>
+    <Page Update="Elements\SliderElementModelView.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+    </Page>
+    <Page Update="Elements\TextBoxElementModelView.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+    </Page>
+    <Page Update="Elements\TextElementModelView.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+    </Page>
+    <Page Update="Elements\ToggleElementModelView.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+    </Page>
+    <Page Update="Nodes\DataNodeElementModelView.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+    </Page>
+  </ItemGroup>
+
+</Project>

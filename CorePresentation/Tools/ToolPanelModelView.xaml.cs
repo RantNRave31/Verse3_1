@@ -27,7 +27,7 @@ namespace Verse3.Tools
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            MainWindowViewModel.ActiveMain.MainWindowViewModel.AddToCanvas_OnCall(sender, e);
+            ArsenalViewModel.StaticArsenal.AddToCanvas_OnCall(sender, e);
         }
     }
 }

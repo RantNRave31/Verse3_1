@@ -68,8 +68,8 @@ namespace Verse3.Elements
         void OnMouseDown(object sender, MouseButtonEventArgs e)
         {
             //MouseButtonEventArgs
-            MainWindowViewModel.ActiveMain.MainWindowViewModel.SelectedDataViewModel.DataModelView.ContentElements.Focus();
-            Keyboard.Focus(MainWindowViewModel.ActiveMain.MainWindowViewModel.SelectedDataViewModel.DataModelView.ContentElements);
+            ArsenalViewModel.StaticSelectedDataViewModel.DataModelView.ContentElements.Focus();
+            Keyboard.Focus(ArsenalViewModel.StaticSelectedDataViewModel.DataModelView.ContentElements);
 
             BezierElementModelView rectangle = (BezierElementModelView)sender;
             Cursor = Cursors.Hand;
@@ -126,7 +126,7 @@ namespace Verse3.Elements
                 }
             }
 
-            MainWindowViewModel.ActiveMain.MainWindowViewModel.SelectedDataViewModel.DataModelView.MouseHandlingMode = MouseHandlingMode.None;
+            ArsenalViewModel.StaticSelectedDataViewModel.DataModelView.MouseHandlingMode = MouseHandlingMode.None;
 
             BezierElementModelView rectangle = (BezierElementModelView)sender;
             rectangle.ReleaseMouseCapture();

@@ -240,7 +240,7 @@ namespace Verse3.Elements
                 this.OverlayImage.Visibility = Visibility.Hidden;
                 this.EmulatedIDEBrowser.IsEnabled = true;
                 this.EmulatedIDEBrowser.Visibility = Visibility.Visible;
-                MainWindowViewModel.ActiveMain.MainWindowViewModel.SelectedDataViewModel.DataModelView.ClearSelection();
+                ArsenalViewModel.StaticSelectedDataViewModel.DataModelView.ClearSelection();
             }
         }
 

@@ -186,9 +186,8 @@ namespace Verse3.Elements
         }
 
         #endregion
-
+ 
         #region UserControlEvents
-
         void OnDataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
             //DependencyPropertyChangedEventArgs
@@ -198,7 +197,6 @@ namespace Verse3.Elements
                 Render();
             }
         }
-
         void OnLoaded(object sender, RoutedEventArgs e)
         {
             //RoutedEventArgs
@@ -208,7 +206,6 @@ namespace Verse3.Elements
                 //Render();
             }
         }
-
         #endregion
 
         private void Button_Click(object sender, RoutedEventArgs e)

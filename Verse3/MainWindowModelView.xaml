@@ -1,11 +1,12 @@
-﻿<Window xmlns:Components="clr-namespace:Verse3.Components"  x:Class="Verse3.MainWindowModelView"
+﻿<Window x:Class="Verse3.MainWindowModelView"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Verse3"
-        xmlns:tools="clr-namespace:Verse3.Tools"
-        xmlns:elements="clr-namespace:Verse3.Elements"
+        xmlns:tools="clr-namespace:Verse3.Tools;assembly=Verse3.CorePresentation"
+        xmlns:elements="clr-namespace:Verse3.Elements;assembly=Verse3.CorePresentation"
+        xmlns:components="clr-namespace:Verse3.Components;assembly=Verse3.CorePresentation"
         mc:Ignorable="d"
         Title="MainWindowModelView" Height="450" Width="800" Loaded="Window_Loaded">
     <Grid>
@@ -35,10 +36,10 @@
         </ToolBar>
         <TabControl Grid.Row="2" Grid.Column="0" Grid.RowSpan="1">
             <TabItem Header="Tools">
-                <tools:ToolPanelModelView x:Name="toolPanel" DataContext="{Binding ToolPanel}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                <tools:ToolPanelModelView x:Name="toolPanel" DataContext="{Binding Path=ArsenalViewModel.ToolPanel}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
             </TabItem>
             <TabItem Header="Assemblies">
-                <Components:AssemblyManagerModelView DataContext="{Binding AssemblyManager}" />
+                <components:AssemblyManagerModelView DataContext="{Binding Path=ArsenalViewModel.AssemblyManager}" />
             </TabItem>
         </TabControl>
         <GridSplitter Grid.Row="2" Grid.Column="1" Grid.RowSpan="1" HorizontalAlignment="Stretch"/>
@@ -48,7 +49,7 @@
         </TabControl>
         <GridSplitter Grid.Row="2" Grid.Column="3" Grid.RowSpan="1" HorizontalAlignment="Stretch"/>
         <TabControl Grid.Row="2" Grid.Column="4">
-            <TabItem Header="Properties" DataContext="{Binding Path=SelectedDataViewModel.SelectedElement}">
+            <TabItem Header="Properties" DataContext="{Binding Path=ArsenalViewModel.SelectedDataViewModel.SelectedElement}">
                 <StackPanel>
                     <TextBlock>Name:  <TextBlock Text="{Binding Name}"/></TextBlock>
                     <TextBlock>Element Type:  <TextBlock Text="{Binding ElementType}"/></TextBlock>

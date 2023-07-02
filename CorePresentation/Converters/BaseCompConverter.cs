@@ -6,7 +6,7 @@ using Verse3.Components;
 
 namespace Verse3.Converters
 {
-    internal class BaseCompConverter : JsonConverter
+    public class BaseCompConverter : JsonConverter
     {
         static JsonSerializerSettings SpecifiedSubclassConversion = new JsonSerializerSettings() { ContractResolver = new JsonBaseCompClassConverter(), ReferenceLoopHandling = ReferenceLoopHandling.Serialize };
 
@@ -29,7 +29,7 @@ namespace Verse3.Converters
                     if (mci != null)
                     {
                         //CompInfo ci = Main_Verse3.ActiveMain.ActiveEditor.FindInArsenal(mci);
-                        CompInfo ci = MainWindowViewModel.ActiveMain.MainWindowViewModel.FindInArsenal(mdCompInfo);
+                        CompInfo ci = ArsenalViewModel.StaticArsenal.FindInArsenal(mdCompInfo);
                         if (ci.ConstructorInfo != null)
                         {
                             if (bc != null && bc is ShellComp shell)

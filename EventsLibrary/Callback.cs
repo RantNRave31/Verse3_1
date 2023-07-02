@@ -55,12 +55,12 @@ namespace EventsLibrary
                             CallbackEventNode.RenderPipelineInfo.AddChild(b);
                             CallbackEventNode.Connections.Add(b);
                             _eventCallbackNodeFromcbComp.ComputationPipelineInfo.AddEventUpStream(_callbackToComp);
-                            MainWindowViewModel.connectionsPending.Add(b);
+                            ArsenalViewModel.connectionsPending.Add(b);
                             //DataTemplateManager.RegisterDataTemplate(b);
                             //DataViewModel.Instance.Elements.Add(b);
                             //b.RedrawBezier(b.Origin, b.Destination);
                             //RenderingCore.Render(_callbackToComp);
-                            MainWindowViewModel.ActiveMain.MainWindowViewModel.AddToCanvas_OnCall(this, new EventArgs());
+                            ArsenalViewModel.StaticArsenal.AddToCanvas_OnCall(this, new EventArgs());
                             RenderingCore.Render(_callbackToComp, false);
                         }
                     }

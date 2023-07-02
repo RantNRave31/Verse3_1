@@ -8,10 +8,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\CorePresentation\Verse3.CorePresentation.csproj" />
     <ProjectReference Include="..\EventsLibrary\Verse3.EventsLibrary.csproj">
       <Private>True</Private>
     </ProjectReference>
-    <ProjectReference Include="..\Verse3\Verse3.Workspace.csproj" />
   </ItemGroup>
 
   <ItemGroup>

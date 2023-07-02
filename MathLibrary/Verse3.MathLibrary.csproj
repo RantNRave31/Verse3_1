@@ -8,8 +8,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\CorePresentation\Verse3.CorePresentation.csproj" />
     <ProjectReference Include="..\Core\Verse3.Core.csproj" />
-    <ProjectReference Include="..\Verse3\Verse3.Workspace.csproj" />
   </ItemGroup>
 
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">

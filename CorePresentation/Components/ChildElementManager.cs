@@ -138,7 +138,7 @@ namespace Verse3.Components
             }
             //AdjustBounds();
             RenderingCore.Render(_owner);
-            MainWindowViewModel.ActiveMain.MainWindowViewModel.SelectedDataViewModel.DataModelView.ExpandContent();
+            ArsenalViewModel.StaticSelectedDataViewModel.DataModelView.ExpandContent();
         }
         public void RemoveElement(IRenderable element)
         {

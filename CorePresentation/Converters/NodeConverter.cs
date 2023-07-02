@@ -7,7 +7,7 @@ using Core.Nodes;
 
 namespace Verse3.Converters
 {
-    internal class NodeConverter : JsonConverter
+    public class NodeConverter : JsonConverter
     {
         static JsonSerializerSettings SpecifiedSubclassConversion = new JsonSerializerSettings() { ContractResolver = new JsonNodeClassConverter() };
 

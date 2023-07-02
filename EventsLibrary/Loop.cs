@@ -135,11 +135,11 @@ namespace EventsLibrary
             {
                 //Callback callback = new Callback(DataViewModel.WPFControl.GetMouseRelPosition().X, DataViewModel.WPFControl.GetMouseRelPosition().Y, parent as BaseComp);
                 object[] args = new object[3];
-                args[0] = MainWindowViewModel.ActiveMain.MainWindowViewModel.SelectedDataViewModel.DataModelView.GetMouseRelPosition().X;
-                args[1] = MainWindowViewModel.ActiveMain.MainWindowViewModel.SelectedDataViewModel.DataModelView.GetMouseRelPosition().Y;
+                args[0] = ArsenalViewModel.StaticSelectedDataViewModel.DataModelView.GetMouseRelPosition().X;
+                args[1] = ArsenalViewModel.StaticSelectedDataViewModel.DataModelView.GetMouseRelPosition().Y;
                 args[2] = parent as BaseCompViewModel;
                 using (Callback callback = new Callback(0, 0, parent as BaseCompViewModel))
-                    MainWindowViewModel.compsPendingInst.Add(callback.GetCompInfo(), args);
+                    ArsenalViewModel.compsPendingInst.Add(callback.GetCompInfo(), args);
                 //Main_Verse3.ActiveMain.ActiveEditor.AddToCanvas_OnCall(this, new EventArgs());
             }
         }

@@ -21,7 +21,7 @@ namespace Verse3.Components
     [Serializable]
     //[XmlRoot("BaseComp")]
     //[XmlType("BaseComp")]
-    public abstract class BaseCompViewModel : ViewModelBase, IRenderable, IComputable
+    public abstract class BaseCompViewModel : ViewModels.ViewModelBase, IRenderable, IComputable
     {
         #region Data Members
 

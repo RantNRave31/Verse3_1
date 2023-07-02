@@ -16,7 +16,6 @@ namespace Verse3.Elements
         public override Type ViewType => typeof(EventNodeElementModelView);
 
         #region Constructor
-
         public EventNodeElementViewModel(IRenderable parent, NodeType type = NodeType.Unset) : base(parent, type)
         {
             //_computationPipelineInfo = new ComputationPipelineInfo(this);
@@ -44,12 +43,10 @@ namespace Verse3.Elements
         {
             this.PropertyChanged += NodeElement_PropertyChanged;
         }
-
         public new void GetObjectData(SerializationInfo info, StreamingContext context)
         {
             base.GetObjectData(info, context);
         }
-
         #endregion
 
         private void NodeElement_PropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -71,12 +68,12 @@ namespace Verse3.Elements
             //    this.IsActive = true;
             //}
             //Set as active Node
-            BezierElementViewModel b = (BezierElementViewModel)MainWindowViewModel.ActiveMain.MainWindowViewModel.SelectedDataViewModel.SelectedConnection;
-            if (MainWindowViewModel.ActiveMain.MainWindowViewModel.SelectedDataViewModel.SelectedConnection == default)
+            BezierElementViewModel b = (BezierElementViewModel)ArsenalViewModel.StaticSelectedDataViewModel.SelectedConnection;
+            if (ArsenalViewModel.StaticSelectedDataViewModel.SelectedConnection == default)
             {
-                MainWindowViewModel.ActiveMain.MainWindowViewModel.SelectedDataViewModel.SelectedNode = this as INode;
-                MainWindowViewModel.ActiveMain.MainWindowViewModel.SelectedDataViewModel.SelectedConnection = MainWindowViewModel.ActiveMain.MainWindowViewModel.SelectedDataViewModel.CreateConnection(MainWindowViewModel.ActiveMain.MainWindowViewModel.SelectedDataViewModel.SelectedNode);
-                b = (BezierElementViewModel)MainWindowViewModel.ActiveMain.MainWindowViewModel.SelectedDataViewModel.SelectedConnection;
+                ArsenalViewModel.StaticSelectedDataViewModel.SelectedNode = this as INode;
+                ArsenalViewModel.StaticSelectedDataViewModel.SelectedConnection = ArsenalViewModel.StaticSelectedDataViewModel.CreateConnection(ArsenalViewModel.StaticSelectedDataViewModel.SelectedNode);
+                b = (BezierElementViewModel)ArsenalViewModel.StaticSelectedDataViewModel.SelectedConnection;
                 if (b != null)
                 {
                     this.RenderPipelineInfo.AddChild(b);
@@ -91,24 +88,24 @@ namespace Verse3.Elements
             {
                 if (b != null)
                 {
-                    if (MainWindowViewModel.ActiveMain.MainWindowViewModel.SelectedDataViewModel.SelectedNode.NodeType != this.NodeType)
+                    if (ArsenalViewModel.StaticSelectedDataViewModel.SelectedNode.NodeType != this.NodeType)
                     {
-                        if (MainWindowViewModel.ActiveMain.MainWindowViewModel.SelectedDataViewModel.SelectedNode.GetType().BaseType == this.GetType().BaseType)
+                        if (ArsenalViewModel.StaticSelectedDataViewModel.SelectedNode.GetType().BaseType == this.GetType().BaseType)
                         {
                             if (b.SetDestination(this as INode))
                             {
-                                if (MainWindowViewModel.ActiveMain.MainWindowViewModel.SelectedDataViewModel.SelectedNode is IComputable && MainWindowViewModel.ActiveMain.MainWindowViewModel.SelectedDataViewModel.SelectedNode != this && MainWindowViewModel.ActiveMain.MainWindowViewModel.SelectedDataViewModel.SelectedNode.NodeType == NodeType.Output)
+                                if (ArsenalViewModel.StaticSelectedDataViewModel.SelectedNode is IComputable && ArsenalViewModel.StaticSelectedDataViewModel.SelectedNode != this && ArsenalViewModel.StaticSelectedDataViewModel.SelectedNode.NodeType == NodeType.Output)
                                 {
-                                    this.ComputationPipelineInfo.AddEventUpStream(MainWindowViewModel.ActiveMain.MainWindowViewModel.SelectedDataViewModel.SelectedNode as IComputable);
+                                    this.ComputationPipelineInfo.AddEventUpStream(ArsenalViewModel.StaticSelectedDataViewModel.SelectedNode as IComputable);
                                 }
-                                MainWindowViewModel.ActiveMain.MainWindowViewModel.SelectedDataViewModel.SelectedNode = this as INode;
+                                ArsenalViewModel.StaticSelectedDataViewModel.SelectedNode = this as INode;
                                 if (MousePositionNode.Instance.Connections.Contains(b))
                                     MousePositionNode.Instance.Connections.Remove(b);
                                 this.RenderPipelineInfo.AddChild(b);
                                 this.Connections.Add(b);
                                 //this.nodeContentColor = System.Windows.Media.Brushes.White;
-                                MainWindowViewModel.ActiveMain.MainWindowViewModel.SelectedDataViewModel.SelectedConnection = default;
-                                MainWindowViewModel.ActiveMain.MainWindowViewModel.SelectedDataViewModel.SelectedNode = default;
+                                ArsenalViewModel.StaticSelectedDataViewModel.SelectedConnection = default;
+                                ArsenalViewModel.StaticSelectedDataViewModel.SelectedNode = default;
                             }
                         }
                     }

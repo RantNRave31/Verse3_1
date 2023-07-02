@@ -13,6 +13,10 @@ namespace Verse3
     #region DataTemplateManager
     public class DataTemplateManager
     {
+        public static DataViewModel DataViewModel { get; set; }
+        static DataTemplateManager()
+        {
+        }
 
         #region Binding Management
 
@@ -122,18 +126,18 @@ namespace Verse3
             //el.BoundingBox = new BoundingBox();
             //Element needs to know DataTemplateKey in order to make a reference to it
             el.ViewKey = template.DataTemplateKey;
-            if (MainWindowViewModel.ActiveMain.MainWindowViewModel.SelectedDataViewModel.DataModelView == null) return false;
-            if (MainWindowViewModel.ActiveMain.MainWindowViewModel.SelectedDataViewModel.DataModelView.Resources[el.ViewKey] != null)
+            if (DataViewModel.DataModelView == null) return false;
+            if (DataViewModel.DataModelView.Resources[el.ViewKey] != null)
             {
-                if (MainWindowViewModel.ActiveMain.MainWindowViewModel.SelectedDataViewModel.DataModelView.Resources.Contains(el.ViewKey)) return false;
+                if (DataViewModel.DataModelView.Resources.Contains(el.ViewKey)) return false;
                 if (el.ViewType.IsAssignableTo(typeof(DataNodeElementModelView)))
                 {
-                    MainWindowViewModel.ActiveMain.MainWindowViewModel.SelectedDataViewModel.DataModelView.Resources.Add(el.ViewKey, template);
+                    DataViewModel.DataModelView.Resources.Add(el.ViewKey, template);
                     return true;
                 }
                 else if (el.ViewType.IsAssignableTo(typeof(EventNodeElementModelView)))
                 {
-                    MainWindowViewModel.ActiveMain.MainWindowViewModel.SelectedDataViewModel.DataModelView.Resources.Add(el.ViewKey, template);
+                    DataViewModel.DataModelView.Resources.Add(el.ViewKey, template);
                     return true;
                 }
                 return false;
@@ -144,9 +148,9 @@ namespace Verse3
                 {
                     Action addTemplate = () =>
                     {
-                        MainWindowViewModel.ActiveMain.MainWindowViewModel.SelectedDataViewModel.DataModelView.Resources.Add(el.ViewKey, template);
+                        DataViewModel.DataModelView.Resources.Add(el.ViewKey, template);
                     };
-                    MainWindowViewModel.ActiveMain.MainWindowViewModel.SelectedDataViewModel.DataModelView.Dispatcher.Invoke(addTemplate);
+                    DataViewModel.DataModelView.Dispatcher.Invoke(addTemplate);
                     //ERROR: The calling thread cannot access this object because a different thread owns it.
                     //DataViewModel.WPFControl.Resources.Add(el.ViewKey, template);
                     return true;
