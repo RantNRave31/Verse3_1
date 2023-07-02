@@ -10,7 +10,7 @@
              xmlns:local="clr-namespace:Verse3.Elements" 
              xmlns:nodes="clr-namespace:Verse3.Nodes" 
              xmlns:converters="clr-namespace:Verse3.Converters" 
-             d:DataContext="{d:DesignInstance Type=local:EventNodeElement}"
+             d:DataContext="{d:DesignInstance Type=local:EventNodeElementViewModel}"
              mc:Ignorable="d" 
              d:DesignHeight="50"
              d:DesignWidth="50"

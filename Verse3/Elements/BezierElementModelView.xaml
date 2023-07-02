@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Verse3.Elements" 
              xmlns:nodes="clr-namespace:Verse3.Nodes" 
-             d:DataContext="{d:DesignInstance Type=local:BezierElement}"
+             d:DataContext="{d:DesignInstance Type=local:BezierElementViewModel}"
              mc:Ignorable="d" 
              d:DesignHeight="400"
              d:DesignWidth="400"

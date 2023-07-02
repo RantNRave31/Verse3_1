@@ -6,7 +6,7 @@
              xmlns:hc="https://handyorg.github.io/handycontrol"
              xmlns:local="clr-namespace:Verse3.Elements" 
              xmlns:nodes="clr-namespace:Verse3.Nodes" 
-             d:DataContext="{d:DesignInstance Type=local:ToggleElement}"
+             d:DataContext="{d:DesignInstance Type=local:ToggleElementViewModel}"
              mc:Ignorable="d" 
              d:DesignHeight="50"
              d:DesignWidth="120"

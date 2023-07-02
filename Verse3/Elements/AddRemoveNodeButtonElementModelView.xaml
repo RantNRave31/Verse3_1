@@ -6,7 +6,7 @@
              xmlns:hc="https://handyorg.github.io/handycontrol"
              xmlns:local="clr-namespace:Verse3.Elements" 
              xmlns:nodes="clr-namespace:Verse3.Nodes" 
-             d:DataContext="{d:DesignInstance Type=local:AddRemoveNodeButtonElement}"
+             d:DataContext="{d:DesignInstance Type=local:AddRemoveNodeButtonElementViewModel}"
              mc:Ignorable="d" 
              d:DesignHeight="25"
              d:DesignWidth="100"
