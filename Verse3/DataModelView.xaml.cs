@@ -1,4 +1,6 @@
 ﻿using Core;
+using Core.Elements;
+using Core.Nodes;
 using InfiniteCanvas;
 using System;
 using System.Collections.Generic;

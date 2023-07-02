@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Core.Elements;
+using Newtonsoft.Json;
 using System;
 using System.ComponentModel;
 using System.Xml.Serialization;

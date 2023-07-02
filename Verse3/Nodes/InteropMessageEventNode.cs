@@ -1,4 +1,5 @@
 ﻿using Core;
+using Core.Nodes;
 using Verse3.Elements;
 
 namespace Verse3.Nodes

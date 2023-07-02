@@ -5,6 +5,7 @@ using System.Runtime.CompilerServices;
 using System.Runtime.Serialization;
 using static Core.Geometry2D;
 using Newtonsoft.Json;
+using Core.Elements;
 
 namespace Verse3.Elements
 {

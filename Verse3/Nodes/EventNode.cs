@@ -9,6 +9,8 @@ using Newtonsoft.Json;
 using static Core.Geometry2D;
 using System.Text;
 using Verse3.Components;
+using Core.Elements;
+using Core.Nodes;
 
 namespace Verse3.Nodes
 {
@@ -394,7 +396,15 @@ namespace Verse3.Nodes
 
         public void TriggerEvent(EventArgData e)
         {
-            NodeEvent.Invoke(this, e);
+            try
+            {
+                NodeEvent.Invoke(this, e);
+
+            }
+            catch(System.Exception se)
+            {
+
+            }
             if (Parent is IComputable)
             {
                 ComputationCore.Compute(Parent as IComputable, false);

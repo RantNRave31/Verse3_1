@@ -7,7 +7,7 @@ using System.Runtime.InteropServices;
 using System.Runtime.Serialization;
 using System.Threading;
 
-namespace Core
+namespace Core.Elements
 {
 
     /// <summary>Represents a doubly linked list.</summary>
@@ -75,11 +75,11 @@ namespace Core
 
             internal Enumerator(ElementsLinkedList<T> list)
             {
-                this.enumlist = list;
+                enumlist = list;
                 version = list.version;
                 enumhead = list.head;
-                current = default(T);
-                currentid = default(Guid);
+                current = default;
+                currentid = default;
                 index = 0;
                 siInfo = null;
             }
@@ -90,8 +90,8 @@ namespace Core
                 enumlist = null;
                 version = 0;
                 enumhead = null;
-                current = default(T);
-                currentid = default(Guid);
+                current = default;
+                currentid = default;
                 index = 0;
             }
 
@@ -135,8 +135,8 @@ namespace Core
                 {
                     throw new InvalidOperationException("InvalidOperation_EnumFailedVersion");
                 }
-                current = default(T);
-                currentid = default(Guid);
+                current = default;
+                currentid = default;
                 enumhead = enumlist.head;
                 index = 0;
             }
@@ -251,7 +251,7 @@ namespace Core
             if (count != 0)
             {
                 T[] array = new T[Count];
-                this.CopyTo(array, 0);
+                CopyTo(array, 0);
                 info.AddValue("Data", array, typeof(T[]));
             }
         }
@@ -390,7 +390,7 @@ namespace Core
             {
                 if (_syncRoot == null)
                 {
-                    Interlocked.CompareExchange<object>(ref _syncRoot, new object(), (object)null);
+                    Interlocked.CompareExchange<object>(ref _syncRoot, new object(), null);
                 }
                 return _syncRoot;
             }
@@ -663,7 +663,7 @@ namespace Core
         //DONE
         public new void ClearItems()
         {
-            this.Clear();
+            Clear();
         }
 
         /// <summary>Determines whether a value is in the <see cref="T:Core.CustomLinkedList<T>" />.</summary>
@@ -675,7 +675,7 @@ namespace Core
         {
             //base.Contains(value);
             //Find(value) != null;
-            if ((Find(value) != null) != (base.Contains(value))) throw new DataMisalignedException();
+            if (Find(value) != null != base.Contains(value)) throw new DataMisalignedException();
             return base.Contains(value);
         }
 
@@ -720,7 +720,7 @@ namespace Core
         //DONE
         void ICollection<T>.Add(T value)
         {
-            this.Add(value);
+            Add(value);
         }
 
         /// <summary>Adds an item at the end of the <see cref="T:System.Collections.Generic.ICollection" />.</summary>
@@ -728,7 +728,7 @@ namespace Core
         //DONE
         public new void Add(T value)
         {
-            this.AddLast(value);
+            AddLast(value);
             base.Add(value);
         }
 
@@ -739,7 +739,7 @@ namespace Core
         //DONE
         public new void Insert(int index, T value)
         {
-            AddBefore(this.NodeAtIndex(index), value);
+            AddBefore(NodeAtIndex(index), value);
             base.Insert(index, value);
         }
 
@@ -748,7 +748,7 @@ namespace Core
         //DONE
         public new void InsertItem(int index, T value)
         {
-            AddBefore(this.NodeAtIndex(index), value);
+            AddBefore(NodeAtIndex(index), value);
             base.Insert(index, value);
         }
 
@@ -768,7 +768,7 @@ namespace Core
         public new void Move(int oldIndex, int newIndex)
         {
             if (oldIndex >= Count || newIndex >= Count || oldIndex < 0 || newIndex < 0) throw new ArgumentOutOfRangeException();
-            T item = base.Items[oldIndex];
+            T item = Items[oldIndex];
             RemoveAt(oldIndex);
             Insert(newIndex, item);
             base.Move(oldIndex, newIndex);
@@ -780,7 +780,7 @@ namespace Core
         //DONE
         public new void MoveItem(int oldIndex, int newIndex)
         {
-            this.Move(oldIndex, newIndex);
+            Move(oldIndex, newIndex);
         }
 
         /// <summary>Replaces the element at the specified index.</summary>
@@ -820,7 +820,7 @@ namespace Core
         //DONE
         public new void RemoveAt(int index)
         {
-            ElementsLinkedListNode<T> ElementsLinkedListNode = Find(base.Items[index]);
+            ElementsLinkedListNode<T> ElementsLinkedListNode = Find(Items[index]);
             if (ElementsLinkedListNode != null)
             {
                 InternalRemoveNode(ElementsLinkedListNode);
@@ -834,7 +834,7 @@ namespace Core
         //DONE
         public new void RemoveItem(int index)
         {
-            ElementsLinkedListNode<T> ElementsLinkedListNode = Find(base.Items[index]);
+            ElementsLinkedListNode<T> ElementsLinkedListNode = Find(Items[index]);
             if (ElementsLinkedListNode != null)
             {
                 InternalRemoveNode(ElementsLinkedListNode);
@@ -855,7 +855,7 @@ namespace Core
 
         public ElementsLinkedListNode<T> NodeAtIndex(int index)
         {
-            return this.Find(base.Items[index]);
+            return Find(Items[index]);
         }
 
         /// <summary>
@@ -866,7 +866,7 @@ namespace Core
 
         public T ItemAtIndex(int index)
         {
-            return this.Find(base.Items[index]).Value;
+            return Find(Items[index]).Value;
         }
 
         /// <summary>
@@ -877,7 +877,7 @@ namespace Core
 
         public Guid IDAtIndex(int index)
         {
-            return this.Find(base.Items[index]).Value.ID;
+            return Find(Items[index]).Value.ID;
         }
 
         /// <summary>Determines whether a value is in the <see cref="T:Core.CustomLinkedList<T>" />.</summary>
@@ -887,7 +887,7 @@ namespace Core
 
         public bool Contains(Guid id)
         {
-            return (Find(id) != null);
+            return Find(id) != null;
         }
 
         /// <summary>Finds the first node that contains the specified value.</summary>
@@ -896,7 +896,7 @@ namespace Core
 
         public ElementsLinkedListNode<T> Find(T value)
         {
-            if (value != null && value.ID != default) return this.Find(value.ID);
+            if (value != null && value.ID != default) return Find(value.ID);
             else return null;
         }
 
@@ -915,7 +915,7 @@ namespace Core
                     {
                         if (next.item != null)
                         {
-                            if (Guid.Equals(next.item.ID, id))
+                            if (Equals(next.item.ID, id))
                             {
                                 return next;
                             }
@@ -946,7 +946,7 @@ namespace Core
 
         public ElementsLinkedListNode<T> FindLast(T value)
         {
-            return this.FindLast(value.ID);
+            return FindLast(value.ID);
         }
 
         /// <summary>Finds the last node that contains the specified value.</summary>
@@ -967,7 +967,7 @@ namespace Core
                 {
                     do
                     {
-                        if (Guid.Equals(ElementsLinkedListNode.item.ID, id))
+                        if (Equals(ElementsLinkedListNode.item.ID, id))
                         {
                             return ElementsLinkedListNode;
                         }

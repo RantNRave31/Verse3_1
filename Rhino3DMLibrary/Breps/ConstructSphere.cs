@@ -1,10 +1,10 @@
-﻿using Core;
-using System;
+﻿using System;
 using System.Windows;
 using Rhino;
 using Rhino.Geometry;
 using Verse3.Nodes;
 using Verse3.Components;
+using Core.Nodes;
 
 namespace Rhino3DMLibrary
 {

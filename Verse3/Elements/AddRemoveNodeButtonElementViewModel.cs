@@ -1,4 +1,5 @@
-﻿using Core;
+﻿using Core.Elements;
+using Core.Nodes;
 using System;
 using System.Windows;
 

@@ -4,7 +4,7 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Runtime.Serialization;
 
-namespace Core
+namespace Core.Elements
 {
     internal class ShellElement : IElement
     {
@@ -26,12 +26,12 @@ namespace Core
         {
             try
             {
-                info.AddValue("ID", this.ID);
+                info.AddValue("ID", ID);
                 //info.AddValue("X", this.X);
                 //info.AddValue("Y", this.Y);
                 //info.AddValue("Width", this.Width);
                 //info.AddValue("Height", this.Height);
-                info.AddValue("ElementType", this.ElementType);
+                info.AddValue("ElementType", ElementType);
                 //info.AddValue("State", this.State);
                 //info.AddValue("IsSelected", this.IsSelected);
                 //info.AddValue("BoundingBox", this.BoundingBox);

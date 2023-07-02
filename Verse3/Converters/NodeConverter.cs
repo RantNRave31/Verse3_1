@@ -3,6 +3,7 @@ using System;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Verse3.Nodes;
+using Core.Nodes;
 
 namespace Verse3.Converters
 {

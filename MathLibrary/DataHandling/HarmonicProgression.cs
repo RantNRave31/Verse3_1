@@ -2,6 +2,7 @@
 using System;
 using Verse3.Nodes;
 using Verse3.Components;
+using Core.Nodes;
 
 namespace MathLibrary
 {

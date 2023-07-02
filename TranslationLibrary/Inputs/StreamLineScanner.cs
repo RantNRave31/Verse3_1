@@ -7,6 +7,8 @@ using Verse3.Components;
 using System.Collections;
 using System.Collections.Generic;
 using GKYU.TranslationLibrary.Translators;
+using System.IO;
+using Core.Nodes;
 
 namespace TextLibrary
 {
@@ -29,7 +31,7 @@ namespace TextLibrary
         public override void Compute()
         {
         }
-        public override CompInfo GetCompInfo() => new CompInfo(this, "StreamLineScaner", "Inputs", "Translation");
+        public override CompInfo GetCompInfo() => new CompInfo(this, "StreamLineScanner", "Inputs", "Translation");
 
         private GenericEventNode eventIn;
         private GenericEventNode eventTrue;
@@ -69,13 +71,29 @@ namespace TextLibrary
         }
         private void eventIn_NodeEvent(IEventNode container, EventArgData e)
         {
-            if (_scanner == null)
+            bool bFileExists = false;
+            try
             {
-                _scanner = new StreamLineScanner(new System.IO.StreamReader(_inputFileName));
+                bFileExists = File.Exists(_inputFileName);
+                if (!bFileExists)
+                {
+                    this.previewTextBlock.DisplayedText = "File Not Found";
+                }
+                if (_scanner == null)
+                {
+                    _scanner = new StreamLineScanner(new System.IO.StreamReader(_inputFileName));
+                }
             }
-            this.ChildElementManager.SetData<bool>(_scanner.EndOfFile, state);
-            this.ChildElementManager.SetData<int>(currentLine++, nodeBlock);
-            _currentInput = _scanner.Read();
+            catch(System.Exception se)
+            {
+                this.previewTextBlock.DisplayedText = "Unauthorized Access";
+            }
+            if (_scanner != null)
+            {
+                this.ChildElementManager.SetData<bool>(_scanner.EndOfFile, state);
+                this.ChildElementManager.SetData<int>(currentLine++, nodeBlock);
+                _currentInput = _scanner.Read();
+            }
             this.ChildElementManager.SetData<string>(_currentInput, nodeBlock1);
             this.previewTextBlock.DisplayedText = _currentInput.ToString();
             ComputationCore.Compute(this, false);

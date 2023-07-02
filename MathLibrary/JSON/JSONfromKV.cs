@@ -4,6 +4,7 @@ using Newtonsoft.Json.Linq;
 using System.Windows.Forms;
 using Verse3.Nodes;
 using Verse3.Components;
+using Core.Nodes;
 
 namespace MathLibrary
 {

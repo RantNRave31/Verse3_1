@@ -4,6 +4,8 @@ using System.Runtime.Serialization;
 using Verse3.Elements;
 using Newtonsoft.Json;
 using Verse3.Nodes;
+using Core.Elements;
+using Core.Nodes;
 
 namespace Verse3.Components
 {

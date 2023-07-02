@@ -10,6 +10,7 @@ using Verse3;
 using Verse3.Components;
 using Verse3.Elements;
 using Core.Assemblies;
+using Core.Elements;
 
 namespace CodeLibrary
 {

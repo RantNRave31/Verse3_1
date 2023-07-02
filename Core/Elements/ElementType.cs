@@ -1,4 +1,4 @@
-﻿namespace Core
+﻿namespace Core.Elements
 {
     #region Enums
     public enum ElementType

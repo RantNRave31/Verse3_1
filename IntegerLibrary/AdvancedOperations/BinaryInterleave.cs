@@ -1,4 +1,4 @@
-﻿using Core;
+﻿using Core.Nodes;
 using IntegerLibrary.Utilities;
 using System;
 using System.Windows;

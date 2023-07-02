@@ -16,6 +16,7 @@ using Verse3.Elements;
 using Verse3.Tools;
 using Core.Assemblies;
 using Verse3.Assemblies;
+using Core.Elements;
 
 namespace Verse3
 {

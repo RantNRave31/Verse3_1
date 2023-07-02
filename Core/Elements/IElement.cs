@@ -4,7 +4,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.Serialization;
 
-namespace Core
+namespace Core.Elements
 {
     public interface IElement : INotifyPropertyChanged, IDisposable, ISerializable
     {
@@ -21,7 +21,7 @@ namespace Core
 
         public ElementType ElementType { get; set; }
 
-        public PropertiesViewModel Properties {get;set;}
+        public PropertiesViewModel Properties { get; set; }
         #endregion
 
         #region INotifyPropertyChanged Members

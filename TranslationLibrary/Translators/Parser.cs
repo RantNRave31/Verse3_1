@@ -1,10 +1,11 @@
 ﻿using Core;
+using Core.Nodes;
 using System;
 using System.Windows;
 using Verse3.Components;
 using Verse3.Nodes;
 
-namespace TranslationLibrary.Scanners
+namespace TranslationLibrary.Translators
 {
     public class Parser : BaseCompViewModel
     {
@@ -22,13 +23,13 @@ namespace TranslationLibrary.Scanners
 
         #endregion
 
-        public override CompInfo GetCompInfo() => new CompInfo(this, "Scanner", "Scanners", "Translation");
+        public override CompInfo GetCompInfo() => new CompInfo(this, "TestParser", "Parsers", "Translation");
 
         public override void Compute()
         {
             ChildElementManager.SetData(false, nodeBlock);
             int a = ChildElementManager.GetData(nodeBlock, 0);
-            this.ChildElementManager.SetData<int>(a, nodeBlock2);
+            ChildElementManager.SetData(a, nodeBlock2);
             ChildElementManager.SetData(true, nodeBlock);
         }
 
@@ -41,13 +42,13 @@ namespace TranslationLibrary.Scanners
         {
             eventIn = new GenericEventNode(this, NodeType.Input);
             eventIn.NodeEvent += eventIn_NodeEvent;
-            this.ChildElementManager.AddEventInputNode(eventIn);
+            ChildElementManager.AddEventInputNode(eventIn);
 
             eventOut = new GenericEventNode(this, NodeType.Output);
-            this.ChildElementManager.AddEventOutputNode(eventOut, "True");
+            ChildElementManager.AddEventOutputNode(eventOut, "True");
 
             state = new BooleanDataNode(this, NodeType.Output);
-            this.ChildElementManager.AddDataOutputNode(state, "Next", true);
+            ChildElementManager.AddDataOutputNode(state, "Next", true);
 
             nodeBlock = new IntegerDataNode(this, NodeType.Input);
             ChildElementManager.AddDataInputNode(nodeBlock, "Input");
@@ -56,8 +57,8 @@ namespace TranslationLibrary.Scanners
             ChildElementManager.AddDataOutputNode(nodeBlock2, "Output", true);
         }
         private void eventIn_NodeEvent(IEventNode container, EventArgData e)
-        {           
-            this.ChildElementManager.SetData<bool>(_state, state);
+        {
+            ChildElementManager.SetData(_state, state);
             ComputationCore.Compute(this, false);
         }
     }

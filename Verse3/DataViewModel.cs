@@ -10,6 +10,8 @@ using Newtonsoft.Json.Serialization;
 using System.Reflection;
 using Verse3.Components;
 using Verse3.Nodes;
+using Core.Elements;
+using Core.Nodes;
 
 namespace Verse3
 {

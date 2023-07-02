@@ -5,6 +5,7 @@ using System.Windows;
 using Verse3.Nodes;
 using Verse3.Elements;
 using Verse3.Components;
+using Core.Nodes;
 
 namespace EventsLibrary
 {

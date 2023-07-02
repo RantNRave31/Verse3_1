@@ -1,4 +1,4 @@
-﻿namespace Core
+﻿namespace Core.Elements
 {
     public enum ElementState
     {

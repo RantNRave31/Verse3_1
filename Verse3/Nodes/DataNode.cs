@@ -10,6 +10,8 @@ using Newtonsoft.Json;
 using static Core.Geometry2D;
 using System.Text;
 using Verse3.Components;
+using Core.Elements;
+using Core.Nodes;
 
 namespace Verse3.Nodes
 {

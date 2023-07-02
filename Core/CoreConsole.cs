@@ -9,6 +9,7 @@ using Postgrest.Attributes;
 using Postgrest;
 using System.Linq;
 using System.Threading.Tasks;
+using Core.Nodes;
 
 namespace Core
 {
