@@ -24,9 +24,9 @@
     <None Include="..\.editorconfig" Link=".editorconfig" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\CoreInterop\CoreInterop.csproj" />
-    <ProjectReference Include="..\Core\Core.csproj" />
-    <ProjectReference Include="..\InfiniteCanvas\InfiniteCanvas.csproj" />
+    <ProjectReference Include="..\CoreInterop\Verse3.CoreInterop.csproj" />
+    <ProjectReference Include="..\Core\Verse3.Core.csproj" />
+    <ProjectReference Include="..\InfiniteCanvas\Verse3.InfiniteCanvas.csproj" />
     <ProjectReference Include="..\TurboTools\GKYU.BusinessLogicLibrary\GKYU.BusinessLogicLibrary.csproj" />
     <ProjectReference Include="..\TurboTools\GKYU.CollectionsLibrary\GKYU.CollectionsLibrary.csproj" />
     <ProjectReference Include="..\TurboTools\GKYU.CoreLibrary\GKYU.CoreLibrary.csproj" />
