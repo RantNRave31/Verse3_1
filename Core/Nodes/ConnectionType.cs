@@ -1,4 +1,4 @@
-﻿namespace Core
+﻿namespace Core.Nodes
 {
     #region Enums
     public enum ConnectionType
