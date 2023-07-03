@@ -5,6 +5,7 @@ using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Runtime.Serialization;
+using Verse3.CorePresentation.Workspaces;
 using Verse3.Elements;
 using static Core.Geometry2D;
 
@@ -30,7 +31,7 @@ namespace Verse3.Nodes
 
         public static void RefreshPosition()
         {
-            System.Drawing.Point p = ArsenalViewModel.StaticSelectedDataViewModel.DataModelView.GetMouseRelPosition();
+            System.Drawing.Point p = WorkspaceViewModel.StaticWorkspaceViewModel.SelectedDataModelView.GetMouseRelPosition();
             Instance._hotspot = new CanvasPoint(p.X, p.Y);
 
             if (Instance.Connections != null)

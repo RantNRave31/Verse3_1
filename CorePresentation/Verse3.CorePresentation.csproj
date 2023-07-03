@@ -24,7 +24,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Include="ArsenalViewModel.cs" />
+    <Compile Include="Workspaces\WorkspaceModelView.xaml.cs" />
+    <Compile Include="Workspaces\WorkspaceViewModel.cs" />
     <Compile Include="Assemblies\AssemblyManagerModelView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>

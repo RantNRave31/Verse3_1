@@ -19,6 +19,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Verse3.About;
+using Verse3.CorePresentation.Workspaces;
+using System.Windows.Forms;
 
 namespace Verse3
 {
@@ -122,25 +124,22 @@ namespace Verse3
             this.Close();
         }
         private void Window_Loaded(object sender, RoutedEventArgs e)
-        {            
-            MainWindowViewModel.ShowNewForm(sender, e);
-            ArsenalViewModel.StaticArsenal.SelectedDataViewModel = (DataViewModel)DataViewModel.DataModel;
-            ArsenalViewModel.StaticArsenal.SelectedDataModelView = new DataModelView();
-            ArsenalViewModel.StaticArsenal.SelectedDataModelView.DataContext = DataViewModel.DataModel;
-            tableLayoutPanel1.Content = ArsenalViewModel.StaticArsenal.SelectedDataModelView;
-            ArsenalViewModel.StaticArsenal.SelectedDataModelView.MouseDown += Canvas_MouseDown;
-            ArsenalViewModel.StaticArsenal.SelectedDataModelView.MouseUp += Canvas_MouseUp;
-            ArsenalViewModel.StaticArsenal.SelectedDataModelView.MouseMove += Canvas_MouseMove;
+        {
+            DataViewModel dataViewModel;
+            WorkspaceViewModel.StaticWorkspaceViewModel.SelectedDataViewModel = dataViewModel = new DataViewModel();
+            WorkspaceViewModel.StaticWorkspaceViewModel.DataViewModels.Add(dataViewModel);
+            WorkspaceViewModel.StaticWorkspaceViewModel.DataViewModels.Add(dataViewModel = new DataViewModel());
             //InfiniteCanvasWPFControl.MouseMove += AddToCanvas_OnCall;
-            ArsenalViewModel.StaticArsenal.SelectedDataModelView.Loaded += ArsenalViewModel.StaticArsenal.LoadLibraries;
+            // moved to view
+            //WorkspaceViewModel.StaticWorkspaceViewModel.SelectedDataModelView.Loaded += WorkspaceViewModel.StaticWorkspaceViewModel.LoadLibraries;
 
         }
         private void timer1_Tick(object sender, EventArgs e)
         {
             if (MainWindowViewModel.SelectedMainWindowModelView is MainWindowModelView)
             {
-                this.MainWindowViewModel.FramesPerSecond = ArsenalViewModel.StaticArsenal.SelectedDataModelView.AverageFPS.ToString();
-                this.MainWindowViewModel.Status = ArsenalViewModel.StaticArsenal.SelectedDataModelView.GetMouseRelPosition().ToString();
+                this.MainWindowViewModel.FramesPerSecond = WorkspaceViewModel.StaticWorkspaceViewModel.SelectedDataModelView.AverageFPS.ToString();
+                this.MainWindowViewModel.Status = WorkspaceViewModel.StaticWorkspaceViewModel.SelectedDataModelView.GetMouseRelPosition().ToString();
             }
             else
             {
@@ -284,67 +283,7 @@ namespace Verse3
             System.Windows.Forms.OpenFileDialog openFileDialog = new System.Windows.Forms.OpenFileDialog();
             if (openFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                ArsenalViewModel.StaticArsenal.HotLoadLibrary(openFileDialog.FileName);
-            }
-        }
-        private void Canvas_MouseMove(object sender, System.Windows.Input.MouseEventArgs e)
-        {
-            if (sender is DataModelView)
-            {
-                DataModelView infiniteCanvas = (DataModelView)sender;
-                this.Cursor = infiniteCanvas.Cursor;
-            }
-            if (ArsenalViewModel.StaticArsenal.SelectedDataViewModel.SelectedConnection != default)
-            {
-                //DataViewModel.ActiveConnection.Destination.
-            }
-            if (ArsenalViewModel.compsPendingInst.Count > 0)
-            {
-                ArsenalViewModel.StaticArsenal.AddToCanvas_OnCall(sender, e);
-            }
-        }
-
-        private void Canvas_MouseUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
-        {
-            if (sender is DataModelView)
-            {
-                DataModelView infiniteCanvas = (DataModelView)sender;
-                if (infiniteCanvas.MouseHandlingMode == MouseHandlingMode.None)
-                {
-                    this.Cursor = Cursors.Arrow;
-                }
-            }
-            //if (DataViewModel.ActiveNode != default /*&& started*/)
-            //{
-            //    //DrawBezierCurve(drawstart, InfiniteCanvasWPFControl.GetMouseRelPosition(), rtl);
-
-            //    if (DataViewModel.ActiveConnection == default)
-            //    {
-            //        DataViewModel.ActiveConnection = CreateConnection(DataViewModel.ActiveNode);
-            //    }
-            //    else
-            //    {
-            //        ((BezierElement)DataViewModel.ActiveConnection).SetDestination(DataViewModel.ActiveNode);
-            //        DataViewModel.ActiveConnection = default;
-            //        DataViewModel.ActiveNode = default;
-            //    }
-            //    //started = false;
-            //}
-        }
-
-        //public INode drawstart = default;
-        private void Canvas_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
-        {
-            if (sender is DataModelView)
-            {
-                DataModelView infiniteCanvas = (DataModelView)sender;
-                if (infiniteCanvas.MouseHandlingMode == MouseHandlingMode.Panning)
-                {
-                    this.Cursor = Cursors.SizeAll;
-                }
-                //if (started)
-                //{
-                //}
+                WorkspaceViewModel.StaticWorkspaceViewModel.HotLoadLibrary(openFileDialog.FileName);
             }
         }
 
@@ -415,7 +354,7 @@ namespace Verse3
 
         private void exportCanvasToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            System.Drawing.Bitmap bmp = new System.Drawing.Bitmap((int)tableLayoutPanel1.RenderSize.Width, (int)tableLayoutPanel1.RenderSize.Height);
+            System.Drawing.Bitmap bmp = new System.Drawing.Bitmap((int)WorkspaceViewModel.StaticWorkspaceViewModel.SelectedDataModelView.RenderSize.Width, (int)WorkspaceViewModel.StaticWorkspaceViewModel.SelectedDataModelView.RenderSize.Height);
             //TODO:  finish this to export to bitmap
             //tableLayoutPanel1.DrawToBitmap(bmp, tableLayoutPanel1.RenderSize.Bounds);
             //save bmp to AppData/CanvasExports
@@ -450,7 +389,7 @@ namespace Verse3
 
         private void saveAsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            VFSerializable VFfile = new VFSerializable(ArsenalViewModel.StaticSelectedDataViewModel);
+            VFSerializable VFfile = new VFSerializable(WorkspaceViewModel.StaticSelectedDataViewModel);
             //show a save file dialog with default file extension *.vf or *.vfx
             System.Windows.Forms.SaveFileDialog saveFileDialog = new System.Windows.Forms.SaveFileDialog();
             saveFileDialog.Filter = "Verse3 JSON File (*.vfj)|*.vfj|Verse3 File Extended (*.vfx)|*.vfx|Verse3 File (*.vf)|*.vf";
@@ -491,20 +430,23 @@ namespace Verse3
                     if (openFileDialog.FileName.EndsWith(".vf"))
                     {
                         VFSerializable VFfile = VFSerializable.Deserialize(openFileDialog.FileName);
-                        DataViewModel.DataModel = VFfile.DataViewModel;
-                        ArsenalViewModel.StaticSelectedDataViewModel.DataModelView.ExpandContent();
+                        WorkspaceViewModel.StaticWorkspaceViewModel.DataViewModels.Add(VFfile.DataViewModel);
+                        WorkspaceViewModel.StaticWorkspaceViewModel.SelectedDataViewModel = VFfile.DataViewModel;
+                        WorkspaceViewModel.StaticSelectedDataViewModel.DataModelView.ExpandContent();
                     }
                     else if (openFileDialog.FileName.EndsWith(".vfx"))
                     {
                         VFSerializable VFfile = VFSerializable.DeserializeXML(openFileDialog.FileName);
-                        DataViewModel.DataModel = VFfile.DataViewModel;
-                        ArsenalViewModel.StaticSelectedDataViewModel.DataModelView.ExpandContent();
+                        WorkspaceViewModel.StaticWorkspaceViewModel.DataViewModels.Add(VFfile.DataViewModel);
+                        WorkspaceViewModel.StaticWorkspaceViewModel.SelectedDataViewModel = VFfile.DataViewModel;
+                        WorkspaceViewModel.StaticSelectedDataViewModel.DataModelView.ExpandContent();
                     }
                     else if (openFileDialog.FileName.EndsWith(".vfj"))
                     {
                         VFSerializable VFfile = VFSerializable.DeserializeJSON(openFileDialog.FileName);
-                        DataViewModel.DataModel = VFfile.DataViewModel;
-                        ArsenalViewModel.StaticSelectedDataViewModel.DataModelView.ExpandContent();
+                        WorkspaceViewModel.StaticWorkspaceViewModel.DataViewModels.Add(VFfile.DataViewModel);
+                        WorkspaceViewModel.StaticWorkspaceViewModel.SelectedDataViewModel = VFfile.DataViewModel;
+                        WorkspaceViewModel.StaticSelectedDataViewModel.DataModelView.ExpandContent();
                     }
                 }
                 catch (Exception ex)
@@ -516,7 +458,7 @@ namespace Verse3
 
         private void exportCanvasToImageToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            System.Drawing.Bitmap bmp = new System.Drawing.Bitmap((int)tableLayoutPanel1.RenderSize.Width, (int)tableLayoutPanel1.RenderSize.Height);
+            System.Drawing.Bitmap bmp = new System.Drawing.Bitmap((int)WorkspaceViewModel.StaticWorkspaceViewModel.SelectedDataModelView.RenderSize.Width, (int)WorkspaceViewModel.StaticWorkspaceViewModel.SelectedDataModelView.RenderSize.Height);
             // TODO:  canvas to image
             //tableLayoutPanel1.DrawToBitmap(bmp, tableLayoutPanel1.Bounds);
             //save bmp to AppData/CanvasExports

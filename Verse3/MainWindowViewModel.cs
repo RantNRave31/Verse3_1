@@ -17,6 +17,7 @@ using Verse3.Tools;
 using Core.Assemblies;
 using Verse3.Assemblies;
 using Core.Elements;
+using Verse3.CorePresentation.Workspaces;
 
 namespace Verse3
 {
@@ -24,15 +25,13 @@ namespace Verse3
         : ViewModels.ViewModelBase
     {
         #region MainWindow
-        public static MainWindowModelView ActiveMain { get => MainApplication._mainWindowModelView; }
-        public ObservableCollection<MainWindowModelView> MainWindowModelViews { get; set; }
         public MainWindowModelView SelectedMainWindowModelView { get; set; }
         public ObservableCollection<MainWindowViewModel> MainWindowViewModels { get; set; }
         MainWindowViewModel _selectedMainWindowViewModel;
         public MainWindowViewModel SelectedMainWindowViewModel { get { return  _selectedMainWindowViewModel; } set { if (value == _selectedMainWindowViewModel) return; _selectedMainWindowViewModel = value; OnPropertyChanged(); } }
         public MainWindowModelView MainWindowModelView { get; set; }
         #endregion
-        public ArsenalViewModel ArsenalViewModel { get { return ArsenalViewModel.StaticArsenal; } }
+        public WorkspaceViewModel WorkspaceViewModel { set; get;  }
         #region Instrumentation
         public string framesPerSecond;
         public string FramesPerSecond { get { return framesPerSecond; } set { if (value == framesPerSecond) return; framesPerSecond = value; OnPropertyChanged(); } }
@@ -45,18 +44,7 @@ namespace Verse3
             : base(displayName)
         {
             MainWindowViewModels = new ObservableCollection<MainWindowViewModel>();
-        }
-        public void ShowNewForm(object sender, EventArgs e)
-        {
-            SelectedMainWindowViewModel = new MainWindowViewModel("Show New Form");
-            MainWindowViewModels.Add(SelectedMainWindowViewModel);
-            if (Debugger.IsAttached)
-            {
-            }
-            else
-            {
-
-            }
+            WorkspaceViewModel  = new WorkspaceViewModel();
         }
     }
 }

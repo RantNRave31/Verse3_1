@@ -16,31 +16,31 @@ using System.Collections.ObjectModel;
 using Verse3.Elements;
 using System.Windows.Controls;
 
-namespace Verse3
+namespace Verse3.CorePresentation.Workspaces
 {
-    public class ArsenalViewModel
-        : ViewModels.ViewModelBase
+    public class WorkspaceViewModel
+        : ViewModelBase
     {
         public static AppDomain domain_;
         #region Data Models and Views
         private int childFormNumber = 0;
         public ObservableCollection<DataViewModel> DataViewModels { get; set; }
-        private DataModelView _selectedDataModelView;
+        DataViewModel _selectedDataViewModel;
+        public DataViewModel SelectedDataViewModel { get { return _selectedDataViewModel; } set { if (value == _selectedDataViewModel) return; StaticSelectedDataViewModel = DataTemplateManager.DataViewModel = _selectedDataViewModel = value; OnPropertyChanged(); } }
         public DataModelView SelectedDataModelView
         {
             get
             {
-                return _selectedDataModelView;
+                return _selectedDataViewModel.DataModelView;
             }
             set
             {
-                _selectedDataModelView = value;
+                _selectedDataViewModel.DataModelView = value;
+                OnPropertyChanged();
             }
         }
-        public static ArsenalViewModel StaticArsenal { get; set; }
+        public static WorkspaceViewModel StaticWorkspaceViewModel { get; set; }
         public static DataViewModel StaticSelectedDataViewModel { get; set; }
-        DataViewModel _selectedDataViewModel;
-        public DataViewModel SelectedDataViewModel { get { return _selectedDataViewModel; } set { if (value == _selectedDataViewModel) return; StaticSelectedDataViewModel = DataTemplateManager.DataViewModel = _selectedDataViewModel = value; OnPropertyChanged(); } }
         #endregion
         #region Assemblies and Components
         public AssemblyManagerViewModel AssemblyManager { get; set; }
@@ -55,12 +55,13 @@ namespace Verse3
         #endregion
         public ObservableDictionary<string, CompInfo> Arsenal { get; set; }
         public ToolPanelViewModel ToolPanel { get; set; }
-        public ArsenalViewModel()
+        public WorkspaceViewModel()
             : base()
         {
-            if (StaticArsenal != null)
+            DataViewModels = new ObservableCollection<DataViewModel>();
+            if (StaticWorkspaceViewModel != null)
                 throw new NotSupportedException("Must be singleton");
-            StaticArsenal = this;
+            StaticWorkspaceViewModel = this;
             AssemblyManager = new AssemblyManagerViewModel("Library Manager");
             Arsenal = new ObservableDictionary<string, CompInfo>();
             ToolPanel = new ToolPanelViewModel("ToolPanel");
@@ -146,11 +147,11 @@ namespace Verse3
                                                 int x = -5000;
                                                 int y = -5000;
                                                 IElement elInst = compInfo.ConstructorInfo.Invoke(new object[] { x, y }) as IElement;
-                                                DataViewModel.DataModel.Elements.Add(elInst);
+                                                WorkspaceViewModel.StaticWorkspaceViewModel.SelectedDataViewModel.Elements.Add(elInst);
                                                 x = 9990;
                                                 y = 9990;
                                                 elInst = compInfo.ConstructorInfo.Invoke(new object[] { x, y }) as IElement;
-                                                DataModel.Instance.Elements.Add(elInst);
+                                                WorkspaceViewModel.StaticWorkspaceViewModel.SelectedDataViewModel.Elements.Add(elInst);
                                                 SelectedDataModelView.ExpandContent();
                                                 SelectedDataModelView.InfiniteCanvasControl1.AnimatedSnapTo(new System.Windows.Point(5000.0, 5000.0));
                                                 continue;
@@ -183,10 +184,10 @@ namespace Verse3
         }
         public void AddToArsenal(CompInfo compInfo)
         {
-            if ((compInfo.ConstructorInfo != null) &&
-                (compInfo.Name != String.Empty) &&
-                (compInfo.Group != String.Empty) &&
-                (compInfo.Tab != String.Empty))
+            if (compInfo.ConstructorInfo != null &&
+                compInfo.Name != string.Empty &&
+                compInfo.Group != string.Empty &&
+                compInfo.Tab != string.Empty)
             {
                 /*                TabPage tp = new TabPage(compInfo.Tab);
                                 tp.SuspendLayout();
@@ -394,7 +395,7 @@ namespace Verse3
                                     }
                                 }
                                 IElement elInst = ci.ConstructorInfo.Invoke(args) as IElement;
-                                DataViewModel.DataModel.Elements.Add(elInst);
+                                WorkspaceViewModel.StaticWorkspaceViewModel.SelectedDataViewModel.Elements.Add(elInst);
                                 if (elInst is BaseCompViewModel) ComputationCore.Compute(elInst as BaseCompViewModel);
                                 //DataViewModel.WPFControl.ExpandContent();
                             }
@@ -468,7 +469,7 @@ namespace Verse3
                             {
                                 BaseCompViewModel elInst = compInfo.ConstructorInfo.Invoke(compsPendingInst[compInfo]) as BaseCompViewModel;
                                 DataTemplateManager.RegisterDataTemplate(elInst);
-                                DataViewModel.DataModel.Elements.Add(elInst);
+                                WorkspaceViewModel.StaticWorkspaceViewModel.SelectedDataViewModel.Elements.Add(elInst);
                                 //EditorForm.compsPendingInst.Remove(compInfo);
                                 ComputationCore.Compute(elInst);
                             }
@@ -488,7 +489,7 @@ namespace Verse3
                         foreach (BezierElementViewModel b in connectionsPending)
                         {
                             DataTemplateManager.RegisterDataTemplate(b);
-                            DataViewModel.DataModel.Elements.Add(b);
+                            WorkspaceViewModel.StaticWorkspaceViewModel.SelectedDataViewModel.Elements.Add(b);
                             //EditorForm.connectionsPending.Remove(b);
                             b.RedrawBezier(b.Origin, b.Destination);
                         }

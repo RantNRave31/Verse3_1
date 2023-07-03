@@ -14,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Verse3.CorePresentation.Workspaces;
 
 namespace Verse3.Elements
 {
@@ -240,7 +241,7 @@ namespace Verse3.Elements
                 this.OverlayImage.Visibility = Visibility.Hidden;
                 this.EmulatedIDEBrowser.IsEnabled = true;
                 this.EmulatedIDEBrowser.Visibility = Visibility.Visible;
-                ArsenalViewModel.StaticSelectedDataViewModel.DataModelView.ClearSelection();
+                WorkspaceViewModel.StaticSelectedDataViewModel.DataModelView.ClearSelection();
             }
         }
 

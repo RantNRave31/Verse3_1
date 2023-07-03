@@ -7,6 +7,7 @@ using System.Windows;
 using System.Windows.Controls;
 using Verse3;
 using Verse3.Components;
+using Verse3.CorePresentation.Workspaces;
 using Verse3.Elements;
 
 namespace MathLibrary
@@ -30,7 +31,7 @@ namespace MathLibrary
             }
             else
             {
-                DataViewModel.DataModel.Elements.Remove(Instance);
+                WorkspaceViewModel.StaticSelectedDataViewModel.Elements.Remove(Instance);
                 Instance = this;
             }
         }
@@ -162,13 +163,13 @@ namespace MathLibrary
                                 else
                                 {
                                     if (pi[i].ParameterType == typeof(int) && pi[i].Name.ToLower() == "x")
-                                        args[i] = ArsenalViewModel.StaticSelectedDataViewModel.DataModelView.GetMouseRelPosition().X;
+                                        args[i] = WorkspaceViewModel.StaticSelectedDataViewModel.DataModelView.GetMouseRelPosition().X;
                                     else if (pi[i].ParameterType == typeof(int) && pi[i].Name.ToLower() == "y")
-                                        args[i] = ArsenalViewModel.StaticSelectedDataViewModel.DataModelView.GetMouseRelPosition().Y;
+                                        args[i] = WorkspaceViewModel.StaticSelectedDataViewModel.DataModelView.GetMouseRelPosition().Y;
                                 }
                             }
-                            ArsenalViewModel.compsPendingInst.Add(ci, args);
-                            ArsenalViewModel.StaticArsenal.AddToCanvas_OnCall(this, new EventArgs());
+                            WorkspaceViewModel.compsPendingInst.Add(ci, args);
+                            WorkspaceViewModel.StaticWorkspaceViewModel.AddToCanvas_OnCall(this, new EventArgs());
                             //IElement? elInst = buttonDictionary[btnElement].ConstructorInfo.Invoke(args) as IElement;
                             //DataTemplateManager.RegisterDataTemplate(elInst as IRenderable);
                             //DataViewModel.Instance.Elements.Add(elInst);

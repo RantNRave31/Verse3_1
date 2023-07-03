@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using Core;
 using NamedPipeWrapper;
+using Verse3.CorePresentation.Workspaces;
 
 namespace Verse3
 {
@@ -26,11 +27,10 @@ namespace Verse3
         }
         protected override void OnStartup(StartupEventArgs e)
         {
-            ArsenalViewModel.domain_ = AppDomain.CurrentDomain;
+            WorkspaceViewModel.domain_ = AppDomain.CurrentDomain;
             base.OnStartup(e);
             Core.Core.InitConsole();
             StartServer();
-            ArsenalViewModel.StaticArsenal = new ArsenalViewModel();
             MainWindowModelView mainWindowModelView = _mainWindowModelView = new MainWindowModelView();
             MainWindowViewModel mainWindowViewModel = new MainWindowViewModel("Main Verse 3");
             _mainWindowModelView.DataContext = mainWindowViewModel;

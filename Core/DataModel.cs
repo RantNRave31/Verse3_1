@@ -40,12 +40,6 @@ namespace Core
         #region Data Members
 
         /// <summary>
-        /// The singleton instance.
-        /// This is a singleton for convenience.
-        /// </summary>
-        protected static DataModel instance = null;
-
-        /// <summary>
         /// The list of rectangles that is displayed both in the main window and in the overview window.
         /// </summary>
         [JsonIgnore]
@@ -105,21 +99,6 @@ namespace Core
         /// Retreive the singleton instance.
         /// </summary>
         //[XmlIgnore]
-        public static DataModel Instance
-        {
-            get
-            {
-                //if (instance == null)
-                //{
-                //    instance = new DataModel();
-                //}
-                return instance;
-            }
-            protected set
-            {
-                instance = value;
-            }
-        }
 
         [JsonIgnore]
         public static double ContentCanvasMarginOffset = 0.0;

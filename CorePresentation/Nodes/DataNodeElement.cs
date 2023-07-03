@@ -5,6 +5,7 @@ using System;
 using System.ComponentModel;
 using System.Runtime.Serialization;
 using System.Windows;
+using Verse3.CorePresentation.Workspaces;
 using Verse3.Elements;
 using static Core.Geometry2D;
 
@@ -69,12 +70,12 @@ namespace Verse3.Nodes
         public override void ToggleActive()
         {
             //Set as active Node
-            BezierElementViewModel b = (BezierElementViewModel)ArsenalViewModel.StaticArsenal.SelectedDataViewModel.SelectedConnection;
-            if (ArsenalViewModel.StaticArsenal.SelectedDataViewModel.SelectedConnection == default)
+            BezierElementViewModel b = (BezierElementViewModel)WorkspaceViewModel.StaticWorkspaceViewModel.SelectedDataViewModel.SelectedConnection;
+            if (WorkspaceViewModel.StaticWorkspaceViewModel.SelectedDataViewModel.SelectedConnection == default)
             {
-                ArsenalViewModel.StaticArsenal.SelectedDataViewModel.SelectedNode = this as INode;
-                ArsenalViewModel.StaticArsenal.SelectedDataViewModel.SelectedConnection = ArsenalViewModel.StaticArsenal.SelectedDataViewModel.CreateConnection(ArsenalViewModel.StaticArsenal.SelectedDataViewModel.SelectedNode);
-                b = (BezierElementViewModel)ArsenalViewModel.StaticArsenal.SelectedDataViewModel.SelectedConnection;
+                WorkspaceViewModel.StaticWorkspaceViewModel.SelectedDataViewModel.SelectedNode = this as INode;
+                WorkspaceViewModel.StaticWorkspaceViewModel.SelectedDataViewModel.SelectedConnection = WorkspaceViewModel.StaticWorkspaceViewModel.SelectedDataViewModel.CreateConnection(WorkspaceViewModel.StaticWorkspaceViewModel.SelectedDataViewModel.SelectedNode);
+                b = (BezierElementViewModel)WorkspaceViewModel.StaticWorkspaceViewModel.SelectedDataViewModel.SelectedConnection;
                 if (b != null)
                 {
                     RenderPipelineInfo.AddChild(b);
@@ -89,24 +90,24 @@ namespace Verse3.Nodes
             {
                 if (b != null)
                 {
-                    if (ArsenalViewModel.StaticArsenal.SelectedDataViewModel.SelectedNode.NodeType != NodeType)
+                    if (WorkspaceViewModel.StaticWorkspaceViewModel.SelectedDataViewModel.SelectedNode.NodeType != NodeType)
                     {
-                        if (NodeUtilities.CheckCompatibility(ArsenalViewModel.StaticArsenal.SelectedDataViewModel.SelectedNode, this))
+                        if (NodeUtilities.CheckCompatibility(WorkspaceViewModel.StaticWorkspaceViewModel.SelectedDataViewModel.SelectedNode, this))
                         {
                             if (b.SetDestination(this as INode))
                             {
-                                if (ArsenalViewModel.StaticArsenal.SelectedDataViewModel.SelectedNode is IComputable && ArsenalViewModel.StaticArsenal.SelectedDataViewModel.SelectedNode != this && ArsenalViewModel.StaticArsenal.SelectedDataViewModel.SelectedNode.NodeType == NodeType.Output)
+                                if (WorkspaceViewModel.StaticWorkspaceViewModel.SelectedDataViewModel.SelectedNode is IComputable && WorkspaceViewModel.StaticWorkspaceViewModel.SelectedDataViewModel.SelectedNode != this && WorkspaceViewModel.StaticWorkspaceViewModel.SelectedDataViewModel.SelectedNode.NodeType == NodeType.Output)
                                 {
-                                    ComputationPipelineInfo.AddDataUpStream(ArsenalViewModel.StaticArsenal.SelectedDataViewModel.SelectedNode as IComputable);
+                                    ComputationPipelineInfo.AddDataUpStream(WorkspaceViewModel.StaticWorkspaceViewModel.SelectedDataViewModel.SelectedNode as IComputable);
                                 }
-                                ArsenalViewModel.StaticArsenal.SelectedDataViewModel.SelectedNode = this as INode;
+                                WorkspaceViewModel.StaticWorkspaceViewModel.SelectedDataViewModel.SelectedNode = this as INode;
                                 if (MousePositionNode.Instance.Connections.Contains(b))
                                     MousePositionNode.Instance.Connections.Remove(b);
                                 RenderPipelineInfo.AddChild(b);
                                 Connections.Add(b);
                                 //this.nodeContentColor = System.Windows.Media.Brushes.White;
-                                ArsenalViewModel.StaticArsenal.SelectedDataViewModel.SelectedConnection = default;
-                                ArsenalViewModel.StaticArsenal.SelectedDataViewModel.SelectedNode = default;
+                                WorkspaceViewModel.StaticWorkspaceViewModel.SelectedDataViewModel.SelectedConnection = default;
+                                WorkspaceViewModel.StaticWorkspaceViewModel.SelectedDataViewModel.SelectedNode = default;
                             }
                         }
                     }

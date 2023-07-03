@@ -3,11 +3,11 @@ using System;
 using System.Linq;
 using System.Windows;
 using System.Windows.Media;
-using Verse3;
 using Verse3.Nodes;
 using Verse3.Elements;
 using Verse3.Components;
 using Core.Nodes;
+using Verse3.CorePresentation.Workspaces;
 
 namespace EventsLibrary
 {
@@ -55,12 +55,12 @@ namespace EventsLibrary
                             CallbackEventNode.RenderPipelineInfo.AddChild(b);
                             CallbackEventNode.Connections.Add(b);
                             _eventCallbackNodeFromcbComp.ComputationPipelineInfo.AddEventUpStream(_callbackToComp);
-                            ArsenalViewModel.connectionsPending.Add(b);
+                            WorkspaceViewModel.connectionsPending.Add(b);
                             //DataTemplateManager.RegisterDataTemplate(b);
                             //DataViewModel.Instance.Elements.Add(b);
                             //b.RedrawBezier(b.Origin, b.Destination);
                             //RenderingCore.Render(_callbackToComp);
-                            ArsenalViewModel.StaticArsenal.AddToCanvas_OnCall(this, new EventArgs());
+                            WorkspaceViewModel.StaticWorkspaceViewModel.AddToCanvas_OnCall(this, new EventArgs());
                             RenderingCore.Render(_callbackToComp, false);
                         }
                     }

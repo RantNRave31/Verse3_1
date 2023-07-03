@@ -6,6 +6,7 @@ using System.Runtime.Serialization;
 using static Core.Geometry2D;
 using Newtonsoft.Json;
 using Core.Elements;
+using Verse3.CorePresentation.Workspaces;
 
 namespace Verse3.Elements
 {
@@ -201,7 +202,7 @@ namespace Verse3.Elements
                     if (child != null) child.Dispose();
                 }
             }
-            DataViewModel.DataModel.Elements.Remove(this);
+            WorkspaceViewModel.StaticWorkspaceViewModel.SelectedDataViewModel.Elements.Remove(this);
             GC.SuppressFinalize(this);
         }
 

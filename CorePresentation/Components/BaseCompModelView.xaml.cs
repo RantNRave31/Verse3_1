@@ -15,6 +15,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Verse3.Components;
+using Verse3.CorePresentation.Workspaces;
 using Verse3.Elements;
 
 namespace Verse3.Components
@@ -108,38 +109,38 @@ namespace Verse3.Components
         void OnMouseDown(object sender, MouseButtonEventArgs e)
         {
             //MouseButtonEventArgs
-            ArsenalViewModel.StaticArsenal.SelectedDataModelView.ContentElements.Focus();
-            Keyboard.Focus(ArsenalViewModel.StaticArsenal.SelectedDataModelView.ContentElements);
+            WorkspaceViewModel.StaticWorkspaceViewModel.SelectedDataModelView.ContentElements.Focus();
+            Keyboard.Focus(WorkspaceViewModel.StaticWorkspaceViewModel.SelectedDataModelView.ContentElements);
 
             BaseCompModelView compView = (BaseCompModelView)sender;
             BaseCompViewModel comp = compView.Element;
             
             if (e.ChangedButton == MouseButton.Left)
             {
-                if ((Keyboard.Modifiers & ModifierKeys.Shift) != 0) ArsenalViewModel.StaticArsenal.SelectedDataModelView.AddToSelection(comp);
-                else if ((Keyboard.Modifiers & ModifierKeys.Control) != 0) ArsenalViewModel.StaticArsenal.SelectedDataModelView.Deselect(comp);
-                else if (!comp.IsSelected) ArsenalViewModel.StaticArsenal.SelectedDataModelView.Select(comp);
+                if ((Keyboard.Modifiers & ModifierKeys.Shift) != 0) WorkspaceViewModel.StaticWorkspaceViewModel.SelectedDataModelView.AddToSelection(comp);
+                else if ((Keyboard.Modifiers & ModifierKeys.Control) != 0) WorkspaceViewModel.StaticWorkspaceViewModel.SelectedDataModelView.Deselect(comp);
+                else if (!comp.IsSelected) WorkspaceViewModel.StaticWorkspaceViewModel.SelectedDataModelView.Select(comp);
 
-                if ((Keyboard.Modifiers & ModifierKeys.Alt) != 0 && ArsenalViewModel.StaticArsenal.SelectedDataModelView.ContentElements.SelectedItems.Count > 0)
+                if ((Keyboard.Modifiers & ModifierKeys.Alt) != 0 && WorkspaceViewModel.StaticWorkspaceViewModel.SelectedDataModelView.ContentElements.SelectedItems.Count > 0)
                 {
-                    ArsenalViewModel.StaticArsenal.SelectedDataModelView.MouseHandlingMode = MouseHandlingMode.CopyDraggingElements;
-                    ArsenalViewModel.StaticArsenal.SelectedDataModelView.origContentMouseDownPoint = e.GetPosition(ArsenalViewModel.StaticArsenal.SelectedDataModelView.ContentElements);
-                    ArsenalViewModel.StaticArsenal.SelectedDataModelView.mouseButtonDown = e.ChangedButton;
+                    WorkspaceViewModel.StaticWorkspaceViewModel.SelectedDataModelView.MouseHandlingMode = MouseHandlingMode.CopyDraggingElements;
+                    WorkspaceViewModel.StaticWorkspaceViewModel.SelectedDataModelView.origContentMouseDownPoint = e.GetPosition(WorkspaceViewModel.StaticWorkspaceViewModel.SelectedDataModelView.ContentElements);
+                    WorkspaceViewModel.StaticWorkspaceViewModel.SelectedDataModelView.mouseButtonDown = e.ChangedButton;
 
                     compView.CaptureMouse();
 
                     e.Handled = true;
                     return;
                 }
-                if (ArsenalViewModel.StaticArsenal.SelectedDataModelView.MouseHandlingMode != MouseHandlingMode.None)
+                if (WorkspaceViewModel.StaticWorkspaceViewModel.SelectedDataModelView.MouseHandlingMode != MouseHandlingMode.None)
                 {
                     // We are in some other mouse handling mode, don't do anything.
                     return;
                 }
 
-                 ArsenalViewModel.StaticArsenal.SelectedDataModelView.MouseHandlingMode = MouseHandlingMode.DraggingElements;
-                ArsenalViewModel.StaticArsenal.SelectedDataModelView.origContentMouseDownPoint = e.GetPosition(ArsenalViewModel.StaticArsenal.SelectedDataModelView.ContentElements);
-                ArsenalViewModel.StaticArsenal.SelectedDataModelView.mouseButtonDown = e.ChangedButton;
+                 WorkspaceViewModel.StaticWorkspaceViewModel.SelectedDataModelView.MouseHandlingMode = MouseHandlingMode.DraggingElements;
+                WorkspaceViewModel.StaticWorkspaceViewModel.SelectedDataModelView.origContentMouseDownPoint = e.GetPosition(WorkspaceViewModel.StaticWorkspaceViewModel.SelectedDataModelView.ContentElements);
+                WorkspaceViewModel.StaticWorkspaceViewModel.SelectedDataModelView.mouseButtonDown = e.ChangedButton;
 
                 compView.CaptureMouse();
 
@@ -159,13 +160,13 @@ namespace Verse3.Components
             if (e.ChangedButton == MouseButton.Left)
             {
                 //MouseButtonEventArgs
-                if (ArsenalViewModel.StaticArsenal.SelectedDataModelView.MouseHandlingMode != MouseHandlingMode.DraggingElements)
+                if (WorkspaceViewModel.StaticWorkspaceViewModel.SelectedDataModelView.MouseHandlingMode != MouseHandlingMode.DraggingElements)
                 {
                     // We are not in rectangle dragging mode.
                     return;
                 }
 
-                 ArsenalViewModel.StaticArsenal.SelectedDataModelView.MouseHandlingMode = MouseHandlingMode.None;
+                 WorkspaceViewModel.StaticWorkspaceViewModel.SelectedDataModelView.MouseHandlingMode = MouseHandlingMode.None;
 
                 if (sender is BaseCompModelView compView)
                 {
@@ -192,10 +193,10 @@ namespace Verse3.Components
             try
             {
                 //MouseEventArgs
-                if (ArsenalViewModel.StaticArsenal.SelectedDataModelView.MouseHandlingMode == MouseHandlingMode.CopyDraggingElements && ArsenalViewModel.StaticArsenal.SelectedDataModelView.ContentElements.SelectedItems.Count > 0)
+                if (WorkspaceViewModel.StaticWorkspaceViewModel.SelectedDataModelView.MouseHandlingMode == MouseHandlingMode.CopyDraggingElements && WorkspaceViewModel.StaticWorkspaceViewModel.SelectedDataModelView.ContentElements.SelectedItems.Count > 0)
                 {
                     List<BaseCompViewModel> copiedComps = new List<BaseCompViewModel>();
-                    foreach (BaseCompViewModel comp in ArsenalViewModel.StaticArsenal.SelectedDataModelView.ContentElements.SelectedItems)
+                    foreach (BaseCompViewModel comp in WorkspaceViewModel.StaticWorkspaceViewModel.SelectedDataModelView.ContentElements.SelectedItems)
                     {
                         BaseCompViewModel comp1 = Activator.CreateInstance(comp.GetType()) as BaseCompViewModel;
                         ParameterInfo[] pi = comp1.GetCompInfo().ConstructorInfo.GetParameters();
@@ -206,25 +207,25 @@ namespace Verse3.Components
                             else
                             {
                                 if (pi[i].ParameterType == typeof(int) && pi[i].Name.ToLower() == "x")
-                                    args[i] = ArsenalViewModel.StaticArsenal.SelectedDataModelView.GetMouseRelPosition().X;
+                                    args[i] = WorkspaceViewModel.StaticWorkspaceViewModel.SelectedDataModelView.GetMouseRelPosition().X;
                                 //args[i] = InfiniteCanvasWPFControl.GetMouseRelPosition().X;
                                 else if (pi[i].ParameterType == typeof(int) && pi[i].Name.ToLower() == "y")
-                                    args[i] = ArsenalViewModel.StaticArsenal.SelectedDataModelView.GetMouseRelPosition().Y;
+                                    args[i] = WorkspaceViewModel.StaticWorkspaceViewModel.SelectedDataModelView.GetMouseRelPosition().Y;
                                 //args[i] = InfiniteCanvasWPFControl.GetMouseRelPosition().Y;
                             }
                         }
                         BaseCompViewModel comp1instance = comp1.GetCompInfo().ConstructorInfo.Invoke(args) as BaseCompViewModel;
                         DataTemplateManager.RegisterDataTemplate(comp1instance);
-                        DataViewModel.DataModel.Elements.Add(comp1instance);
+                        WorkspaceViewModel.StaticWorkspaceViewModel.SelectedDataViewModel.Elements.Add(comp1instance);
 
                         copiedComps.Add(comp1instance);
                     }
-                     ArsenalViewModel.StaticArsenal.SelectedDataModelView.ClearSelection();
-                    foreach (BaseCompViewModel comp in copiedComps) ArsenalViewModel.StaticArsenal.SelectedDataModelView.AddToSelection(comp);
+                     WorkspaceViewModel.StaticWorkspaceViewModel.SelectedDataModelView.ClearSelection();
+                    foreach (BaseCompViewModel comp in copiedComps) WorkspaceViewModel.StaticWorkspaceViewModel.SelectedDataModelView.AddToSelection(comp);
 
-                    ArsenalViewModel.StaticArsenal.SelectedDataModelView.MouseHandlingMode = MouseHandlingMode.DraggingElements;
+                    WorkspaceViewModel.StaticWorkspaceViewModel.SelectedDataModelView.MouseHandlingMode = MouseHandlingMode.DraggingElements;
                 }
-                if (ArsenalViewModel.StaticArsenal.SelectedDataModelView.MouseHandlingMode != MouseHandlingMode.DraggingElements)
+                if (WorkspaceViewModel.StaticWorkspaceViewModel.SelectedDataModelView.MouseHandlingMode != MouseHandlingMode.DraggingElements)
                 {
                     //
                     // We are not in rectangle dragging mode, so don't do anything.
@@ -232,19 +233,19 @@ namespace Verse3.Components
                     return;
                 }
 
-                Point curContentPoint = e.GetPosition(ArsenalViewModel.StaticArsenal.SelectedDataModelView.ContentElements);
-                Vector rectangleDragVector = curContentPoint - ArsenalViewModel.StaticArsenal.SelectedDataModelView.origContentMouseDownPoint;
+                Point curContentPoint = e.GetPosition(WorkspaceViewModel.StaticWorkspaceViewModel.SelectedDataModelView.ContentElements);
+                Vector rectangleDragVector = curContentPoint - WorkspaceViewModel.StaticWorkspaceViewModel.SelectedDataModelView.origContentMouseDownPoint;
 
                 //
                 // When in 'dragging rectangles' mode update the position of the rectangle as the user drags it.
                 //
 
-                ArsenalViewModel.StaticArsenal.SelectedDataModelView.origContentMouseDownPoint = curContentPoint;
+                WorkspaceViewModel.StaticWorkspaceViewModel.SelectedDataModelView.origContentMouseDownPoint = curContentPoint;
 
                 //TODO: If other BaseComps are also selected, Render all selected BaseComps together with rectangleDragVector translation
-                if (ArsenalViewModel.StaticArsenal.SelectedDataModelView.LBcontent.SelectedItems.Count > 1)
+                if (WorkspaceViewModel.StaticWorkspaceViewModel.SelectedDataModelView.LBcontent.SelectedItems.Count > 1)
                 {
-                    foreach (IRenderable renderable in ArsenalViewModel.StaticArsenal.SelectedDataModelView.LBcontent.SelectedItems)
+                    foreach (IRenderable renderable in WorkspaceViewModel.StaticWorkspaceViewModel.SelectedDataModelView.LBcontent.SelectedItems)
                     {
                         if (renderable != null)
                         {
@@ -257,7 +258,7 @@ namespace Verse3.Components
                     RenderPipeline.RenderRenderable(this.Element, rectangleDragVector.X, rectangleDragVector.Y);
                 }
 
-                 ArsenalViewModel.StaticArsenal.SelectedDataModelView.ExpandContent();
+                 WorkspaceViewModel.StaticWorkspaceViewModel.SelectedDataModelView.ExpandContent();
 
                 e.Handled = true;
             }

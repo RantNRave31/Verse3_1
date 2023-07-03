@@ -5,6 +5,7 @@ using System;
 using System.ComponentModel;
 using System.Runtime.Serialization;
 using System.Windows;
+using Verse3.CorePresentation.Workspaces;
 using Verse3.Nodes;
 using static Core.Geometry2D;
 
@@ -68,12 +69,12 @@ namespace Verse3.Elements
             //    this.IsActive = true;
             //}
             //Set as active Node
-            BezierElementViewModel b = (BezierElementViewModel)ArsenalViewModel.StaticSelectedDataViewModel.SelectedConnection;
-            if (ArsenalViewModel.StaticSelectedDataViewModel.SelectedConnection == default)
+            BezierElementViewModel b = (BezierElementViewModel)WorkspaceViewModel.StaticSelectedDataViewModel.SelectedConnection;
+            if (WorkspaceViewModel.StaticSelectedDataViewModel.SelectedConnection == default)
             {
-                ArsenalViewModel.StaticSelectedDataViewModel.SelectedNode = this as INode;
-                ArsenalViewModel.StaticSelectedDataViewModel.SelectedConnection = ArsenalViewModel.StaticSelectedDataViewModel.CreateConnection(ArsenalViewModel.StaticSelectedDataViewModel.SelectedNode);
-                b = (BezierElementViewModel)ArsenalViewModel.StaticSelectedDataViewModel.SelectedConnection;
+                WorkspaceViewModel.StaticSelectedDataViewModel.SelectedNode = this as INode;
+                WorkspaceViewModel.StaticSelectedDataViewModel.SelectedConnection = WorkspaceViewModel.StaticSelectedDataViewModel.CreateConnection(WorkspaceViewModel.StaticSelectedDataViewModel.SelectedNode);
+                b = (BezierElementViewModel)WorkspaceViewModel.StaticSelectedDataViewModel.SelectedConnection;
                 if (b != null)
                 {
                     this.RenderPipelineInfo.AddChild(b);
@@ -88,24 +89,24 @@ namespace Verse3.Elements
             {
                 if (b != null)
                 {
-                    if (ArsenalViewModel.StaticSelectedDataViewModel.SelectedNode.NodeType != this.NodeType)
+                    if (WorkspaceViewModel.StaticSelectedDataViewModel.SelectedNode.NodeType != this.NodeType)
                     {
-                        if (ArsenalViewModel.StaticSelectedDataViewModel.SelectedNode.GetType().BaseType == this.GetType().BaseType)
+                        if (WorkspaceViewModel.StaticSelectedDataViewModel.SelectedNode.GetType().BaseType == this.GetType().BaseType)
                         {
                             if (b.SetDestination(this as INode))
                             {
-                                if (ArsenalViewModel.StaticSelectedDataViewModel.SelectedNode is IComputable && ArsenalViewModel.StaticSelectedDataViewModel.SelectedNode != this && ArsenalViewModel.StaticSelectedDataViewModel.SelectedNode.NodeType == NodeType.Output)
+                                if (WorkspaceViewModel.StaticSelectedDataViewModel.SelectedNode is IComputable && WorkspaceViewModel.StaticSelectedDataViewModel.SelectedNode != this && WorkspaceViewModel.StaticSelectedDataViewModel.SelectedNode.NodeType == NodeType.Output)
                                 {
-                                    this.ComputationPipelineInfo.AddEventUpStream(ArsenalViewModel.StaticSelectedDataViewModel.SelectedNode as IComputable);
+                                    this.ComputationPipelineInfo.AddEventUpStream(WorkspaceViewModel.StaticSelectedDataViewModel.SelectedNode as IComputable);
                                 }
-                                ArsenalViewModel.StaticSelectedDataViewModel.SelectedNode = this as INode;
+                                WorkspaceViewModel.StaticSelectedDataViewModel.SelectedNode = this as INode;
                                 if (MousePositionNode.Instance.Connections.Contains(b))
                                     MousePositionNode.Instance.Connections.Remove(b);
                                 this.RenderPipelineInfo.AddChild(b);
                                 this.Connections.Add(b);
                                 //this.nodeContentColor = System.Windows.Media.Brushes.White;
-                                ArsenalViewModel.StaticSelectedDataViewModel.SelectedConnection = default;
-                                ArsenalViewModel.StaticSelectedDataViewModel.SelectedNode = default;
+                                WorkspaceViewModel.StaticSelectedDataViewModel.SelectedConnection = default;
+                                WorkspaceViewModel.StaticSelectedDataViewModel.SelectedNode = default;
                             }
                         }
                     }

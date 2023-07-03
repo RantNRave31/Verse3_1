@@ -8,6 +8,7 @@ using Verse3.Nodes;
 using Verse3.Elements;
 using Verse3.Components;
 using Core.Nodes;
+using Verse3.CorePresentation.Workspaces;
 
 namespace IntegerLibrary.Inputs
 {
@@ -79,7 +80,7 @@ namespace IntegerLibrary.Inputs
                 menuItem.Header = "Delete";
                 menuItem.Click += (s, e) =>
                 {
-                    DataViewModel.DataModel.Elements.Remove(this);
+                    WorkspaceViewModel.StaticSelectedDataViewModel.Elements.Remove(this);
                 };
                 contextMenu.Items.Add(menuItem);
 

@@ -3,6 +3,7 @@ using System;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Verse3.Components;
+using Verse3.CorePresentation.Workspaces;
 
 namespace Verse3.Converters
 {
@@ -29,7 +30,7 @@ namespace Verse3.Converters
                     if (mci != null)
                     {
                         //CompInfo ci = Main_Verse3.ActiveMain.ActiveEditor.FindInArsenal(mci);
-                        CompInfo ci = ArsenalViewModel.StaticArsenal.FindInArsenal(mdCompInfo);
+                        CompInfo ci = WorkspaceViewModel.StaticWorkspaceViewModel.FindInArsenal(mdCompInfo);
                         if (ci.ConstructorInfo != null)
                         {
                             if (bc != null && bc is ShellComp shell)

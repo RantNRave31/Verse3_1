@@ -4,6 +4,7 @@ using Newtonsoft.Json;
 using System;
 using System.Runtime.Serialization;
 using System.Windows;
+using Verse3.CorePresentation.Workspaces;
 using Verse3.Nodes;
 using static Core.Geometry2D;
 
@@ -94,7 +95,7 @@ namespace Verse3.Elements
                 this.destination.Connections.Remove(this);
                 //this.origin = null;
                 //this.destination = null;
-                DataViewModel.DataModel.Elements.Remove(this);
+                WorkspaceViewModel.StaticWorkspaceViewModel.SelectedDataViewModel.Elements.Remove(this);
                 this.Dispose();
             }
             catch (Exception ex)

@@ -2,11 +2,11 @@
 using System;
 using System.Windows;
 using System.Windows.Media;
-using Verse3;
 using Verse3.Nodes;
 using Verse3.Elements;
 using Verse3.Components;
 using Core.Nodes;
+using Verse3.CorePresentation.Workspaces;
 
 namespace EventsLibrary
 {
@@ -135,11 +135,11 @@ namespace EventsLibrary
             {
                 //Callback callback = new Callback(DataViewModel.WPFControl.GetMouseRelPosition().X, DataViewModel.WPFControl.GetMouseRelPosition().Y, parent as BaseComp);
                 object[] args = new object[3];
-                args[0] = ArsenalViewModel.StaticSelectedDataViewModel.DataModelView.GetMouseRelPosition().X;
-                args[1] = ArsenalViewModel.StaticSelectedDataViewModel.DataModelView.GetMouseRelPosition().Y;
+                args[0] = WorkspaceViewModel.StaticSelectedDataViewModel.DataModelView.GetMouseRelPosition().X;
+                args[1] = WorkspaceViewModel.StaticSelectedDataViewModel.DataModelView.GetMouseRelPosition().Y;
                 args[2] = parent as BaseCompViewModel;
                 using (Callback callback = new Callback(0, 0, parent as BaseCompViewModel))
-                    ArsenalViewModel.compsPendingInst.Add(callback.GetCompInfo(), args);
+                    WorkspaceViewModel.compsPendingInst.Add(callback.GetCompInfo(), args);
                 //Main_Verse3.ActiveMain.ActiveEditor.AddToCanvas_OnCall(this, new EventArgs());
             }
         }

@@ -143,11 +143,11 @@
     </UserControl.Resources>
     <DockPanel>
         <InfiniteCanvas:InfiniteCanvasControl x:Name="InfiniteCanvasControl1"
-                                              ContentScale="{Binding Source={x:Static local:DataViewModel.Instance}, Path=ContentScale, Mode=TwoWay}"
-                                              ContentOffsetX="{Binding Source={x:Static local:DataViewModel.Instance}, Path=ContentOffsetX, Mode=TwoWay}"
-                                              ContentOffsetY="{Binding Source={x:Static local:DataViewModel.Instance}, Path=ContentOffsetY, Mode=TwoWay}"
-                                              ContentViewportWidth="{Binding Source={x:Static local:DataViewModel.Instance}, Path=ContentViewportWidth, Mode=OneWayToSource}"
-                                              ContentViewportHeight="{Binding Source={x:Static local:DataViewModel.Instance}, Path=ContentViewportHeight, Mode=OneWayToSource}"
+                                              ContentScale="{Binding Path=ContentScale, Mode=TwoWay}"
+                                              ContentOffsetX="{Binding Path=ContentOffsetX, Mode=TwoWay}"
+                                              ContentOffsetY="{Binding Path=ContentOffsetY, Mode=TwoWay}"
+                                              ContentViewportWidth="{Binding Path=ContentViewportWidth, Mode=OneWayToSource}"
+                                              ContentViewportHeight="{Binding Path=ContentViewportHeight, Mode=OneWayToSource}"
                                               Background="#ff1a1a1a"
                                               MouseDown="zoomAndPanControl_MouseDown"
                                               MouseUp="zoomAndPanControl_MouseUp"
@@ -185,8 +185,8 @@
                 </DrawingBrush>
             </InfiniteCanvas:InfiniteCanvasControl.Background>-->
             <Grid
-                Width="{Binding Source={x:Static local:DataViewModel.Instance}, Path=ContentWidth}"
-                Height="{Binding Source={x:Static local:DataViewModel.Instance}, Path=ContentHeight}">
+                Width="{Binding Path=ContentWidth}"
+                Height="{Binding Path=ContentHeight}">
                 <ListBox
                     x:Name="LBcontent"
                     Background="#ff1a1a1a"

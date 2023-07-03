@@ -11,6 +11,7 @@ using Verse3.Components;
 using Verse3.Elements;
 using Core.Assemblies;
 using Core.Elements;
+using Verse3.CorePresentation.Workspaces;
 
 namespace CodeLibrary
 {
@@ -38,7 +39,7 @@ namespace CodeLibrary
                 _script = this.ideElement.Script;
                 this.previewTextBlock.DisplayedText = "Compiling...";
                 byte[] ASMbytes = AssemblyCompiler.Compile(_script, "RuntimeCompiled_CSharp_Verse3");
-                List<IElement> elements = new List<IElement>(AssemblyLoader.Load(ASMbytes, ArsenalViewModel.domain_));
+                List<IElement> elements = new List<IElement>(AssemblyLoader.Load(ASMbytes, WorkspaceViewModel.domain_));
                 foreach (IElement element in elements)
                 {
                     CoreConsole.Log(element.ID.ToString());
@@ -160,17 +161,17 @@ namespace CodeLibrary
                             else
                             {
                                 if (pi[i].ParameterType == typeof(int) && pi[i].Name.ToLower() == "x")
-                                    args[i] = ArsenalViewModel.StaticSelectedDataViewModel.DataModelView.GetMouseRelPosition().X;
+                                    args[i] = WorkspaceViewModel.StaticSelectedDataViewModel.DataModelView.GetMouseRelPosition().X;
                                 else if (pi[i].ParameterType == typeof(int) && pi[i].Name.ToLower() == "y")
-                                    args[i] = ArsenalViewModel.StaticSelectedDataViewModel.DataModelView.GetMouseRelPosition().Y;
+                                    args[i] = WorkspaceViewModel.StaticSelectedDataViewModel.DataModelView.GetMouseRelPosition().Y;
                             }
                         }
                         //IElement? elInst = compInfo.ConstructorInfo.Invoke(args) as IElement;
                         try
                         {
                             //TODO: LOAD/INSTANTIATE ASSEMBLY INTO RIBBON AND ON CANVAS
-                            ArsenalViewModel.compsPendingInst.Add(compiledCompInfo, args);
-                            ArsenalViewModel.StaticArsenal.AddToCanvas_OnCall(this, new EventArgs());
+                            WorkspaceViewModel.compsPendingInst.Add(compiledCompInfo, args);
+                            WorkspaceViewModel.StaticWorkspaceViewModel.AddToCanvas_OnCall(this, new EventArgs());
                         }
                         catch (Exception ex)
                         {
@@ -210,17 +211,17 @@ namespace CodeLibrary
                             else
                             {
                                 if (pi[i].ParameterType == typeof(int) && pi[i].Name.ToLower() == "x")
-                                    args[i] = ArsenalViewModel.StaticSelectedDataViewModel.DataModelView.GetMouseRelPosition().X;
+                                    args[i] = WorkspaceViewModel.StaticSelectedDataViewModel.DataModelView.GetMouseRelPosition().X;
                                 else if (pi[i].ParameterType == typeof(int) && pi[i].Name.ToLower() == "y")
-                                    args[i] = ArsenalViewModel.StaticSelectedDataViewModel.DataModelView.GetMouseRelPosition().Y;
+                                    args[i] = WorkspaceViewModel.StaticSelectedDataViewModel.DataModelView.GetMouseRelPosition().Y;
                             }
                         }
                         //IElement? elInst = compInfo.ConstructorInfo.Invoke(args) as IElement;
                         try
                         {
                             //TODO: LOAD/INSTANTIATE ASSEMBLY INTO RIBBON AND ON CANVAS
-                            ArsenalViewModel.compsPendingAddToArsenal.Add(compiledCompInfo);
-                            ArsenalViewModel.StaticArsenal.AddToCanvas_OnCall(this, new EventArgs());
+                            WorkspaceViewModel.compsPendingAddToArsenal.Add(compiledCompInfo);
+                            WorkspaceViewModel.StaticWorkspaceViewModel.AddToCanvas_OnCall(this, new EventArgs());
                         }
                         catch (Exception ex)
                         {

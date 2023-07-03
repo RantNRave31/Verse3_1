@@ -26,7 +26,7 @@ namespace Core
         {
             this._current = default;
         }
-        public static int Render()
+        public static int Render(ElementsLinkedList<IElement> _elementsBuffer)
         {
             int count = 0;
             try
@@ -34,7 +34,6 @@ namespace Core
                 //Parallel.ForEach(DataModel.Instance.Elements, e => { });
                 //TODO: Multithreading
                 //https://medium.com/@alex.puiu/parallel-foreach-async-in-c-36756f8ebe62
-                ElementsLinkedList<IElement> _elementsBuffer = DataModel.Instance.Elements;
                 foreach (IElement e in _elementsBuffer)
                 {
                     if (e != null && e is IRenderable)

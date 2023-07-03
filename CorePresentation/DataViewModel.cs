@@ -13,6 +13,7 @@ using Verse3.Nodes;
 using Core.Elements;
 using Core.Nodes;
 using Verse3.Collections.Generic;
+using Verse3.CorePresentation.Workspaces;
 
 namespace Verse3
 {
@@ -29,7 +30,8 @@ namespace Verse3
     {
         ////[XmlIgnore]
         [JsonIgnore]
-        public DataModelView DataModelView { get; private set; }
+        private DataModelView dataModelView { get; set; }
+        public DataModelView DataModelView { get { return dataModelView; } set { if (value == dataModelView) return; dataModelView = value; OnPropertyChanged("DataModelView"); } }
         ////[XmlIgnore]
         private IElement selectedElement;
         [JsonIgnore]
@@ -152,23 +154,6 @@ namespace Verse3
 
         //protected static DataViewModel instance = new DataViewModel();
         ////[XmlIgnore]
-        public static new DataModel DataModel
-        {
-            get
-            {
-                if (instance == null)
-                {
-                    instance = new DataViewModel();
-                    Instance = instance;
-                }
-                return instance;
-            }
-            set
-            {
-                instance = value;
-                Instance = instance;
-            }
-        }
 
         //public static void AddElement(IElement e)
         //{
@@ -188,7 +173,7 @@ namespace Verse3
         //        CoreConsole.Log(ex);
         //    }
         //}
-        private DataViewModel() : base()
+        public DataViewModel() : base()
         {
             dispatcher = Dispatcher.CurrentDispatcher;
         }
@@ -224,7 +209,7 @@ namespace Verse3
                             if (DataModelView != null)
                             {
                                 CompInfo ci = shell.GetCompInfo();
-                                ci = ArsenalViewModel.StaticArsenal.FindInArsenal(ci, false);
+                                ci = WorkspaceViewModel.StaticWorkspaceViewModel.FindInArsenal(ci, false);
                                 ConstructorInfo ctorInfo = GetDeserializationCtor(ci);
                                 if (ctorInfo != null)
                                 {
@@ -263,8 +248,7 @@ namespace Verse3
                             }
                         }
 
-                        DataModel.Elements.Clear();
-                        DataModel = this;
+                        this.Elements.Clear();
                     }
                     catch (Exception ex)
                     {
@@ -279,7 +263,7 @@ namespace Verse3
                 DataModelView.ExpandContent();
             }
 
-            RenderPipeline.Render();
+            RenderPipeline.Render(this.Elements);
         }
 
         internal static ConstructorInfo GetDeserializationCtor(CompInfo ci)
@@ -317,7 +301,7 @@ namespace Verse3
             }
             BezierElementViewModel bezier = new BezierElementViewModel(start, end);
             DataTemplateManager.RegisterDataTemplate(bezier as IRenderable);
-            DataModel.Elements.Add(bezier);
+            this.Elements.Add(bezier);
             //start.Connections.Add(bezier);
             //end.Connections.Add(bezier);
             return bezier;

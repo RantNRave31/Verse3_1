@@ -11,6 +11,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using Verse3.Components;
+using Verse3.CorePresentation.Workspaces;
 using Verse3.Elements;
 using Verse3.Nodes;
 using static Core.Geometry2D;
@@ -26,8 +27,18 @@ namespace Verse3
         {
             InitializeComponent();
             CompositionTarget.Rendering += BeforeFrameRender;
+            MouseDown += Canvas_MouseDown;
+            MouseUp += Canvas_MouseUp;
+            MouseMove += Canvas_MouseMove;
+            DataContextChanged += DataModelView_DataContextChanged;
             //TODO Add different view templates
         }
+
+        private void DataModelView_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            ((DataViewModel)this.DataContext).DataModelView = this;
+        }
+
         public DataViewModel DataViewModel
         {
             get
@@ -126,6 +137,8 @@ namespace Verse3
 
         private void Control_Loaded(object sender, RoutedEventArgs e)
         {
+            WorkspaceViewModel.StaticWorkspaceViewModel.LoadLibraries(sender, e);
+
             ExpandContent();
         }
 
@@ -136,13 +149,13 @@ namespace Verse3
         {
             if (DataViewModel.DataModelView != this)
                 DataViewModel.InitDataViewModel(this);
-            if (LBcontent.ItemsSource != DataViewModel.DataModel.Elements)
-                LBcontent.ItemsSource = DataViewModel.DataModel.Elements;
+            if (LBcontent.ItemsSource !=this.DataViewModel.Elements)
+                LBcontent.ItemsSource = DataViewModel.Elements;
 
             double xOffset = 0;
             double yOffset = 0;
             Rect contentRect = new Rect(0, 0, 0, 0);
-            ElementsLinkedList<IElement> _elementsBuffer = DataViewModel.DataModel.Elements;
+            ElementsLinkedList<IElement> _elementsBuffer = DataViewModel.Elements;
             foreach (IRenderable elementsData in _elementsBuffer)
             {
                 if (elementsData.X < xOffset)
@@ -185,8 +198,8 @@ namespace Verse3
                 }
             }
 
-            DataViewModel.DataModel.ContentWidth = contentRect.Width;
-            DataViewModel.DataModel.ContentHeight = contentRect.Height;
+            WorkspaceViewModel.StaticWorkspaceViewModel.SelectedDataViewModel.ContentWidth = contentRect.Width;
+            WorkspaceViewModel.StaticWorkspaceViewModel.SelectedDataViewModel.ContentHeight = contentRect.Height;
         }
 
         private Point currCanvasMousePosition = new Point();
@@ -250,6 +263,66 @@ namespace Verse3
         #endregion
 
         #region MouseEvents
+        private void Canvas_MouseMove(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            if (sender is DataModelView)
+            {
+                DataModelView infiniteCanvas = (DataModelView)sender;
+                this.Cursor = infiniteCanvas.Cursor;
+            }
+            if (WorkspaceViewModel.StaticWorkspaceViewModel.SelectedDataViewModel.SelectedConnection != default)
+            {
+                //DataViewModel.ActiveConnection.Destination.
+            }
+            if (WorkspaceViewModel.compsPendingInst.Count > 0)
+            {
+                WorkspaceViewModel.StaticWorkspaceViewModel.AddToCanvas_OnCall(sender, e);
+            }
+        }
+
+        private void Canvas_MouseUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            if (sender is DataModelView)
+            {
+                DataModelView infiniteCanvas = (DataModelView)sender;
+                if (infiniteCanvas.MouseHandlingMode == MouseHandlingMode.None)
+                {
+                    this.Cursor = Cursors.Arrow;
+                }
+            }
+            //if (DataViewModel.ActiveNode != default /*&& started*/)
+            //{
+            //    //DrawBezierCurve(drawstart, InfiniteCanvasWPFControl.GetMouseRelPosition(), rtl);
+
+            //    if (DataViewModel.ActiveConnection == default)
+            //    {
+            //        DataViewModel.ActiveConnection = CreateConnection(DataViewModel.ActiveNode);
+            //    }
+            //    else
+            //    {
+            //        ((BezierElement)DataViewModel.ActiveConnection).SetDestination(DataViewModel.ActiveNode);
+            //        DataViewModel.ActiveConnection = default;
+            //        DataViewModel.ActiveNode = default;
+            //    }
+            //    //started = false;
+            //}
+        }
+
+        //public INode drawstart = default;
+        private void Canvas_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            if (sender is DataModelView)
+            {
+                DataModelView infiniteCanvas = (DataModelView)sender;
+                if (infiniteCanvas.MouseHandlingMode == MouseHandlingMode.Panning)
+                {
+                    this.Cursor = Cursors.SizeAll;
+                }
+                //if (started)
+                //{
+                //}
+            }
+        }
 
         /// <summary>
         /// Event raised on mouse down in the ZoomAndPanControl.
@@ -595,7 +668,7 @@ namespace Verse3
                         {
                             DataViewModel.SelectedConnection.Origin.Connections.Remove(DataViewModel.SelectedConnection);
                             DataViewModel.SelectedConnection.Destination.Connections.Remove(DataViewModel.SelectedConnection);
-                            DataViewModel.DataModel.Elements.Remove(DataViewModel.SelectedConnection);
+                            DataViewModel.Elements.Remove(DataViewModel.SelectedConnection);
                             DataViewModel.SelectedConnection.Dispose();
                             DataViewModel.SelectedConnection = default;
                         }
@@ -621,7 +694,7 @@ namespace Verse3
                                     }
                                 }
                                 IElement elInst = DataViewModel.SearchBarCompInfo.ConstructorInfo.Invoke(args) as IElement;
-                                DataViewModel.DataModel.Elements.Add(elInst);
+                                DataViewModel.Elements.Add(elInst);
                             }
                         }
                         break;
@@ -898,7 +971,7 @@ namespace Verse3
             if (!add) this.ClearSelection();
             
             BoundingBox selectionBounds = new BoundingBox(contentX, contentY, contentWidth, contentHeight);
-            ElementsLinkedList<IElement> _elementsBuffer = DataViewModel.DataModel.Elements;
+            ElementsLinkedList<IElement> _elementsBuffer = DataViewModel.Elements;
             foreach (IRenderable renderable in _elementsBuffer)
             {
                 if (renderable != null)

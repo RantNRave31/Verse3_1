@@ -7,6 +7,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Shapes;
+using Verse3.CorePresentation.Workspaces;
 
 namespace Verse3.Elements
 {
@@ -68,8 +69,8 @@ namespace Verse3.Elements
         void OnMouseDown(object sender, MouseButtonEventArgs e)
         {
             //MouseButtonEventArgs
-            ArsenalViewModel.StaticSelectedDataViewModel.DataModelView.ContentElements.Focus();
-            Keyboard.Focus(ArsenalViewModel.StaticSelectedDataViewModel.DataModelView.ContentElements);
+            WorkspaceViewModel.StaticSelectedDataViewModel.DataModelView.ContentElements.Focus();
+            Keyboard.Focus(WorkspaceViewModel.StaticSelectedDataViewModel.DataModelView.ContentElements);
 
             BezierElementModelView rectangle = (BezierElementModelView)sender;
             Cursor = Cursors.Hand;
@@ -126,7 +127,7 @@ namespace Verse3.Elements
                 }
             }
 
-            ArsenalViewModel.StaticSelectedDataViewModel.DataModelView.MouseHandlingMode = MouseHandlingMode.None;
+            WorkspaceViewModel.StaticSelectedDataViewModel.DataModelView.MouseHandlingMode = MouseHandlingMode.None;
 
             BezierElementModelView rectangle = (BezierElementModelView)sender;
             rectangle.ReleaseMouseCapture();

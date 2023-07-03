@@ -12,6 +12,7 @@ using System.Text;
 using Verse3.Components;
 using Core.Elements;
 using Core.Nodes;
+using Verse3.CorePresentation.Workspaces;
 
 namespace Verse3.Nodes
 {
@@ -509,7 +510,7 @@ namespace Verse3.Nodes
             DataGoo = info.GetValue("DataGoo", typeof(DataStructure<D>)) as DataStructure<D>;
             if (DataGoo != null || connections != null && connections.Count > 0)
             {
-                if (DataViewModel.DataModel.GetElementWithGuid(parentComp.ID) is BaseCompViewModel comp)
+                if (WorkspaceViewModel.StaticWorkspaceViewModel.SelectedDataViewModel.GetElementWithGuid(parentComp.ID) is BaseCompViewModel comp)
                 {
                     //TODO: Replicate the connections and set the data
                     //comp.ChildElementManager.InputNodes.
@@ -749,7 +750,7 @@ namespace Verse3.Nodes
                     if (connection != null) connection.Dispose();
                 }
             }
-            DataViewModel.DataModel.Elements.Remove(this);
+            WorkspaceViewModel.StaticWorkspaceViewModel.SelectedDataViewModel.Elements.Remove(this);
             GC.SuppressFinalize(this);
         }
         ~DataNode() => Dispose();

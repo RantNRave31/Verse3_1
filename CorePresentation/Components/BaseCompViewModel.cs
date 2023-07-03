@@ -15,6 +15,7 @@ using System.Text;
 using Verse3.ViewModels;
 using Core.Elements;
 using Core.Nodes;
+using Verse3.CorePresentation.Workspaces;
 
 namespace Verse3.Components
 {
@@ -233,7 +234,7 @@ namespace Verse3.Components
                 menuItem.Header = "Delete";
                 menuItem.Click += (s, e) =>
                 {
-                    DataViewModel.DataModel.Elements.Remove(this);
+                    WorkspaceViewModel.StaticWorkspaceViewModel.SelectedDataViewModel.Elements.Remove(this);
                 };
                 contextMenu.Items.Add(menuItem);
 
@@ -437,7 +438,7 @@ namespace Verse3.Components
                     }
                 }
             }
-            DataViewModel.DataModel.Elements.Remove(this);
+            WorkspaceViewModel.StaticWorkspaceViewModel.SelectedDataViewModel.Elements.Remove(this);
             GC.SuppressFinalize(this);
         }
 

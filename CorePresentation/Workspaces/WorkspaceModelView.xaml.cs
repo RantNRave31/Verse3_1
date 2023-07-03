@@ -12,23 +12,17 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Verse3.CorePresentation.Workspaces;
 
-namespace Verse3.Tools
+namespace Verse3.CorePresentation.Workspaces
 {
     /// <summary>
-    /// Interaction logic for ToolsetViewModel.xaml
+    /// Interaction logic for WorkspaceModelView.xaml
     /// </summary>
-    public partial class ToolPanelModelView : UserControl
+    public partial class WorkspaceModelView : UserControl
     {
-        public ToolPanelModelView()
+        public WorkspaceModelView()
         {
             InitializeComponent();
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            WorkspaceViewModel.StaticWorkspaceViewModel.AddToCanvas_OnCall(sender, e);
         }
     }
 }

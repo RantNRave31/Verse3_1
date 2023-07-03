@@ -6,6 +6,7 @@ using Newtonsoft.Json;
 using Verse3.Nodes;
 using Core.Elements;
 using Core.Nodes;
+using Verse3.CorePresentation.Workspaces;
 
 namespace Verse3.Components
 {
@@ -138,7 +139,7 @@ namespace Verse3.Components
             }
             //AdjustBounds();
             RenderingCore.Render(_owner);
-            ArsenalViewModel.StaticSelectedDataViewModel.DataModelView.ExpandContent();
+            WorkspaceViewModel.StaticSelectedDataViewModel.DataModelView.ExpandContent();
         }
         public void RemoveElement(IRenderable element)
         {
