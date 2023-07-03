@@ -63,9 +63,11 @@
             </TabItem>
         </TabControl>
         <StatusBar Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="5">
-            <TextBlock Text="{Binding FramesPerSecond}" Width="94"/>
-            <TextBlock Text="{Binding Status}" Width="94"/>
+            <StatusBarItem>
+                <TextBlock>Status:  <TextBlock Text="{Binding Status}" Width="94"/></TextBlock>
+            </StatusBarItem>
             <StatusBarItem x:Name="statusBar">
+                <TextBlock>FPS:  <TextBlock Text="{Binding FramesPerSecond}" Width="94"/></TextBlock>
             </StatusBarItem>
         </StatusBar>
     </Grid>

@@ -137,8 +137,8 @@ namespace Verse3
 
         private void Control_Loaded(object sender, RoutedEventArgs e)
         {
-            WorkspaceViewModel.StaticWorkspaceViewModel.LoadLibraries(sender, e);
 
+            WorkspaceViewModel.StaticWorkspaceViewModel.LoadLibraries(sender, e);
             ExpandContent();
         }
 

@@ -29,6 +29,7 @@ namespace Verse3
     /// </summary>
     public partial class MainWindowModelView : Window
     {
+        System.Windows.Threading.DispatcherTimer dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
         public MainWindowViewModel MainWindowViewModel { get { return ((MainWindowViewModel)DataContext); } }
         public MainWindowModelView()
         {
@@ -125,10 +126,13 @@ namespace Verse3
         }
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            dispatcherTimer.Tick += new EventHandler(timer1_Tick);
+            dispatcherTimer.Interval = new TimeSpan(0, 0, 1);
+            dispatcherTimer.Start();
             DataViewModel dataViewModel;
             WorkspaceViewModel.StaticWorkspaceViewModel.SelectedDataViewModel = dataViewModel = new DataViewModel();
             WorkspaceViewModel.StaticWorkspaceViewModel.DataViewModels.Add(dataViewModel);
-            WorkspaceViewModel.StaticWorkspaceViewModel.DataViewModels.Add(dataViewModel = new DataViewModel());
+            WorkspaceViewModel.StaticWorkspaceViewModel.DataViewModels.Add(dataViewModel);
             //InfiniteCanvasWPFControl.MouseMove += AddToCanvas_OnCall;
             // moved to view
             //WorkspaceViewModel.StaticWorkspaceViewModel.SelectedDataModelView.Loaded += WorkspaceViewModel.StaticWorkspaceViewModel.LoadLibraries;
@@ -136,7 +140,7 @@ namespace Verse3
         }
         private void timer1_Tick(object sender, EventArgs e)
         {
-            if (MainWindowViewModel.SelectedMainWindowModelView is MainWindowModelView)
+            if (MainWindowViewModel.SelectedMainWindowViewModel is MainWindowViewModel)
             {
                 this.MainWindowViewModel.FramesPerSecond = WorkspaceViewModel.StaticWorkspaceViewModel.SelectedDataModelView.AverageFPS.ToString();
                 this.MainWindowViewModel.Status = WorkspaceViewModel.StaticWorkspaceViewModel.SelectedDataModelView.GetMouseRelPosition().ToString();

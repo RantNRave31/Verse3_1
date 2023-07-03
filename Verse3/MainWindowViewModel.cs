@@ -44,6 +44,7 @@ namespace Verse3
             : base(displayName)
         {
             MainWindowViewModels = new ObservableCollection<MainWindowViewModel>();
+            SelectedMainWindowViewModel = this;
             WorkspaceViewModel  = new WorkspaceViewModel();
         }
     }
