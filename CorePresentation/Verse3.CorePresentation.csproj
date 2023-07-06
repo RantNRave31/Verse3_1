@@ -24,6 +24,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Include="Nodes\StreamDataNode.cs" />
     <Compile Include="Workspaces\WorkspaceModelView.xaml.cs" />
     <Compile Include="Workspaces\WorkspaceViewModel.cs" />
     <Compile Include="Assemblies\AssemblyManagerModelView.xaml.cs">
